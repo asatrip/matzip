@@ -1,0 +1,3 @@
+<% if (locals.banners.filter(banner => banner.position === 'custom' && banner.status === 1).length) { %>
+  <%- include('../banner', { position: 'custom' }); %>
+<% } %>

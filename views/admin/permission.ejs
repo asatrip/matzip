@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '회원등급 설정',
+          info: 'https://waffleboard.io/support/manage/permission',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">자동 회원등급</th>
+                <th>매니저 권한</th>
+                <th rowspan="2">설정</th>
+              </tr>
+              <tr>
+                <th>사용</th>
+                <th>기준</th>
+                <th>게시글 관리</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/permission" method="POST">
+                <tr>
+                  <td><input type="checkbox" name="useAutoPermission" value="1"<% if (locals.setting.useAutoPermission) { %> checked<% } %>></td>
+                  <td>
+                    <select name="autoPermissionType">
+                      <option value="1"<% if (setting.autoPermissionType === 1) { %> selected<% } %>>현재 포인트</option>
+                      <option value="2"<% if (setting.autoPermissionType === 2) { %> selected<% } %>>최대 포인트</option>
+                    </select>
+                  </td>
+                  <td><input type="checkbox" name="useManagerArticle" value="1"<% if (locals.setting.useManagerArticle) { %> checked<% } %>></td>
+                  <td><button>설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', { title: '회원등급' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>등급</th>
+                <th>등급 이름</th>
+                <th>자동등업 포인트 기준</th>
+                <th>매니저</th>
+                <th>관리자</th>
+                <th>이미지</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>이미지 초기화</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% permissions.forEach(permission => { %>
+              <form action="/admin/permission/edit/<%= permission.id %>" method="POST" enctype="multipart/form-data">
+                <tr>
+                  <td><%= permission.permission %></td>
+                  <td><input type="text" name="title" value="<%= permission.title %>" placeholder="등급 이름"></td>
+                  <td><input type="text" name="pointBaseline" value="<%= permission.pointBaseline %>" placeholder="등업 포인트"></td>
+                  <td><input type="checkbox" name="isManager" value="1"<% if (permission.isManager) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="isAdmin" value="1"<% if (permission.isAdmin) { %> checked<% } %>></td>
+                  <td>
+                    <% if (permission.image) { %>
+                    <div><img src="<%= locals.storage %>/permission/<%= permission.image %>"></div>
+                    <% } %>
+                    <div><input type="file" name="image"></div>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                  <td><button name="submit" value="resetImage">초기화</button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>등급</th>
+                <th>등급 이름</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/permission/new" method="POST">
+                <tr>
+                  <td><input type="text" name="permission" placeholder="등급"></td>
+                  <td><input type="text" name="title" placeholder="등급 이름"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

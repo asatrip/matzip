@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= setting.siteName %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <meta property="og:url" content="<%= setting.siteDomain %>/privacy">
+    <link rel="canonical" href="<%= setting.siteDomain %>/privacy">
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <%- include('./aside', { mobile: false }) %>
+      <article>
+        <%- include('./title', { title: '개인정보보호 정책' }) %>
+        <section id="page">
+          <div class="content"><%- privacy %></div>
+        </section>
+      </article>
+      <%- include('./aside', { mobile: true }) %>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

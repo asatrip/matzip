@@ -1,0 +1,23 @@
+<% if (pn.pnTotal > 1) { %>
+  <div class="pagination">
+    <div class="prev">
+      <% if (pn.pnNum > pn.pnSize) { %>
+        <a href="/<%= boardSlug %>?<% if (typeof (searchType) !== 'undefined' && searchType) { %>searchType=<%= searchType %>&<% } %>&<% if (typeof (keyword) !== 'undefined' && keyword) { %>keyword=<%= keyword %>&<% } %><% if (typeof (category) !== 'undefined' && category) { %>category=<%= category %>&<% } %>page=<%= pn.pnStart - pn.pnSize %>">이전</a>
+      <% } %>
+    </div>
+    <div class="number">
+      <% for (let i = pn.pnStart; i < pn.pnEnd + 1; i++) { %>
+        <% if (pn.pnNum === i) { %>
+          <a class="selected"><%= i %></a>
+        <% } else { %>
+          <a class="notSelected" href="/<%= boardSlug %>?<% if (typeof (searchType) !== 'undefined' && searchType) { %>searchType=<%= searchType %>&<% } %>&<% if (typeof (keyword) !== 'undefined' && keyword) { %>keyword=<%= keyword %>&<% } %><% if (typeof (category) !== 'undefined' && category) { %>category=<%= category %>&<% } %>page=<%= i %>"><%= i %></a>
+        <% } %>
+      <% } %>
+    </div>
+    <div class="next">
+      <% if ((pn.pnTotal - pn.pnStart) > pn.pnSize) { %>
+        <a href="/<%= boardSlug %>?<% if (typeof (searchType) !== 'undefined' && searchType) { %>searchType=<%= searchType %>&<% } %>&<% if (typeof (keyword) !== 'undefined' && keyword) { %>keyword=<%= keyword %>&<% } %><% if (typeof (category) !== 'undefined' && category) { %>category=<%= category %>&<% } %>page=<%= pn.pnStart + pn.pnSize %>">다음</a>
+      <% } %>
+    </div>
+  </div>
+<% } %>

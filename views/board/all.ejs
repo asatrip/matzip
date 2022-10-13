@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= pageTitle %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <%- include('../ogImage') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/new">
+    <link rel="stylesheet" href="/stylesheets/board/commons.css">
+    <link rel="stylesheet" href="/stylesheets/board/list.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="list">
+        <%- include('../banner', { position: 'articleTop' }) %>
+        <%- include('../title', { title: '전체게시글' }) %>
+        <%- include(`./type/board`, { articles }) %>
+        <%- include('../pagination') %>
+        <%- include('./searchAndWrite') %>
+        <%- include('../banner', { position: 'articleBottom' }) %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

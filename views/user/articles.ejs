@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/mypage/article">
+    <link rel="canonical" href="<%= setting.siteDomain %>/mypage/article">
+    <link rel="stylesheet" href="/stylesheets/user.css">
+    <link rel="stylesheet" href="/stylesheets/board/list.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article>
+        <%- include('../title', { title: `${targetUser.nickName}의 게시글` }) %>
+        <%- include(`../board/type/board`, { articles }) %>
+        <%- include('../pagination') %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

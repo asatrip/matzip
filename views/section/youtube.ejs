@@ -1,0 +1,19 @@
+<div class="sections <%= sectionGroup.type %>">
+  <% if (sectionGroup.showTitleAndContent) { %>
+  <div class="sectionTitleContainer">
+    <h2><%= sectionGroup.title %></h2>
+    <div class="content"><%- sectionGroup.content %></div>
+  </div>
+  <% } %>
+  <% sectionGroup.sections.forEach(section => { %>
+  <div class="section <%= section.type %>">
+    <div class="articles <%= section.type %>">
+      <% section.articles.forEach(article => { %>
+      <div class="article">
+        <div class="content"><%- article.content %></div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <% }) %>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= pageTitle %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <meta property="og:url" content="<%= setting.siteDomain %>/join">
+    <link rel="canonical" href="<%= setting.siteDomain %>/join">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <script src="/javascripts/join.js" defer></script>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <article>
+        <h1>회원가입</h1>
+        <form action="/join" method="POST" onsubmit="onSubmit(this); return false;">
+          <input type="text" name="email" placeholder="이메일">
+          <input type="password" name="password" placeholder="비밀번호">
+          <input type="password" name="passwordCheck" placeholder="비밀번호 확인">
+          <input type="text" name="nickName" placeholder="닉네임">
+          <button>회원가입</button>
+          <div class="agreement">
+            <div class="all">
+              <input type="checkbox" name="all" id="all">
+              <label for="all">모두 동의합니다.</label>
+            </div>
+            <div>
+              <input type="checkbox" name="terms" id="terms">
+              <label for="terms">[필수] <a href="/terms" target="_blank">이용약관</a>에 동의합니다.</label>
+            </div>
+            <div>
+              <input type="checkbox" name="privacy" id="privacy">
+              <label for="privacy">[필수] <a href="/privacy" target="_blank">개인정보처리방침</a>에 동의합니다.</label>
+            </div>
+          </div>
+        </form>
+        <section id="socialAuth">
+          <% if (setting.useSocialApple) { %><a href="/auth/apple" class="apple"><img src="/assets/social/apple.svg"><div>Apple로 회원가입</div></a><% } %>
+          <% if (setting.useSocialGoogle) { %><a href="/auth/google" class="google"><img src="/assets/social/google.svg"><div>Google로 회원가입</div></a><% } %>
+          <% if (setting.useSocialFacebook) { %><a href="/auth/facebook" class="facebook"><img src="/assets/social/facebook.svg"><div>Facebook로 회원가입</div></a><% } %>
+          <% if (setting.useSocialTwitter) { %><a href="/auth/twitter" class="twitter"><img src="/assets/social/twitter.svg"><div>Twitter로 회원가입</div></a><% } %>
+          <% if (setting.useSocialNaver) { %><a href="/auth/naver" class="naver"><img src="/assets/social/naver.svg"><div>Naver로 회원가입</div></a><% } %>
+          <% if (setting.useSocialKakao) { %><a href="/auth/kakao" class="kakao"><img src="/assets/social/kakao.svg"><div>Kakao로 회원가입</div></a><% } %>
+        </section>
+        <div class="etc">이미 회원이라면? <a href="/login">로그인</a></div>
+      </article>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

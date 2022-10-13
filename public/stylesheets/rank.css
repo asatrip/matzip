@@ -1,0 +1,54 @@
+article .buttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+article .buttons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #CACFD8;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 0;
+}
+
+article .buttons a:hover,
+article .buttons a:active {
+  background-color: #B5B9C1;
+}
+
+article .buttons a.selected {
+  color: #000;
+  background-color: #fff;
+}
+
+article .pointRanks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+article .pointRank {
+  display: flex;
+  background-color: #fff;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+article .pointRank > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article .pointRank .nickName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}

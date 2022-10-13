@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= keyword %> - 검색결과 - <%= setting.siteName %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <%- include('../ogImage') %>
+    <link rel="stylesheet" href="/stylesheets/board/commons.css">
+    <link rel="stylesheet" href="/stylesheets/board/list.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="list">
+        <% if (locals.setting.adsenseTop) { %>
+        <div class="adsense"><%- locals.setting.adsenseTop %></div>
+        <% } %>
+        <% if (locals.banners.filter(b => b.position === 'articleTop' && b.status === 1).length) { %>
+          <%- include('../banner', { position: 'articleTop' }) %>
+        <% } %>
+        <% if (keyword) { %>
+          <%- include('../title', { title: `${keyword} 검색결과` }) %>
+          <%- include(`./type/board`, { articles }) %>
+          <%- include('../pagination') %>
+        <% } else { %>
+          <%- include('../title', { title: `키워드 없음` }) %>
+        <% } %>
+        <%- include('./searchAndWrite') %>
+        <% if (locals.setting.adsenseBottom) { %>
+        <div class="adsense"><%- locals.setting.adsenseBottom %></div>
+        <% } %>
+        <% if (locals.banners.filter(b => b.position === 'articleBottom' && b.status === 1).length) { %>
+          <%- include('../banner', { position: 'articleBottom' }) %>
+        <% } %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

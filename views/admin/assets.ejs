@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '에셋',
+          info: 'https://waffleboard.io/support/manage/asset',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>이미지</th>
+                <th>주소복사</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% assets.forEach(asset => { %>
+              <form action="/admin/asset/edit/<%= asset.id %>" method="POST">
+                <input type="hidden" name="type" value="image">
+                <tr>
+                  <td><%= asset.id %></td>
+                  <td><a href="<%= locals.storage %>/asset/<%= asset.image %>" target="_blank"><img src="<%= locals.storage %>/asset/<%= asset.image %>" alt="<%= asset.image %>"></a></td>
+                  <td><input type="text" disabled value="<%= locals.storage %>/asset/<%= asset.image %>"></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이미지</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/asset/new" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="type" value="image">
+                <tr>
+                  <td><input type="file" name="images" multiple></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

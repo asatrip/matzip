@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <section>
+        <%- include('../title', {
+          title: '파싱 설정',
+          info: 'https://waffleboard.io/support/plugin/parsing',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">파싱 플러그인</th>
+                <th colspan="2">프록시</th>
+                <th rowspan="2">설정</th>
+                <th rowspan="2">시작</th>
+                <th rowspan="2">중지</th>
+                <th rowspan="2">진행상태</th>
+              </tr>
+              <tr>
+                <th>주소</th>
+                <th>연결상태</th>
+                <th>목록</th>
+                <th>사용</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/parsing" method="POST">
+                <tr>
+                  <td><input type="text" name="server" value="<%= setting.parsingServer %>" placeholder="예) http://127.0.0.1:3001"></td>
+                  <td class="status">
+                    <% if (serverStatus === 1) { %>
+                      <span class="true">연결완료</span>
+                    <% } else { %>
+                      <span>연결끊김</span>
+                    <% } %>
+                  </td>
+                  <td><textarea name="proxies" placeholder="프록시"><%= parsingSetting.proxies %></textarea></td>
+                  <td><input type="checkbox" name="useProxies" value="1"<% if (parsingSetting.useProxies) { %> checked<% } %>></td>
+                  <td><button>설정</button></td>
+                  <td>
+                    <a href="/admin/parsing/start"><button type="button" name="status" value="start"<% if (!serverStatus) { %> disabled<% } %>>시작</button></a>
+                  </td>
+                  <td>
+                    <a href="/admin/parsing/stop"><button type="button" name="status" value="stop"<% if (!serverStatus) { %> disabled<% } %>>중단</button></a>
+                  </td>
+                  <td>
+                    <% if (serverStatus === 2) { %>
+                      <span class="true">진행중</span>
+                    <% } else { %>
+                      <span>중지</span>
+                    <% } %>
+                  </td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('../title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>도메인</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/parsing/site/new" method="POST">
+                <tr>
+                  <td><input type="text" name="title" placeholder="예) 구글"></td>
+                  <td><input type="text" name="domain" placeholder="예) https://www.google.com"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('../title', { title: '파싱 사이트' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>도메인</th>
+                <th>URL 구조</th>
+                <th>지연시간 (초)</th>
+                <th>표시 순서</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>상세</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% sites.forEach(site => { %>
+                <form action="/admin/parsing/site/edit/<%= site.id %>" method="POST">
+                  <tr>
+                    <td><input type="text" name="title" value="<%= site.title %>" placeholder="예) 구글"></td>
+                    <td><input type="text" name="domain" value="<%= site.domain %>" placeholder="예) https://www.google.com"></td>
+                    <td><input type="text" name="urlStructure" value="<%= site.urlStructure %>" placeholder="URL 구조" style="width: 500px;"></td>
+                    <td><input type="text" name="delay" value="<%= site.delay %>" placeholder="예) 3"></td>
+                    <td><input type="text" name="viewOrder" value="<%= site.viewOrder %>" placeholder="예) 100"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                    <td><a href="/admin/parsing/site/detail/<%= site.id %>"><button type="button">상세</button></a></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../../pagination') %>
+    </main>
+    <script>
+
+    </script>
+  </body>
+</html>

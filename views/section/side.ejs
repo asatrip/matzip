@@ -1,0 +1,23 @@
+<div class="sections <%= sectionGroup.type %>">
+  <% sectionGroup.sections.forEach(section => { %>
+  <div class="section <%= section.type %>">
+    <div class="sectionTitleContainer">
+      <h3><a href="/<%= section.slug %>"><%= section.title %></a></h3>
+      <div class="more"><a href="/<%= section.slug %>">더보기</a></div>
+    </div>
+    <div class="articles <%= section.type %>">
+      <% section.articles.forEach(article => { %>
+      <div class="article">
+        <div class="titleContainer">
+          <% if (article.category) { %><span class="category"><%= article.category %></span><% } %>
+          <a href="/<%= article.boardSlug %>/<%= article.id %>" class="title"><%= article.title %></a>
+          <% if (article.images) { %><span class="image"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="image" class="svg-inline--fa fa-image fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#9da5b6" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"></path></svg></span><% } %>
+          <% if (article.commentCount) { %><span class="commentCount"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="comment-dots" class="svg-inline--fa fa-comment-dots fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#9da5b6" d="M144 208c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zM256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg><%= article.commentCount %></span><% } %>
+        </div>
+        <div class="datetime"><%= article.datetime %></div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <% }) %>
+</div>

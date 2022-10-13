@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: 'GO',
+          info: 'https://waffleboard.io/support/manage/go',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>GO</th>
+                <th>URL</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% gos.forEach(go => { %>
+                <form action="/admin/go/edit/<%= go.id %>" method="POST">
+                  <tr>
+                    <td><input type="text" name="slug" value="<%= go.slug %>" placeholder="GO"></td>
+                    <td><input type="text" name="url" value="<%= go.url %>" placeholder="URL"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>GO</th>
+                <th>URL</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/go/new" method="POST">
+                <tr>
+                  <td><input type="text" name="slug" placeholder="GO"></td>
+                  <td><input type="text" name="url" placeholder="URL"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

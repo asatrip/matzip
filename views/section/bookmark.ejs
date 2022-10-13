@@ -1,0 +1,31 @@
+<div class="sections bookmark <%= sectionGroup.type %>">
+  <% sectionGroup.sections.forEach(section => { %>
+  <div class="section <%= section.type %>">
+    <% if (sectionGroup.showTitleAndContent) { %>
+    <div class="sectionTitleContainer">
+      <h2><a href="/<%= section.slug %>"><%= section.title %></a></h2>
+      <div class="content"><%- sectionGroup.content %></div>
+    </div>
+    <% } %>
+    <div class="articles <%= section.type %>">
+      <% section.articles.forEach(article => { %>
+      <div class="article">
+        <% if (article.image) { %>
+        <a href="/<%= section.slug %>/<%= article.id %>" class="image"><img src="<%= article.image %>" alt="<%= article.title %>"></a>
+        <% } else { %>
+        <a href="/<%= section.slug %>/<%= article.id %>" class="image"><img src="/assets/none.png"></a>
+        <% } %>
+        <div class="info">
+          <div class="title"><%= article.title %></div>
+          <div class="code">가입코드 : <%= article.customField02 %></div>
+        </div>
+        <div class="buttons">
+          <a href="/<%= section.slug %>/<%= article.id %>" class="detail">상세보기</a>
+          <a href="<%= article.customField01 %>" target="_blank" class="join">가입하기</a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <% }) %>
+</div>

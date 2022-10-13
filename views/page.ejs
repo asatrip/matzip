@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/<%= page.slug %>">
+    <link rel="canonical" href="<%= setting.siteDomain %>/<%= page.slug %>">
+    <style>
+      <%- page.css %>
+    </style>
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <%- include('./aside', { mobile: false }) %>
+      <article>
+        <%- page.html %>
+      </article>
+      <%- include('./aside', { mobile: true }) %>
+    </main>
+    <%- include('./footer') %>
+    <script>
+      <%- page.javascript %>
+    </script>
+  </body>
+</html>

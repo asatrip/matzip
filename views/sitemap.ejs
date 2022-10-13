@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc><%= locals.setting.siteDomain %>/sitemap/commons.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc><%= locals.setting.siteDomain %>/sitemap/board.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc><%= locals.setting.siteDomain %>/sitemap/article.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc><%= locals.setting.siteDomain %>/sitemap/page.xml</loc>
+  </sitemap>
+  <% if (locals.setting.index === 'location') { %>
+  <sitemap>
+    <loc><%= locals.setting.siteDomain %>/sitemap/store.xml</loc>
+  </sitemap>
+  <% } %>
+</sitemapindex>

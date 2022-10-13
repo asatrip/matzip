@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '리포트',
+          info: 'https://waffleboard.io/support/manage/report',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>타입</th>
+                <th>대상회원</th>
+                <th>내용</th>
+                <th>신고회원</th>
+                <th>신고내용</th>
+                <th>복원</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% reports.forEach(report => { %>
+                <form action="/admin/report/edit/<%= report.id %>" method="POST">
+                  <tr>
+                    <td><%= report.datetime %></td>
+                    <td><%= report.type %></td>
+                    <td><%= report.targetNickName %></td>
+                    <td><textarea><%= report.content %></textarea></td>
+                    <td><%= report.nickName %></td>
+                    <td><textarea><%= report.content %></textarea></td>
+                    <td><button name="submit" value="restore">복원</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+    </main>
+  </body>
+</html>

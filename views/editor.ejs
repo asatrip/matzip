@@ -1,0 +1,86 @@
+editor = new EditorJS({
+  holder: 'editorjs',
+  tools: {
+    header: {
+      class: Header,
+      inlineToolbar: ['link'],
+    },
+    list: {
+      class: List,
+      inlineToolber: [
+        'link',
+        'bold',
+      ],
+    },
+    embed: {
+      class: Embed,
+      inlineToolbar: false,
+      config: {
+        services: {
+          youtube: true,
+          coub: true,
+        }
+      }
+    },
+    image: {
+      class: ImageTool,
+      config: {
+        endpoints: {
+          byFile: '/api/imageUpload',
+          byUrl: '/api/imageUpload',
+        },
+      }
+    },
+    linkTool: {
+      class: LinkTool,
+      config: {
+        endpoint: '/api/getLink',
+      },
+    },
+    delimiter: Delimiter,
+    table: {
+      class: Table,
+    },
+  },
+  data: {
+    blocks: result,
+  },
+  i18n: {
+    messages: {
+      ui: {
+        "toolbar": {
+          "toolbox": {
+            "Add": "추가",
+          },
+        },
+        "blockTunes": {
+          "toggler": {
+            "Click to tune": "조정",
+            "or drag to move": "또는 드래그 하기",
+          },
+        },
+      },
+      toolNames: {
+        "Add": "추가",
+        "Text": "글자",
+        "Heading": "헤드",
+        "List": "리스트",
+        "Image": "이미지",
+        "Link": "링크",
+        "Delimiter": "경계선",
+        "Table": "표",
+      },
+      blockTunes: {
+        "delete": {
+          "Delete": "삭제",
+        },
+        "moveUp": {
+          "Move up": "위로 이동",
+        },
+        "moveDown": {
+          "Move down": "아래로 이동",
+        },
+      }
+    },
+  },
+});

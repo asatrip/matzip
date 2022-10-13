@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <section>
+        <%- include('../title', { title: '파싱 사이트' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>주소</th>
+                <th>URL 구조</th>
+                <th>딜레이</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../../pagination') %>
+      <section>
+        <%- include('../title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>주소</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/parsing/site/new" method="POST">
+                <tr>
+                  <td><input type="text" name="title" placeholder="예) 구글"></td>
+                  <td><input type="text" name="url" placeholder="예) https://www.google.com"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

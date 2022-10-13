@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <link rel="stylesheet" href="/stylesheets/permission.css">
+    <style>
+      .button a {
+        background-color: <%= locals.setting.pointColor %>;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <% if (setting.mainLayout === 'basic') { %>
+        <%- include('../aside', { mobile: false }) %>
+      <% } %>
+      <article>
+        <% if (message === 'needLogin') { %>
+        <div class="permission">
+          <div class="comment">로그인 후 이용가능 한 서비스 입니다.</div>
+          <div class="button">
+            <a href="/login">로그인 바로가기</a>
+          </div>
+        </div>
+        <% } else if (message === 'point') { %>
+        <div class="permission">포인트 부족</div>
+        <% } else { %>
+        <div class="permission">권한 없음</div>
+        <% } %>
+      </article>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

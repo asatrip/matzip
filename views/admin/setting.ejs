@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '기본',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">사이트 이름</th>
+                <th colspan="3">SEO</th>
+                <th rowspan="2">언어</th>
+                <th rowspan="2">시간대</th>
+                <th rowspan="2">설정</th>
+              </tr>
+              <tr>
+                <th>사이트 이름</th>
+                <th>사이트 설명</th>
+                <th>키워드</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/basic" method="POST">
+                <tr>
+                  <td><input type="text" name="siteNameRaw" value="<%= setting.siteNameRaw %>" placeholder="사이트 이름"></td>
+                  <td><input type="text" name="siteName" value="<%= setting.siteName %>" placeholder="사이트 이름"></td>
+                  <td><input type="text" name="siteDescription" value="<%= setting.siteDescription %>" placeholder="사이트 설명"></td>
+                  <td><input type="text" name="siteKeywords" value="<%= setting.siteKeywords %>" placeholder="키워드1, 키워드2, 키워드3"></td>
+                  <td>
+                    <select name="language">
+                      <option value="korean">한국어</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="time">
+                      <option value="seoul">서울/한국</option>
+                    </select>
+                  </td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '도메인',
+          info: 'https://waffleboard.io/support/create/how-to-connect-domain',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>도메인</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/domain" method="POST">
+                <tr>
+                  <td><input type="text" name="siteDomain" value="<%= setting.siteDomain %>" placeholder="도메인"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '이메일',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>서비스</th>
+                <th>이메일</th>
+                <th>앱 비밀번호</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/email" method="POST">
+                <tr>
+                  <td>
+                    <select name="emailService">
+                      <option value="gmailWithPassword"<% if (setting.emailService === 'gmailWithPassword') { %> selected<% } %>>Gmail</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="gmailUser" value="<%= setting.gmailUser %>" placeholder="이메일 (예:user@gmail.com)"></td>
+                  <td><input type="password" name="gmailPassword" value="<%= setting.gmailPassword %>" placeholder="비밀번호"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '템플릿',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>상단</th>
+                <th>하단</th>
+                <th>메인</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/template" method="POST">
+                <tr>
+                  <td>
+                    <select name="headerTemplate">
+                      <option value="basic"<% if (setting.headerTemplate === 'basic') { %> selected<% } %>>기본</option>
+                      <option value="simple"<% if (setting.headerTemplate === 'simple') { %> selected<% } %>>심플</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="footerTemplate">
+                      <option value="basic"<% if (setting.footerTemplate === 'basic') { %> selected<% } %>>기본</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="mainTemplate">
+                      <option value="basic"<% if (setting.footerTemplate === 'basic') { %> selected<% } %>>사이드 좌측</option>
+                      <!-- <option value="reverse"<% if (setting.footerTemplate === 'reverse') { %> selected<% } %>>사이드 우측</option> -->
+                      <option value="wrap"<% if (setting.footerTemplate === 'wrap') { %> selected<% } %>>사이드 없음</option>
+                      <!-- <option value="nowrap"<% if (setting.footerTemplate === 'nowrap') { %> selected<% } %>>전체화면</option> -->
+                    </select>
+                  </td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '디자인',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">색상테마</th>
+                <th colspan="5">로고</th>
+                <th rowspan="2">파비콘 (600x600)</th>
+                <th rowspan="2">OG 이미지 (1200x630)</th>
+                <th rowspan="2">설정</th>
+              </tr>
+              <tr>
+                <th>타입</th>
+                <th>이미지</th>
+                <th>이미지 (다크모드)</th>
+                <th>데스크탑 사이즈</th>
+                <th>모바일 사이즈</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/design" method="POST" enctype="multipart/form-data">
+                <tr>
+                  <td>
+                    <select name="theme">
+                      <option value="auto"<% if (setting.theme === 'auto') { %> selected<% } %>>자동전환</option>
+                      <option value="light"<% if (setting.theme === 'light') { %> selected<% } %>>라이트</option>
+                      <option value="dark"<% if (setting.theme === 'dark') { %> selected<% } %>>다크</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="logoType">
+                      <option value="text"<% if (setting.logoType === 'text') { %> selected<% } %>>텍스트</option>
+                      <option value="image"<% if (setting.logoType === 'image') { %> selected<% } %>>이미지</option>
+                    </select>
+                  </td>
+                  <td>
+                    <% if (setting.logoImage) { %>
+                    <div><img src="<%= storage %>/assets/<%= setting.logoImage %>"></div>
+                    <% } %>
+                    <div><input type="file" name="logoImage"></div>
+                  </td>
+                  <td>
+                    <% if (setting.logoImageDarkMode) { %>
+                    <div><img src="<%= storage %>/assets/<%= setting.logoImageDarkMode %>"></div>
+                    <% } %>
+                    <div><input type="file" name="logoImageDarkMode"></div>
+                  </td>
+                  <td><input type="text" name="logoImageDesktopSize" value="<%= setting.logoImageDesktopSize %>" placeholder="데스크탑 사이즈"></td>
+                  <td><input type="text" name="logoImageMobileSize" value="<%= setting.logoImageMobileSize %>" placeholder="모바일 사이즈"></td>
+                  <td>
+                    <% if (setting.faviconImage) { %>
+                    <div><img src="<%= storage %>/assets/<%= setting.faviconImage %>" alt="favicon"></div>
+                    <% } %>
+                    <div><input type="file" name="faviconImage"></div>
+                  </td>
+                  <td>
+                    <% if (setting.ogImage) { %>
+                    <div><img src="<%= storage %>/assets/<%= setting.ogImage %>" alt="favicon"></div>
+                    <% } %>
+                    <div><input type="file" name="ogImage"></div>
+                  </td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '기타 디자인',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>헤더 글씨색상</th>
+                <th>헤더 배경색상</th>
+                <th>본문 글씨색상</th>
+                <th>본문 배경색상</th>
+                <th>포인트 색상</th>
+                <th>포인트 배경색상</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/etcDesign" method="POST">
+                <tr>
+                  <td><input type="text" name="headerFontColor" value="<%= setting.headerFontColor %>" placeholder="헤더 글씨색상"></td>
+                  <td><input type="text" name="headerBackgroundColor" value="<%= setting.headerBackgroundColor %>" placeholder="헤더 배경색상"></td>
+                  <td><input type="text" name="bodyFontColor" value="<%= setting.bodyFontColor %>" placeholder="본문 글씨색상"></td>
+                  <td><input type="text" name="bodyBackgroundColor" value="<%= setting.bodyBackgroundColor %>" placeholder="본문 배경색상"></td>
+                  <td><input type="text" name="pointColor" value="<%= setting.pointColor %>" placeholder="포인트 색상"></td>
+                  <td><input type="text" name="pointBackgroundColor" value="<%= setting.pointBackgroundColor %>" placeholder="포인트 배경색상"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '커스텀 디자인',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>상단</th>
+                <th>하단</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/customDesign" method="POST">
+                <tr>
+                  <td><textarea name="headerDesign" style="height: 120px;"><%= setting.headerDesign %></textarea></td>
+                  <td><textarea name="footerDesign" style="height: 120px;"><%= setting.footerDesign %></textarea></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '첫페이지 H1, H2',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>H1</th>
+                <th>H2</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/indexHeadTag" method="POST">
+                <tr>
+                  <td><input type="text" name="indexH1" value="<%= setting.indexH1 %>" placeholder="H1"></td>
+                  <td><input type="text" name="indexH2" value="<%= setting.indexH2 %>" placeholder="H2"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '배너',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="8">데스크탑</th>
+                <th rowspan="2">배너 라운딩</th>
+                <th rowspan="2">데스크탑 간격</th>
+                <th rowspan="2">모바일 간격</th>
+                <th rowspan="2">설정</th>
+              </tr>
+              <tr>
+                <th>헤더</th>
+                <th>첫페이지 상단</th>
+                <th>첫페이지 하단</th>
+                <th>사이드 상단</th>
+                <th>사이드 하단</th>
+                <th>본문 상단</th>
+                <th>본문 하단</th>
+                <th>커스텀</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/banner" method="POST">
+              <tr>
+                <td>
+                  <select name="desktopBannerRowsHeader">
+                    <option value="1"<% if (setting.desktopBannerRowsHeader === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsHeader === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsHeader === 3) { %> selected<% } %>>3단</option>
+                    <option value="4"<% if (setting.desktopBannerRowsHeader === 4) { %> selected<% } %>>4단</option>
+                    <option value="5"<% if (setting.desktopBannerRowsHeader === 5) { %> selected<% } %>>5단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsIndexTop">
+                    <option value="1"<% if (setting.desktopBannerRowsIndexTop === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsIndexTop === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsIndexTop === 3) { %> selected<% } %>>3단</option>
+                    <option value="4"<% if (setting.desktopBannerRowsIndexTop === 4) { %> selected<% } %>>4단</option>
+                    <option value="5"<% if (setting.desktopBannerRowsIndexTop === 5) { %> selected<% } %>>5단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsIndexBottom">
+                    <option value="1"<% if (setting.desktopBannerRowsIndexBottom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsIndexBottom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsIndexBottom === 3) { %> selected<% } %>>3단</option>
+                    <option value="4"<% if (setting.desktopBannerRowsIndexBottom === 4) { %> selected<% } %>>4단</option>
+                    <option value="5"<% if (setting.desktopBannerRowsIndexBottom === 5) { %> selected<% } %>>5단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsSideTop">
+                    <option value="1"<% if (setting.desktopBannerRowsSideTop === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsSideTop === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsSideTop === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsSideBottom">
+                    <option value="1"<% if (setting.desktopBannerRowsSideBottom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsSideBottom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsSideBottom === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsArticleTop">
+                    <option value="1"<% if (setting.desktopBannerRowsArticleTop === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsArticleTop === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsArticleTop === 3) { %> selected<% } %>>3단</option>
+                    <option value="4"<% if (setting.desktopBannerRowsArticleTop === 4) { %> selected<% } %>>4단</option>
+                    <option value="5"<% if (setting.desktopBannerRowsArticleTop === 5) { %> selected<% } %>>5단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsArticleBottom">
+                    <option value="1"<% if (setting.desktopBannerRowsArticleBottom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsArticleBottom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsArticleBottom === 3) { %> selected<% } %>>3단</option>
+                    <option value="4"<% if (setting.desktopBannerRowsArticleBottom === 4) { %> selected<% } %>>4단</option>
+                    <option value="5"<% if (setting.desktopBannerRowsArticleBottom === 5) { %> selected<% } %>>5단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="desktopBannerRowsCustom">
+                    <option value="1"<% if (setting.desktopBannerRowsCustom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.desktopBannerRowsCustom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.desktopBannerRowsCustom === 3) { %> selected<% } %>>3단</option>
+                    <option value="4"<% if (setting.desktopBannerRowsCustom === 4) { %> selected<% } %>>4단</option>
+                    <option value="5"<% if (setting.desktopBannerRowsCustom === 5) { %> selected<% } %>>5단</option>
+                  </select>
+                </td>
+                <td rowspan="4"><input type="checkbox" name="bannerBorderRounding" value="1"<% if (setting.bannerBorderRounding) { %> checked<% } %>></td>
+                <td rowspan="4"><input type="text" name="bannerGapDesktop" value="<%= setting.bannerGapDesktop %>"></td>
+                <td rowspan="4"><input type="text" name="bannerGapMobile" value="<%= setting.bannerGapMobile %>"></td>
+                <td rowspan="4"><button>등록</button></td>
+              </tr>
+              <tr>
+                <th colspan="8">모바일</th>
+              </tr>
+              <tr>
+                <th>헤더</th>
+                <th>첫페이지 상단</th>
+                <th>첫페이지 하단</th>
+                <th>사이드 상단</th>
+                <th>사이드 하단</th>
+                <th>본문 상단</th>
+                <th>본문 하단</th>
+                <th>커스텀</th>
+              </tr>
+              <tr>
+                <td>
+                  <select name="mobileBannerRowsHeader">
+                    <option value="1"<% if (setting.mobileBannerRowsHeader === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsHeader === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsHeader === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsIndexTop">
+                    <option value="1"<% if (setting.mobileBannerRowsIndexTop === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsIndexTop === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsIndexTop === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsIndexBottom">
+                    <option value="1"<% if (setting.mobileBannerRowsIndexBottom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsIndexBottom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsIndexBottom === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsSideTop">
+                    <option value="1"<% if (setting.mobileBannerRowsSideTop === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsSideTop === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsSideTop === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsSideBottom">
+                    <option value="1"<% if (setting.mobileBannerRowsSideBottom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsSideBottom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsSideBottom === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsArticleTop">
+                    <option value="1"<% if (setting.mobileBannerRowsArticleTop === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsArticleTop === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsArticleTop === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsArticleBottom">
+                    <option value="1"<% if (setting.mobileBannerRowsArticleBottom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsArticleBottom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsArticleBottom === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="mobileBannerRowsCustom">
+                    <option value="1"<% if (setting.mobileBannerRowsCustom === 1) { %> selected<% } %>>1단</option>
+                    <option value="2"<% if (setting.mobileBannerRowsCustom === 2) { %> selected<% } %>>2단</option>
+                    <option value="3"<% if (setting.mobileBannerRowsCustom === 3) { %> selected<% } %>>3단</option>
+                  </select>
+                </td>
+              </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '게시판',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="3">게시물 읽기</th>
+                <th rowspan="2">글쓰기 텀 (초)</th>
+                <th rowspan="2">설정</th>
+              </tr>
+              <tr>
+                <th>이전글, 다음글</th>
+                <th>전체글</th>
+                <th>작성자의 다른 게시글</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/board" method="POST">
+                <tr>
+                  <td><input type="checkbox" name="boardPrevNextArticle" value="1"<% if (setting.boardPrevNextArticle) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="boardAllArticle" value="1"<% if (setting.boardAllArticle) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="boardAuthorArticle" value="1"<% if (setting.boardAuthorArticle) { %> checked<% } %>></td>
+                  <td><input type="text" name="writingTerm" value="<%= setting.writingTerm %>" placeholder="글쓰기 텀"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '사용자 정의 태그',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>HEAD</th>
+                <th>BODY 상단</th>
+                <th>BODY 하단</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/customTags" method="POST">
+                <tr>
+                  <td><textarea name="customHeadTags" placeholder="HEAD"><%= setting.customHeadTags %></textarea></td>
+                  <td><textarea name="customHeaderTags" placeholder="BODY 상단"><%= setting.customHeaderTags %></textarea></td>
+                  <td><textarea name="customFooterTags" placeholder="BODY 하단"><%= setting.customFooterTags %></textarea></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '사용자 정의 이용약관 & 개인정보보호 정책',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이용약관</th>
+                <th>개인정보보호 정책</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/termsAndPrivacy" method="POST">
+                <tr>
+                  <td><textarea name="terms" placeholder="이용약관"><%= setting.terms %></textarea></td>
+                  <td><textarea name="privacy" placeholder="개인정보보호 정책"><%= setting.privacy %></textarea></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '에드센스',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>첫페이지 상단</th>
+                <th>첫페이지 하단</th>
+                <th>사이드</th>
+                <th>커스텀</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/adsense" method="POST">
+                <tr>
+                  <td><textarea name="adsenseIndexTop"><%= setting.adsenseIndexTop %></textarea></td>
+                  <td><textarea name="adsenseIndexBottom"><%= setting.adsenseIndexBottom %></textarea></td>
+                  <td><textarea name="adsenseSide"><%= setting.adsenseSide %></textarea></td>
+                  <td><textarea name="adsenseCustom"><%= setting.adsenseCustom %></textarea></td>
+                  <td rowspan="3"><button>등록</button></td>
+                </tr>
+                <tr>
+                  <th>본문 상단</th>
+                  <th>본문 하단</th>
+                  <th>본문 중앙</th>
+                  <th>ads.txt</th>
+                </tr>
+                <tr>
+                  <td><textarea name="adsenseArticleTop"><%= setting.adsenseArticleTop %></textarea></td>
+                  <td><textarea name="adsenseArticleBottom"><%= setting.adsenseArticleBottom %></textarea></td>
+                  <td><textarea name="adsenseArticleCenter"><%= setting.adsenseArticleCenter %></textarea></td>
+                  <td><textarea name="adsenseAds"><%= setting.adsenseAds %></textarea></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '금지어 필터링',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <th>금지어</th>
+              <th>설정</th>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/blockWords" method="POST">
+                <td><textarea name="blockWords" style="height: 100px;" placeholder="키워드1, 키워드2, 키워드3"><%= setting.blockWords %></textarea></td>
+                <td><button>등록</button></td>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '추가 회원가입폼',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <th>휴대폰</th>
+              <th>성명</th>
+              <th>설정</th>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/joinForm" method="POST">
+                <td><input type="checkbox" name="useJoinPhone" value="1" <% if (setting.useJoinPhone) { %> checked<% } %>></td>
+                <td><input type="checkbox" name="useJoinRealName" value="1" <% if (setting.useJoinRealName) { %> checked<% } %>></td>
+                <td><button>등록</button></td>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: 'SNS 로그인',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="4">애플</th>
+                <th colspan="2">구글</th>
+                <th colspan="2">페이스북</th>
+                <th colspan="2">트위터</th>
+                <th colspan="2">네이버</th>
+                <th colspan="2">카카오톡</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/social" method="POST">
+                <tr>
+                  <td colspan="4"><input type="checkbox" name="useSocialApple" value="1"<% if (setting.useSocialApple) { %> checked<% } %>></td>
+                  <td colspan="2"><input type="checkbox" name="useSocialGoogle" value="1"<% if (setting.useSocialGoogle) { %> checked<% } %>></td>
+                  <td colspan="2"><input type="checkbox" name="useSocialFacebook" value="1"<% if (setting.useSocialFacebook) { %> checked<% } %>></td>
+                  <td colspan="2"><input type="checkbox" name="useSocialTwitter" value="1"<% if (setting.useSocialTwitter) { %> checked<% } %>></td>
+                  <td colspan="2"><input type="checkbox" name="useSocialNaver" value="1"<% if (setting.useSocialNaver) { %> checked<% } %>></td>
+                  <td colspan="2"><input type="checkbox" name="useSocialKakao" value="1"<% if (setting.useSocialKakao) { %> checked<% } %>></td>
+                  <td rowspan="5"><button>등록</button></td>
+                </tr>
+                <tr>
+                  <th>Service ID</th>
+                  <th>Team ID</th>
+                  <th>Key ID</th>
+                  <th>Auth Key</th>
+                  <th>Client ID</th>
+                  <th>Client Secret</th>
+                  <th>App ID</th>
+                  <th>App Secret</th>
+                  <th>API Key</th>
+                  <th>API Secret</th>
+                  <th>Client ID</th>
+                  <th>Client Secret</th>
+                  <th>Client ID</th>
+                  <th>Client Secret</th>
+                </tr>
+                <tr>
+                  <td><input type="text" name="socialAppleServiceId" value="<%= setting.socialAppleServiceId %>" placeholder="Bundle ID"></td>
+                  <td><input type="text" name="socialAppleTeamId" value="<%= setting.socialAppleTeamId %>" placeholder="Team ID"></td>
+                  <td><input type="text" name="socialAppleKeyId" value="<%= setting.socialAppleKeyId %>" placeholder="Key ID"></td>
+                  <td><textarea name="socialAppleAuthKey" placeholder="Auth Key"><%= setting.socialAppleAuthKey %></textarea></td>
+                  <td><input type="text" name="socialGoogleClientId" value="<%= setting.socialGoogleClientId %>" placeholder="Client ID"></td>
+                  <td><input type="text" name="socialGoogleClientSecret" value="<%= setting.socialGoogleClientSecret %>" placeholder="Client Secret"></td>
+                  <td><input type="text" name="socialFacebookAppId" value="<%= setting.socialFacebookAppId %>" placeholder="App ID"></td>
+                  <td><input type="text" name="socialFacebookAppSecret" value="<%= setting.socialFacebookAppSecret %>" placeholder="App Secret"></td>
+                  <td><input type="text" name="socialTwitterApiKey" value="<%= setting.socialTwitterApiKey %>" placeholder="API Key"></td>
+                  <td><input type="text" name="socialTwitterApiSecret" value="<%= setting.socialTwitterApiSecret %>" placeholder="API Secret"></td>
+                  <td><input type="text" name="socialNaverClientId" value="<%= setting.socialNaverClientId %>" placeholder="Client ID"></td>
+                  <td><input type="text" name="socialNaverClientSecret" value="<%= setting.socialNaverClientSecret %>" placeholder="Client Secret"></td>
+                  <td><input type="text" name="socialKakaoClientId" value="<%= setting.socialKakaoClientId %>" placeholder="Client ID"></td>
+                  <td><input type="text" name="socialKakaoClientSecret" value="<%= setting.socialKakaoClientSecret %>" placeholder="Client Secret"></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: 'SMS 설정 (NHN Cloud Platform)',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>발신번호</th>
+                <th>Service ID</th>
+                <th>Service Secret Key</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/sms" method="POST">
+                <tr>
+                  <td><input type="text" name="smsCallerId" value="<%= setting.smsCallerId %>" placeholder="발신번호"></td>
+                  <td><input type="text" name="smsServiceId" value="<%= setting.smsServiceId %>" placeholder="Service ID"></td>
+                  <td><input type="text" name="smsServiceSecretKey" value="<%= setting.smsServiceSecretKey %>" placeholder="Service Secret Key"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: 'API',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">텔레그램</th>
+                <th colspan="2">네이버 클라우드 플랫폼</th>
+                <th>구글 클라우드 플랫폼</th>
+                <th>카카오</th>
+                <th rowspan="2">설정</th>
+              </tr>
+              <tr>
+                <th>토큰</th>
+                <th>챗 ID</th>
+                <th>Access Key ID</th>
+                <th>Secret Key</th>
+                <th>API Key</th>
+                <th>Javascript Key</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/api" method="POST">
+                <tr>
+                  <td><input type="text" name="telegramToken" value="<%= setting.telegramToken %>" placeholder="토큰"></td>
+                  <td><input type="text" name="telegramChatId" value="<%= setting.telegramChatId %>" placeholder="챗 ID"></td>
+                  <td><input type="text" name="naverCloudPlatformAccessKeyId" value="<%= setting.naverCloudPlatformAccessKeyId %>" placeholder="Access Key ID"></td>
+                  <td><input type="text" name="naverCloudPlatformSecretKey" value="<%= setting.naverCloudPlatformSecretKey %>" placeholder="Secret Key"></td>
+                  <td><input type="text" name="googleCloudPlatformApiKey" value="<%= setting.googleCloudPlatformApiKey %>" placeholder="API Key"></td>
+                  <td><input type="text" name="kakaoJavascriptKey" value="<%= setting.kakaoJavascriptKey %>" placeholder="Javascript Key"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '기타 설정',
+          info: 'https://waffleboard.io/support/manage/setting',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>약관 동의</th>
+                <th>이메일 인증</th>
+                <th>SMS 인증</th>
+                <th>게시글 조회수</th>
+                <th>방문자 카운터</th>
+                <th>메시지</th>
+                <th>채팅창</th>
+                <th>SMS</th>
+                <th>등급이미지</th>
+                <th>회원탈퇴</th>
+                <th>탈퇴방법</th>
+                <th>포인트 출금신청</th>
+                <th>작업회원</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/setting/etc" method="POST">
+                <tr>
+                  <td><input type="checkbox" name="useTermsAndPrivacy" value="1"<% if (setting.useTermsAndPrivacy) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useEmailAuthentication" value="1"<% if (setting.useEmailAuthentication) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useSmsAuthentication" value="1"<% if (setting.useSmsAuthentication) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useArticleViewCount" value="1"<% if (setting.useArticleViewCount) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useVisitCount" value="1"<% if (setting.useVisitCount) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useMessage" value="1"<% if (setting.useMessage) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useChat" value="1"<% if (setting.useChat) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useSms" value="1"<% if (setting.useSms) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="usePermissionImage" value="1"<% if (setting.usePermissionImage) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useWithdraw" value="1"<% if (setting.useWithdraw) { %> checked<% } %>></td>
+                  <td>
+                    <select name="withdrawType">
+                      <option value="1"<% if (setting.withdrawType === 1) { %> selected<% } %>>비활성</option>
+                      <option value="2"<% if (setting.withdrawType === 2) { %> selected<% } %>>완전삭제</option>
+                    </select>
+                  </td>
+                  <td><input type="checkbox" name="usePointWithdraw" value="1"<% if (setting.usePointWithdraw) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useWorkingUser" value="1"<% if (setting.useWorkingUser) { %> checked<% } %>></td>
+                  <td rowspan="3"><button>등록</button></td>
+                </tr>
+                <tr>
+                  <th>포인트 출금신청 한도</th>
+                  <th>가입 포인트</th>
+                  <th>초대 포인트</th>
+                  <th>내용 숨김 리포트 개수</th>
+                  <th>좋아요 획득 포인트</th>
+                  <th>좋아요 클릭 포인트</th>
+                  <th>게시글 포인트 일일 한도</th>
+                  <th>댓글 포인트 일일 한도</th>
+                  <th>좋아요 획득 포인트 일일 한도</th>
+                  <th>좋아요 클릭 포인트 일일 한도</th>
+                  <th>무료 포인트 지급 간격</th>
+                  <th>무료 포인트</th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <td><input type="text" name="pointWithdrawLimit" value="<%= setting.pointWithdrawLimit %>" placeholder="포인트 출금신청 한도"></td>
+                  <td><input type="text" name="joinPoint" value="<%= setting.joinPoint %>" placeholder="가입 포인트"></td>
+                  <td><input type="text" name="invitePoint" value="<%= setting.invitePoint %>" placeholder="초대 포인트"></td>
+                  <td><input type="text" name="reportCount" value="<%= setting.reportCount %>" placeholder="내용 숨김 리포트 개수"></td>
+                  <td><input type="text" name="authorLikePoint" value="<%= setting.authorLikePoint %>" placeholder="좋아요 획득 포인트"></td>
+                  <td><input type="text" name="userLikePoint" value="<%= setting.userLikePoint %>" placeholder="좋아요 클릭 포인트"></td>
+                  <td><input type="text" name="articlePointLimit" value="<%= setting.articlePointLimit %>" placeholder="게시글 포인트 일일 한도"></td>
+                  <td><input type="text" name="commentPointLimit" value="<%= setting.commentPointLimit %>" placeholder="댓글 포인트 일일 한도"></td>
+                  <td><input type="text" name="authorLikePointLimit" value="<%= setting.authorLikePointLimit %>" placeholder="좋아요 포인트 일일 한도"></td>
+                  <td><input type="text" name="userLikePointLimit" value="<%= setting.userLikePointLimit %>" placeholder="좋아요 포인트 일일 한도"></td>
+                  <td>
+                    <select name="freePointTerm">
+                      <option value="daily"<% if (setting.freePointTerm === 'daily') { %> selected<% } %>>매일</option>
+                      <option value="weekly"<% if (setting.freePointTerm === 'weekly') { %> selected<% } %>>주간</option>
+                      <option value="montly"<% if (setting.freePointTerm === 'montly') { %> selected<% } %>>월간</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="freePoint" value="<%= setting.freePoint %>" placeholder="무료 포인트"></td>
+                  <td></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <%- include('./footer') %>
+    <script>
+      const useSocialApple = document.querySelector('input[name=useSocialApple]');
+      const socialAppleServiceId = document.querySelector('input[name=socialAppleServiceId]');
+      const socialAppleTeamId = document.querySelector('input[name=socialAppleTeamId]');
+      const socialAppleKeyId = document.querySelector('input[name=socialAppleKeyId]');
+      const socialAppleAuthKey = document.querySelector('textarea[name=socialAppleAuthKey]');
+      useSocialApple.addEventListener('click', () => {
+        if (
+          useSocialApple.checked &&
+          !socialAppleServiceId.value
+          || !socialAppleTeamId.value
+          || !socialAppleTeamId.value
+          || !socialAppleKeyId.value
+          || !socialAppleAuthKey.value
+        ) {
+          alert('API키를 발급받아 모두 입력되어야 활성화 가능합니다');
+          useSocialApple.checked = false; 
+        }
+      });
+      const useSocialGoogle = document.querySelector('input[name=useSocialGoogle]');
+      const socialGoogleClientId = document.querySelector('input[name=socialGoogleClientId]');
+      const socialGoogleClientSecret = document.querySelector('input[name=socialGoogleClientSecret]');
+      useSocialGoogle.addEventListener('click', () => {
+        if (
+          useSocialGoogle.checked &&
+          !socialGoogleClientId.value
+          || !socialGoogleClientSecret.value
+        ) {
+          alert('API키를 발급받아 모두 입력되어야 활성화 가능합니다');
+          useSocialGoogle.checked = false; 
+        }
+      });
+      const useSocialFacebook = document.querySelector('input[name=useSocialFacebook]');
+      const socialFacebookAppId = document.querySelector('input[name=socialFacebookAppId]');
+      const socialFacebookAppSecret = document.querySelector('input[name=socialFacebookAppSecret]');
+      useSocialFacebook.addEventListener('click', () => {
+        if (
+          useSocialFacebook.checked &&
+          !socialFacebookAppId.value
+          || !socialFacebookAppSecret.value
+        ) {
+          alert('API키를 발급받아 모두 입력되어야 활성화 가능합니다');
+          useSocialFacebook.checked = false; 
+        }
+      });
+      const useSocialTwitter = document.querySelector('input[name=useSocialTwitter]');
+      const socialTwitterApiKey = document.querySelector('input[name=socialTwitterApiKey]');
+      const socialTwitterApiSecret = document.querySelector('input[name=socialTwitterApiSecret]');
+      useSocialTwitter.addEventListener('click', () => {
+        if (
+          useSocialTwitter.checked &&
+          !socialTwitterApiKey.value
+          || !socialTwitterApiSecret.value
+        ) {
+          alert('API키를 발급받아 모두 입력되어야 활성화 가능합니다');
+          useSocialTwitter.checked = false; 
+        }
+      });
+      const useSocialNaver = document.querySelector('input[name=useSocialNaver]');
+      const socialNaverClientId = document.querySelector('input[name=socialNaverClientId]');
+      const socialNaverClientSecret = document.querySelector('input[name=socialNaverClientSecret]');
+      useSocialNaver.addEventListener('click', () => {
+        if (
+          useSocialNaver.checked &&
+          !socialNaverClientId.value
+          || !socialNaverClientSecret.value
+        ) {
+          alert('API키를 발급받아 모두 입력되어야 활성화 가능합니다');
+          useSocialNaver.checked = false; 
+        }
+      });
+      const useSocialKakao = document.querySelector('input[name=useSocialKakao]');
+      const socialKakaoClientId = document.querySelector('input[name=socialKakaoClientId]');
+      const socialKakaoClientSecret = document.querySelector('input[name=socialKakaoClientSecret]');
+      useSocialKakao.addEventListener('click', () => {
+        if (
+          useSocialKakao.checked &&
+          !socialKakaoClientId.value
+          || !socialKakaoClientSecret.value
+        ) {
+          alert('API키를 발급받아 모두 입력되어야 활성화 가능합니다');
+          useSocialKakao.checked = false; 
+        }
+      });
+    </script>
+  </body>
+</html>

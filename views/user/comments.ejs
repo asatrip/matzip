@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/mypage/article">
+    <link rel="canonical" href="<%= setting.siteDomain %>/mypage/article">
+    <link rel="stylesheet" href="/stylesheets/user.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article>
+        <%- include('../title', { title: `${targetUser.nickName}의 댓글` }) %>
+        <section id="item">
+          <div class="items">
+            <% comments.forEach(comment => { %>
+              <div class="item">
+                <div class="main">
+                  <a href="/<%= comment.boardSlug %>/<%= comment.articleId %>"><%= comment.content %></a>
+                </div>
+                <div class="info">
+                  <div class="datetime"><%= comment.datetime %></div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </section>
+        <%- include('../pagination') %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

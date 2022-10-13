@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        
+      </section>
+      <section>
+        <%- include('./title', {
+          title: `${user.nickName} 회원 그룹`,
+          info: 'https://waffleboard.io/support/manage/user',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>그룹명</th>
+                <th>권한</th>
+                <th >설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/user/detail/<%= user.id %>" method="POST">
+                <% let i = 0 %>
+                <% userGroups.forEach(userGroup => { %>
+                  <tr>
+                    <td><%= userGroup.title %></td>
+                    <td><input type="checkbox" name="userGroups" value="<%= userGroup.id %>"<% if (userUserGroups.find(userUserGroup => userUserGroup.userUserGroup_userGroup_ID === userGroup.id)) { %> checked<% } %>></td>
+                    <% if (i === 0) { %><td rowspan="3"><button name="submit" value="userGroup">설정</button></td><% } %>
+                  </tr>
+                  <% i ++ %>
+                <% }) %>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', { title: '포인트 내역' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>타입</th>
+                <th>포인트</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% points.forEach(point => { %>
+              <tr>
+                <td><%= point.datetime %></td>
+                <td><%= point.type %></td>
+                <td><%= point.point.toLocaleString() %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <div class="search">
+        <form action="/admin/point/download" method="POST">
+          <input type="hidden" name="userId" value="<%= user.id %>">
+          <button>다운로드</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

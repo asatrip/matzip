@@ -1,0 +1,85 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 100px 0;
+}
+
+footer .buttons {
+  display: flex;
+  gap: 10px;
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 0.9em;
+}
+
+[data-theme='dark'] footer .buttons {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+footer .buttons a {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] footer .buttons a {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+footer .buttons a:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] footer .buttons a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+footer .counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] footer .counter {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+footer .introduce {
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
+[data-theme='dark'] footer .introduce {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+footer .license {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 0.9em;
+}
+
+[data-theme='dark'] footer .license {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+footer .license a {
+  display: unset;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
+[data-theme='dark'] footer .license a {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+
+footer .license a:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] footer .license a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/alarm">
+    <link rel="canonical" href="<%= setting.siteDomain %>/alarm">
+    <link rel="stylesheet" href="/stylesheets/user/message.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="alarm">
+        <%- include('../title', { title: '알림' }) %>
+        <section class="items">
+          <% alarms.forEach(alarm => { %>
+            <div class="item<% if (alarm.status === 2) { %> read<% } %>">
+              <div>
+                <div class="info"><%= alarm.datetime %></div>
+                <div><a href="<%= alarm.link %>"><%= alarm.content %></a></div>
+              </div>
+              <div class="status">
+                <% if (alarm.status === 1) { %>
+                새 알림
+                <% } else if (alarm.status === 2) { %>
+                읽음
+                <% } %>
+              </div>
+            </div>
+          <% }) %>
+        </section>
+        <%- include('../pagination') %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

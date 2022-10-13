@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '게시판',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">번호</th>
+                <th rowspan="2">이름</th>
+                <th rowspan="2">연결 주소</th>
+                <th rowspan="2">타입</th>
+                <th rowspan="2">목록 갯수</th>
+                <th colspan="4">등급</th>
+                <th rowspan="2">수정</th>
+                <th rowspan="2">삭제</th>
+                <th rowspan="2">상세</th>
+              </tr>
+              <tr>
+                <th>목록 조회</th>
+                <th>게시글 읽기</th>
+                <th>게시글 쓰기</th>
+                <th>댓글 쓰기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% boards.forEach(board => { %>
+                <form action="/admin/board/edit/<%= board.id %>" method="POST">
+                  <tr>
+                    <td><%= board.id %></td>
+                    <td><input type="text" name="title" value="<%= board.title %>" placeholder="예) 뉴스"></td>
+                    <td><input type="text" name="slug" value="<%= board.slug %>" placeholder="예) news"></td>
+                    <td>
+                      <select name="type">
+                        <option value="board"<% if (board.type === 'board') { %> selected<% } %>>게시판</option>
+                        <option value="gallery"<% if (board.type === 'gallery') { %> selected<% } %>>갤러리</option>
+                        <option value="bookmarkThree"<% if (board.type === 'bookmarkThree') { %> selected<% } %>>북마크3단</option>
+                        <option value="bookmarkFour"<% if (board.type === 'bookmarkFour') { %> selected<% } %>>북마크4단</option>
+                        <option value="bookmarkFive"<% if (board.type === 'bookmarkFive') { %> selected<% } %>>북마크5단</option>
+                      </select>
+                    </td>
+                    <td><input type="text" name="listCount" value="<%= board.listCount %>" placeholder="목록 갯수"></td>
+                    <td>
+                      <select name="listPermission">
+                        <option value="0"<% if (board.listPermission === 0) { %> selected<% } %>>비회원</option>
+                        <% locals.permissions.forEach(permission => { %>
+                          <option value="<%= permission.permission %>"<% if (board.listPermission === permission.permission) { %> selected<% } %>><%= permission.title %></option>
+                        <% }) %>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="readPermission">
+                        <option value="0"<% if (board.readPermission === 0) { %> selected<% } %>>비회원</option>
+                        <% locals.permissions.forEach(permission => { %>
+                          <option value="<%= permission.permission %>"<% if (board.readPermission === permission.permission) { %> selected<% } %>><%= permission.title %></option>
+                        <% }) %>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="writePermission">
+                        <option value="0"<% if (board.writePermission === 0) { %> selected<% } %>>비회원</option>
+                        <% locals.permissions.forEach(permission => { %>
+                          <option value="<%= permission.permission %>"<% if (board.writePermission === permission.permission) { %> selected<% } %>><%= permission.title %></option>
+                        <% }) %>
+                      </select>
+                    </td>
+                    <td>
+                      <select name="commentPermission">
+                        <option value="0"<% if (board.commentPermission === 0) { %> selected<% } %>>비회원</option>
+                        <% locals.permissions.forEach(permission => { %>
+                          <option value="<%= permission.permission %>"<% if (board.commentPermission === permission.permission) { %> selected<% } %>><%= permission.title %></option>
+                        <% }) %>
+                      </select>
+                    </td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                    <td><a href="/admin/board/detail/<%= board.id %>"><button type="button">상세설정</button></a></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>연결 주소</th>
+                <th>타입</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/board/new" method="POST">
+                <tr>
+                  <td><input type="text" name="title" placeholder="예) 뉴스"></td>
+                  <td><input type="text" name="slug" placeholder="예) news"></td>
+                  <td>
+                    <select name="type">
+                      <option value="board">게시판</option>
+                      <option value="gallery">갤러리</option>
+                      <!-- <option value="feed">피드</option> -->
+                      <option value="bookmarkThree">북마크3단</option>
+                      <option value="bookmarkFour">북마크4단</option>
+                      <option value="bookmarkFive">북마크5단</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="new">등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

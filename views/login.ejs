@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= pageTitle %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <meta property="og:url" content="<%= setting.siteDomain %>/login">
+    <link rel="canonical" href="<%= setting.siteDomain %>/login">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <article>
+        <h1>로그인</h1>
+        <form action="/login" method="POST">
+          <input type="text" name="email" placeholder="이메일">
+          <input type="password" name="password" placeholder="비밀번호">
+          <button>로그인</button>
+        </form>
+        <section id="socialAuth">
+          <% if (setting.useSocialApple) { %><a href="/auth/apple" class="apple"><img src="/assets/social/apple.svg"><div>애플 로그인</div></a><% } %>
+          <% if (setting.useSocialGoogle) { %><a href="/auth/google" class="google"><img src="/assets/social/google.svg"><div>구글 로그인</div></a><% } %>
+        </section>
+        <div class="etc">아직 회원이 아니라면? <a href="/join">회원가입</a></div>
+        <div class="find"><a href="/findInfo">아이디, 비밀번호 찾기</a></div>
+      </article>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

@@ -1,0 +1,550 @@
+[
+  {
+    "hash": "1.0.1",
+    "sql": "ALTER TABLE `cms`.`banner` ADD COLUMN `mobileHide` TINYINT NULL DEFAULT 0 AFTER `newPage`;"
+  },
+  {
+    "hash": "1.0.2",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `useLink` TINYINT NULL DEFAULT 0 AFTER `thumbnailSize`,ADD COLUMN `useFileUpload` TINYINT NULL DEFAULT 0 AFTER `useLink`;"
+  },
+  {
+    "hash": "1.0.3",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `bannerBorderRounding` TINYINT NULL DEFAULT 1 AFTER `bannerGapMobile`;"
+  },
+  {
+    "hash": "1.0.4",
+    "sql": "ALTER TABLE `cms`.`chat` ADD COLUMN `status` TINYINT NULL DEFAULT 1 AFTER `fixed`;"
+  },
+  {
+    "hash": "1.0.5",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `color` VARCHAR(45) NULL AFTER `useFileUpload`;"
+  },
+  {
+    "hash": "1.0.6",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useEmailAuthentication` TINYINT NULL DEFAULT 0 AFTER `adsenseCustom`;"
+  },
+  {
+    "hash": "1.0.7",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `emailAuthentication` TINYINT NULL DEFAULT 0 AFTER `email`,ADD COLUMN `realNameAuthentication` TINYINT NULL DEFAULT 0 AFTER `realName`,ADD COLUMN `phoneAuthentication` TINYINT NULL DEFAULT 0 AFTER `phone`;"
+  },
+  {
+    "hash": "1.0.8",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `pageCommonCss` LONGTEXT NULL AFTER `footerGuide`;"
+  },
+  {
+    "hash": "1.0.9",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `hash` VARCHAR(45) NULL AFTER `id`;"
+  },
+  {
+    "hash": "1.0.10",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `telegramToken` VARCHAR(200) NULL AFTER `joinMethod`;"
+  },
+  {
+    "hash": "1.0.11",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `theme` VARCHAR(45) NULL DEFAULT 'white' AFTER `logoImageSize`;"
+  },
+  {
+    "hash": "1.0.12",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `telegramChatId` VARCHAR(45) NULL AFTER `telegramToken`;"
+  },
+  {
+    "hash": "1.0.13",
+    "sql": "ALTER TABLE `cms`.`message` CHANGE COLUMN `updated_at` `updatedAt` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ,CHANGE COLUMN `created_at` `createdAt` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ;"
+  },
+  {
+    "hash": "1.0.14",
+    "sql": "ALTER TABLE `cms`.`menu` ADD COLUMN `slug` VARCHAR(45) NULL AFTER `title`;"
+  },
+  {
+    "hash": "1.0.15",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `index` VARCHAR(45) NULL DEFAULT 'basic' AFTER `hash`;"
+  },
+  {
+    "hash": "1.0.16",
+    "sql": "ALTER TABLE `cms`.`setting` DROP COLUMN `smsSecretKeyId`,DROP COLUMN `smsAccessKeyId`,ADD COLUMN `adsenseAds` VARCHAR(200) NULL AFTER `metaTagKeyword`,ADD COLUMN `NaverCloudPlatformAccessKeyId` VARCHAR(200) NULL AFTER `bannerBorderRounding`,ADD COLUMN `NaverCloudPlatformSecretKey` VARCHAR(200) NULL AFTER `NaverCloudPlatformAccessKeyId`;"
+  },
+  {
+    "hash": "1.0.17",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `googleCloudPlatformApiKey` VARCHAR(200) NULL AFTER `naverCloudPlatformSecretKey`;"
+  },
+  {
+    "hash": "1.0.18",
+    "sql": "ALTER TABLE `cms`.`chat` ADD COLUMN `type` VARCHAR(45) NULL AFTER `isAdmin`,ADD COLUMN `target` VARCHAR(45) NULL AFTER `type`;"
+  },
+  {
+    "hash": "1.0.19",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `landingLayout` VARCHAR(45) NULL DEFAULT 'basic' AFTER `indexLayout`;"
+  },
+  {
+    "hash": "1.0.20",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `editor` VARCHAR(45) NULL DEFAULT 'ckeditor' AFTER `index`;"
+  },
+  {
+    "hash": "1.0.21",
+    "sql": "ALTER TABLE `cms`.`parsingBoard` ADD COLUMN `listSelector` VARCHAR(400) NULL AFTER `slug`,ADD COLUMN `listRegex` VARCHAR(400) NULL AFTER `listSelector`,ADD COLUMN `titleSelector` VARCHAR(400) NULL AFTER `listRegex`,ADD COLUMN `titleRegex` VARCHAR(400) NULL AFTER `titleSelector`,ADD COLUMN `contentSelector` VARCHAR(400) NULL AFTER `titleRegex`,ADD COLUMN `contentRegex` VARCHAR(400) NULL AFTER `contentSelector`;"
+  },
+  {
+    "hash": "1.0.22",
+    "sql": "ALTER TABLE `cms`.`menu` ADD COLUMN `status` TINYINT NULL DEFAULT 1 AFTER `viewOrder`;"
+  },
+  {
+    "hash": "1.0.23",
+    "sql": "ALTER TABLE `cms`.`point` ADD COLUMN `point_pointDeposit_ID` INT UNSIGNED NULL AFTER `point_comment_ID`,ADD INDEX `point_pointDeposit_ID` (`point_pointDeposit_ID` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.24",
+    "sql": "ALTER TABLE `cms`.`point` ADD CONSTRAINT `point_pointDeposit_ID` FOREIGN KEY (`point_pointDeposit_ID`) REFERENCES `cms`.`pointDeposit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;"
+  },
+  {
+    "hash": "1.0.25",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `faviconImage` VARCHAR(45) NULL AFTER `logoImageSize`;"
+  },
+  {
+    "hash": "1.0.26",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `siteNameRaw` VARCHAR(200) NULL DEFAULT '사이트명' AFTER `siteName`;"
+  },
+  {
+    "hash": "1.0.27",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `smsServiceSecretKey` VARCHAR(45) NULL AFTER `smsServiceId`;"
+  },
+  {
+    "hash": "1.0.28",
+    "sql": "ALTER TABLE `cms`.`banner` ADD COLUMN `desktopHide` TINYINT NULL DEFAULT 0 AFTER `newPage`;"
+  },
+  {
+    "hash": "1.0.29",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useSmsAuthentication` TINYINT NULL DEFAULT 0 AFTER `useEmailAuthentication`;"
+  },
+  {
+    "hash": "1.0.30",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `unlikeCount` INT UNSIGNED NULL DEFAULT 0 AFTER `likeCount`;"
+  },
+  {
+    "hash": "1.0.31",
+    "sql": "ALTER TABLE `cms`.`comment` ADD COLUMN `unlikeCount` INT UNSIGNED NULL DEFAULT 0 AFTER `likeCount`;"
+  },
+  {
+    "hash": "1.0.32",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `boardTheme` VARCHAR(45) NOT NULL DEFAULT 'basic' AFTER `theme`;"
+  },
+  {
+    "hash": "1.0.33",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `user_parent_ID` INT UNSIGNED NULL AFTER `user_userGroup_ID`,ADD INDEX `user_parent_ID` (`user_parent_ID` ASC) VISIBLE; ALTER TABLE `cms`.`user` ADD CONSTRAINT `user_parentUser_ID` FOREIGN KEY (`user_parentUser_ID`)REFERENCES `cms`.`user` (`id`) ON DELETE SET NULLON UPDATE SET NULL;"
+  },
+  {
+    "hash": "1.0.35",
+    "sql": "ALTER TABLE `cms`.`assets` ADD COLUMN `type` VARCHAR(45) NULL AFTER `id`,ADD COLUMN `slug` VARCHAR(45) NULL AFTER `type`,ADD COLUMN `title` VARCHAR(200) NULL AFTER `image`,ADD COLUMN `content` LONGTEXT NULL AFTER `title`,CHANGE COLUMN `image` `image` VARCHAR(200) NULL ,ADD INDEX `type` (`type` ASC) VISIBLE,DROP INDEX `image` ;"
+  },
+  {
+    "hash": "1.0.36",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `font` VARCHAR(45) NULL DEFAULT 'basic' AFTER `faviconImage`;"
+  },
+  {
+    "hash": "1.0.37",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useCustomLayout` TINYINT NULL DEFAULT 0 AFTER `faviconImage`;"
+  },
+  {
+    "hash": "1.0.38",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `image` VARCHAR(200) NULL AFTER `summary`;"
+  },
+  {
+    "hash": "1.0.39",
+    "sql": "ALTER TABLE `cms`.`alarm` ADD COLUMN `type` VARCHAR(45) NOT NULL AFTER `alarm_message_ID`, ADD INDEX `type` (`type` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.40",
+    "sql": "ALTER TABLE `cms`.`point` ADD COLUMN `point_pointDeposit_ID` INT UNSIGNED NULL AFTER `point_comment_ID`,ADD INDEX `point_pointDeposit_ID` (`point_pointDeposit_ID` ASC) VISIBLE;;ALTER TABLE `cms`.`point` ADD CONSTRAINT `point_pointDeposit_ID`FOREIGN KEY (`point_pointDeposit_ID`)REFERENCES `cms`.`pointDeposit` (`id`)ON DELETE CASCADEON UPDATE CASCADE;"
+  },
+  {
+    "hash": "1.0.41",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `telegramToken` `telegramToken` VARCHAR(200) NULL DEFAULT NULL AFTER `testMode`,CHANGE COLUMN `telegramChatId` `telegramChatId` VARCHAR(45) NULL DEFAULT NULL AFTER `telegramToken`;"
+  },
+  {
+    "hash": "1.0.42",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `boardPrevNextArticle` TINYINT NULL DEFAULT 1 AFTER `bannerBorderRounding`, ADD COLUMN `boardAllArticle` TINYINT NULL DEFAULT 0 AFTER `boardPrevNextArticle`, ADD COLUMN `boardAuthorArticle` TINYINT NULL DEFAULT 0 AFTER `boardAllArticle`;"
+  },
+  {
+    "hash": "1.0.43",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `mobileBannerRowsHeader` INT NULL DEFAULT 1 AFTER `bannerRowsCustom`,ADD COLUMN `mobileBannerRowsIndexTop` INT NULL DEFAULT 1 AFTER `mobileBannerRowsHeader`,ADD COLUMN `mobileBannerRowsIndexBottom` INT NULL DEFAULT 1 AFTER `mobileBannerRowsIndexTop`,ADD COLUMN `mobileBannerRowsSideTop` INT NULL DEFAULT 1 AFTER `mobileBannerRowsIndexBottom`,ADD COLUMN `mobileBannerRowsSideBottom` INT NULL DEFAULT 1 AFTER `mobileBannerRowsSideTop`,ADD COLUMN `mobileBannerRowsArticleTop` INT NULL DEFAULT 1 AFTER `mobileBannerRowsSideBottom`,ADD COLUMN `mobileBannerRowsArticleBottom` INT NULL DEFAULT 1 AFTER `mobileBannerRowsArticleTop`,ADD COLUMN `mobileBannerRowsCustom` INT NULL DEFAULT 1 AFTER `mobileBannerRowsArticleBottom`;"
+  },
+  {
+    "hash": "1.0.44",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `bannerRowsHeader` `desktopBannerRowsHeader` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsIndexTop` `desktopBannerRowsIndexTop` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsArticleTop` `desktopBannerRowsArticleTop` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsIndexBottom` `desktopBannerRowsIndexBottom` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsSideTop` `desktopBannerRowsSideTop` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsSideBottom` `desktopBannerRowsSideBottom` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsArticleBottom` `desktopBannerRowsArticleBottom` INT NULL DEFAULT '2' ,CHANGE COLUMN `bannerRowsCustom` `desktopBannerRowsCustom` INT NULL DEFAULT '2' ;"
+  },
+  {
+    "hash": "1.0.45",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useSocialApple` TINYINT NULL DEFAULT 0 AFTER `boardAuthorArticle`,ADD COLUMN `useSocialGoogle` TINYINT NULL DEFAULT 0 AFTER `useSocialApple`,ADD COLUMN `useSocialFacebook` TINYINT NULL DEFAULT 0 AFTER `useSocialGoogle`,ADD COLUMN `useSocialTwitter` TINYINT NULL DEFAULT 0 AFTER `useSocialFacebook`,ADD COLUMN `useSocialNaver` TINYINT NULL DEFAULT 0 AFTER `useSocialTwitter`,ADD COLUMN `useSocialKakao` TINYINT NULL DEFAULT 0 AFTER `useSocialNaver`,ADD COLUMN `socialAppleServiceId` VARCHAR(200) NULL AFTER `useSocialKakao`,ADD COLUMN `socialAppleTeamId` VARCHAR(200) NULL AFTER `socialAppleServiceId`,ADD COLUMN `socialAppleKeyId` VARCHAR(200) NULL AFTER `socialAppleTeamId`,ADD COLUMN `socialAppleAuthKey` VARCHAR(800) NULL AFTER `socialAppleKeyId`,ADD COLUMN `socialGoogleClientId` VARCHAR(200) NULL AFTER `socialAppleAuthKey`,ADD COLUMN `socialGoogleClientSecret` VARCHAR(200) NULL AFTER `socialGoogleClientId`,ADD COLUMN `socialFacebookAppId` VARCHAR(200) NULL AFTER `socialGoogleClientSecret`,ADD COLUMN `socialFacebookAppSecret` VARCHAR(200) NULL AFTER `socialFacebookAppId`,ADD COLUMN `socialTwitterApiKey` VARCHAR(200) NULL AFTER `socialFacebookAppSecret`,ADD COLUMN `socialTwitterApiSecret` VARCHAR(200) NULL AFTER `socialTwitterApiKey`,ADD COLUMN `socialNaverClientId` VARCHAR(200) NULL AFTER `socialTwitterApiSecret`,ADD COLUMN `socialNaverClientSecret` VARCHAR(200) NULL AFTER `socialNaverClientId`,ADD COLUMN `socialKakaoClientId` VARCHAR(200) NULL AFTER `socialNaverClientSecret`,ADD COLUMN `socialKakaoClientSecret` VARCHAR(200) NULL AFTER `socialKakaoClientId`;"
+  },
+  {
+    "hash": "1.0.46",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `appleId` VARCHAR(200) NULL AFTER `image`,ADD COLUMN `googleId` VARCHAR(200) NULL AFTER `appleId`,ADD COLUMN `facebookId` VARCHAR(200) NULL AFTER `googleId`,ADD COLUMN `twitterId` VARCHAR(200) NULL AFTER `facebookId`,ADD COLUMN `naverId` VARCHAR(200) NULL AFTER `twitterId`,ADD COLUMN `kakaoId` VARCHAR(200) NULL AFTER `naverId`;"
+  },
+  {
+    "hash": "1.0.47",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `nickName` VARCHAR(45) NULL AFTER `file`,ADD COLUMN `password` VARCHAR(200) NULL AFTER `nickName`;"
+  },
+  {
+    "hash": "1.0.48",
+    "sql": "ALTER TABLE `cms`.`board` DROP COLUMN `thumbnailSize`,DROP COLUMN `useThumbnail`,ADD COLUMN `useSecret` TINYINT NULL DEFAULT 0 AFTER `readPoint`,ADD COLUMN `useAnonymous` TINYINT NULL DEFAULT 0 AFTER `useSecret`;"
+  },
+  {
+    "hash": "1.0.49",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `blockWords` LONGTEXT NULL AFTER `invitePoint`;"
+  },
+  {
+    "hash": "1.0.50",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `visitPoint` `checkPoint` INT NULL DEFAULT '0' ;"
+  },
+  {
+    "hash": "1.0.51",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `checkContinue` INT NULL DEFAULT 0 AFTER `marketingAgreement`,ADD COLUMN `checkTotal` INT NULL DEFAULT 0 AFTER `checkContinue`;"
+  },
+  {
+    "hash": "1.0.52",
+    "sql": "ALTER TABLE `cms`.`landing` DROP COLUMN `tags`,DROP COLUMN `logoSize`,DROP COLUMN `logoImage`;"
+  },
+  {
+    "hash": "1.0.53",
+    "sql": "ALTER TABLE `cms`.`setting` DROP COLUMN `naverSiteVerification`;"
+  },
+  {
+    "hash": "1.0.54",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `customHeadTags` LONGTEXT NULL AFTER `smsServiceSecretKey`,ADD COLUMN `customHeaderTags` LONGTEXT NULL AFTER `customHeadTags`,ADD COLUMN `customFooterTags` LONGTEXT NULL AFTER `customHeaderTags`;"
+  },
+  {
+    "hash": "1.0.55",
+    "sql": "ALTER TABLE `cms`.`category` DROP COLUMN `image`,DROP COLUMN `color`;"
+  },
+  {
+    "hash": "1.0.56",
+    "sql": "ALTER TABLE `cms`.`board` DROP COLUMN `color`,DROP COLUMN `image`;"
+  },
+  {
+    "hash": "1.0.57",
+    "sql": "ALTER TABLE `cms`.`user` DROP COLUMN `hash`,DROP INDEX `hash_UNIQUE` ;;"
+  },
+  {
+    "hash": "1.0.58",
+    "sql": "ALTER TABLE `cms`.`menu` CHANGE COLUMN `parentId` `menu_parent_ID` INT UNSIGNED NULL DEFAULT NULL AFTER `id`,ADD INDEX `menu_parent_ID` (`menu_parent_ID` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.59",
+    "sql": "ALTER TABLE `cms`.`menu` ADD CONSTRAINT `menu_parent_ID`FOREIGN KEY (`menu_parent_ID`)REFERENCES `cms`.`menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;"
+  },
+  {
+    "hash": "1.0.60",
+    "sql": "ALTER TABLE `cms`.`image` CHANGE COLUMN `image` `key` VARCHAR(200) NOT NULL ;"
+  },
+  {
+    "hash": "1.0.61",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useMessage` TINYINT NULL DEFAULT 1 AFTER `useWorkingUser`;"
+  },
+  {
+    "hash": "1.0.62",
+    "sql": "ALTER TABLE `cms`.`comment` CHANGE COLUMN `comment_parent_id` `comment_parent_ID` INT UNSIGNED NULL DEFAULT NULL , CHANGE COLUMN `comment_group_id` `comment_group_ID` INT UNSIGNED NULL DEFAULT NULL , ADD INDEX `comment_parent_ID` (`comment_parent_ID` ASC) VISIBLE, ADD INDEX `comment_group_ID` (`comment_group_ID` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.63",
+    "sql": "ALTER TABLE `cms`.`comment`  ADD CONSTRAINT `comment_parent_ID` FOREIGN KEY (`comment_parent_ID`) REFERENCES `cms`.`comment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, ADD CONSTRAINT `comment_group_ID` FOREIGN KEY (`comment_group_ID`) REFERENCES `cms`.`comment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;"
+  },
+  {
+    "hash": "1.0.64",
+    "sql": "ALTER TABLE `cms`.`comment` DROP COLUMN `anonymous`;"
+  },
+  {
+    "hash": "1.0.65",
+    "sql": "ALTER TABLE `cms`.`comment` ADD COLUMN `nickName` VARCHAR(45) NULL AFTER `replyCount`, ADD COLUMN `password` VARCHAR(200) NULL AFTER `nickName`;"
+  },
+  {
+    "hash": "1.0.66",
+    "sql": "ALTER TABLE `cms`.`alarm` DROP FOREIGN KEY `alarm_targetUser_ID`;"
+  },
+  {
+    "hash": "1.0.67",
+    "sql": "ALTER TABLE `cms`.`alarm` CHANGE COLUMN `alarm_targetUser_ID` `alarm_relatedUser_ID` INT UNSIGNED NULL DEFAULT NULL , DROP INDEX `alarm_targetUser_ID` , ADD INDEX `alarm_relatedUser_ID` (`alarm_relatedUser_ID` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.68",
+    "sql": "ALTER TABLE `cms`.`alarm` ADD CONSTRAINT `alarm_relatedUser_ID` FOREIGN KEY (`alarm_relatedUser_ID`) REFERENCES `cms`.`user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;"
+  },
+  {
+    "hash": "1.0.69",
+    "sql": "ALTER TABLE `cms`.`report` ADD COLUMN `content` LONGTEXT NULL AFTER `report_message_ID`;"
+  },
+  {
+    "hash": "1.0.70",
+    "sql": "ALTER TABLE `cms`.`article` CHANGE COLUMN `link` `links` VARCHAR(400) NULL DEFAULT NULL ,CHANGE COLUMN `file` `files` VARCHAR(400) NULL DEFAULT NULL ;"
+  },
+  {
+    "hash": "1.0.71",
+    "sql": "ALTER TABLE `cms`.`board` CHANGE COLUMN `useLink` `useLinks` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `useFileUpload` `useFiles` TINYINT NULL DEFAULT '0' ;"
+  },
+  {
+    "hash": "1.0.72",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `useUserAlarm` TINYINT NULL DEFAULT 0 AFTER `useFiles`,ADD COLUMN `useAdminAlarm` TINYINT NULL DEFAULT 0 AFTER `useUserAlarm`;"
+  },
+  {
+    "hash": "1.0.73",
+    "sql": "ALTER TABLE `cms`.`board` CHANGE COLUMN `customFieldUse01` `useCustomField01` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse02` `useCustomField02` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse03` `useCustomField03` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse04` `useCustomField04` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse05` `useCustomField05` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse06` `useCustomField06` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse07` `useCustomField07` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse08` `useCustomField08` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse09` `useCustomField09` TINYINT NULL DEFAULT '0' ,CHANGE COLUMN `customFieldUse10` `useCustomField10` TINYINT NULL DEFAULT '0' ;"
+  },
+  {
+    "hash": "1.0.74",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useAutoPermission` TINYINT NULL DEFAULT 0 AFTER `adsenseCustom`;"
+  },
+  {
+    "hash": "1.0.75",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useWithdraw` TINYINT NULL DEFAULT 0 AFTER `useAutoPermission`;"
+  },
+  {
+    "hash": "1.0.76",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useCheckComments` TINYINT NULL DEFAULT 0 AFTER `blockWords`,ADD COLUMN `checkComments` VARCHAR(800) NULL AFTER `useCheckComments`;"
+  },
+  {
+    "hash": "1.0.77",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `bannerAlignHeader` VARCHAR(45) NULL DEFAULT 'lately' AFTER `mobileBannerRowsCustom`,ADD COLUMN `bannerAlignIndexTop` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignHeader`,ADD COLUMN `bannerAlignIndexBottom` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignIndexTop`,ADD COLUMN `bannerAlignSideTop` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignIndexBottom`,ADD COLUMN `bannerAlignSideBottom` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignSideTop`,ADD COLUMN `bannerAlignArticleTop` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignSideBottom`,ADD COLUMN `bannerAlignArticleBottom` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignArticleTop`,ADD COLUMN `bannerAlignLeftWing` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignArticleBottom`,ADD COLUMN `bannerAlignRightWing` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignLeftWing`,ADD COLUMN `bannerAlignCustom` VARCHAR(45) NULL DEFAULT 'lately' AFTER `bannerAlignRightWing`;"
+  },
+  {
+    "hash": "1.0.78",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useJoinPhone` TINYINT NULL DEFAULT 0 AFTER `blockWords`,ADD COLUMN `useJoinRealName` TINYINT NULL DEFAULT 0 AFTER `useJoinPhone`,ADD COLUMN `useJoinBirthDay` TINYINT NULL DEFAULT 0 AFTER `useJoinRealName`;"
+  },
+  {
+    "hash": "1.0.79",
+    "sql": "ALTER TABLE `cms`.`permission` DROP COLUMN `viewOrder`;"
+  },
+  {
+    "hash": "1.0.80",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `writingTerm` INT NULL DEFAULT 0 AFTER `boardAuthorArticle`;"
+  },
+  {
+    "hash": "1.0.81",
+    "sql": "ALTER TABLE `cms`.`user` DROP FOREIGN KEY `user_userGroup_ID`; ALTER TABLE `cms`.`user` ADD CONSTRAINT `user_userGroup_ID` FOREIGN KEY (`user_userGroup_ID`)REFERENCES `cms`.`userGroup` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;"
+  },
+  {
+    "hash": "1.0.82",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `useUserGroupPermission` TINYINT NULL DEFAULT 0 AFTER `useFiles`;"
+  },
+  {
+    "hash": "1.0.83",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `useHtml` TINYINT NULL DEFAULT 0 AFTER `useFiles`;"
+  },
+  {
+    "hash": "1.0.84",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `html` LONGTEXT NULL AFTER `content`;"
+  },
+  {
+    "hash": "1.0.85",
+    "sql": "ALTER TABLE `cms`.`user` DROP FOREIGN KEY `user_userGroup_ID`;"
+  },
+  {
+    "hash": "1.0.86",
+    "sql": "ALTER TABLE `cms`.`user` DROP COLUMN `user_userGroup_ID`,DROP INDEX `user_userGroup_ID_idx`;"
+  },
+  {
+    "hash": "1.0.87",
+    "sql": "ALTER TABLE `cms`.`setting` DROP COLUMN `emailPassword`,DROP COLUMN `emailUser`;"
+  },
+  {
+    "hash": "1.0.88",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `gmailUser` VARCHAR(200) NULL AFTER `emailService`,ADD COLUMN `gmailOauthClientId` VARCHAR(200) NULL AFTER `gmailUser`,ADD COLUMN `gmailOauthClientSecret` VARCHAR(200) NULL AFTER `gmailOauthClientId`,ADD COLUMN `gmailOauthRefreshToken` VARCHAR(200) NULL AFTER `gmailOauthClientSecret`,CHANGE COLUMN `emailService` `emailService` VARCHAR(200) NOT NULL DEFAULT 'gmail';"
+  },
+  {
+    "hash": "1.0.89",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `html` LONGTEXT NULL AFTER `content`;"
+  },
+  {
+    "hash": "1.0.90",
+    "sql": "ALTER TABLE `cms`.`chat` DROP COLUMN `fixed`,DROP COLUMN `target`,DROP COLUMN `type`,DROP COLUMN `isAdmin`,DROP COLUMN `isLogin`;"
+  },
+  {
+    "hash": "1.0.91",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `metaTagKeyword` `siteKeywords` VARCHAR(200) NULL DEFAULT NULL AFTER `siteDescription`;"
+  },
+  {
+    "hash": "1.0.92",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `terms` LONGTEXT NULL AFTER `writingTerm`,ADD COLUMN `privacy` LONGTEXT NULL AFTER `terms`;"
+  },
+  {
+    "hash": "1.0.93",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `ios` VARCHAR(400) NULL AFTER `image`,ADD COLUMN `android` VARCHAR(400) NULL AFTER `ios`;"
+  },
+  {
+    "hash": "1.0.94",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `adsenseSide` `adsenseSide` TEXT NULL DEFAULT NULL AFTER `adsenseArticleBottom`,CHANGE COLUMN `adsenseTop` `adsenseArticleTop` TEXT NULL DEFAULT NULL ,CHANGE COLUMN `adsenseBottom` `adsenseArticleBottom` TEXT NULL DEFAULT NULL ;"
+  },
+  {
+    "hash": "1.0.95",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `adsenseIndexTop` TEXT NULL AFTER `adsenseAds`,ADD COLUMN `adsenseIndexBottom` TEXT NULL AFTER `adsenseIndexTop`,ADD COLUMN `adsenseArticleCenter` TEXT NULL AFTER `adsenseArticleBottom`;"
+  },
+  {
+    "hash": "1.0.96",
+    "sql": "ALTER TABLE `cms`.`permission` ADD COLUMN `isManager` TINYINT NULL DEFAULT 0 AFTER `pointBaseline`;"
+  },
+  {
+    "hash": "1.0.97",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `useManagerArticle` TINYINT NULL DEFAULT 0 AFTER `useAutoPermission`,ADD COLUMN `useManagerChat` TINYINT NULL DEFAULT 0 AFTER `useManagerArticle`;"
+  },
+  {
+    "hash": "1.0.98",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `autoPermissionType` TINYINT NULL DEFAULT 1 AFTER `useAutoPermission`;"
+  },
+  {
+    "hash": "1.0.99",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `maxPoint` INT NULL DEFAULT 0 AFTER `point`;"
+  },
+  {
+    "hash": "1.0.100",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `headerDesign` LONGTEXT NULL AFTER `siteDomain`,CHANGE COLUMN `footerGuide` `footerDesign` LONGTEXT NULL DEFAULT NULL ;"
+  },
+  {
+    "hash": "1.0.101",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `withdrawType` TINYINT NULL DEFAULT 2 AFTER `useWithdraw`;"
+  },
+  {
+    "hash": "1.0.102",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `status` TINYINT NULL DEFAULT 1 AFTER `checkTotal`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.103",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `indexH1` VARCHAR(200) NULL AFTER `pointBackgroundColor`, ADD COLUMN `indexH2` VARCHAR(200) NULL AFTER `indexH1`;"
+  },
+  {
+    "hash": "1.0.104",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `ogImage` VARCHAR(45) NULL AFTER `faviconImage`;"
+  },
+  {
+    "hash": "1.0.105",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `status` TINYINT(1) NULL DEFAULT 1 AFTER `marketingAgreement`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.106",
+    "sql": "ALTER TABLE `cms`.`point` ADD COLUMN `status` TINYINT(1) NULL DEFAULT 1 AFTER `comment`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.107",
+    "sql": "ALTER TABLE `cms`.`userArticleLike` ADD COLUMN `status` TINYINT(1) NULL DEFAULT 1 AFTER `userArticleLike_article_ID`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.108",
+    "sql": "ALTER TABLE `cms`.`userArticleUnlike` ADD COLUMN `status` TINYINT(1) NULL DEFAULT 1 AFTER `userArticleUnlike_article_ID`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.109",
+    "sql": "ALTER TABLE `cms`.`userCommentLike` ADD COLUMN `status` TINYINT(1) NULL DEFAULT 1 AFTER `userCommentLike_comment_ID`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.110",
+    "sql": "ALTER TABLE `cms`.`userCommentUnlike` ADD COLUMN `status` TINYINT(1) NULL DEFAULT 1 AFTER `userCommentUnlike_comment_ID`, ADD INDEX `status` (`status` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.111",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `bannerFollow` TINYINT NULL DEFAULT 0 AFTER `bannerBorderRounding`;"
+  },
+  {
+    "hash": "1.0.112",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `headerHtml` VARCHAR(800) NULL AFTER `readPoint`, ADD COLUMN `footerHtml` VARCHAR(800) NULL AFTER `headerHtml`;"
+  },
+  {
+    "hash": "1.0.113",
+    "sql": "ALTER TABLE `cms`.`banner` ADD COLUMN `banner_board_ID` INT UNSIGNED NULL AFTER `id`, ADD INDEX `banner_board_ID` (`banner_board_ID` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.114",
+    "sql": "ALTER TABLE `cms`.`banner` ADD CONSTRAINT `banner_board_ID` FOREIGN KEY (`banner_board_ID`) REFERENCES `cms`.`board` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;"
+  },
+  {
+    "hash": "1.0.115",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `reportCount` INT NULL DEFAULT 0 AFTER `invitePoint`;"
+  },
+  {
+    "hash": "1.0.116",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `reportCount` INT UNSIGNED NULL DEFAULT 0 AFTER `commentCount`;"
+  },
+  {
+    "hash": "1.0.117",
+    "sql": "ALTER TABLE `cms`.`comment` ADD COLUMN `reportCount` INT UNSIGNED NULL DEFAULT 0 AFTER `replyCount`;"
+  },
+  {
+    "hash": "1.0.118",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `authorLikePoint` INT UNSIGNED NULL DEFAULT 0 AFTER `reportCount`,ADD COLUMN `userLikePoint` INT UNSIGNED NULL DEFAULT 0 AFTER `authorLikePoint`;"
+  },
+  {
+    "hash": "1.0.119",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `articlePointLimit` INT UNSIGNED NULL DEFAULT 0 AFTER `userLikePoint`,ADD COLUMN `commentPointLimit` INT UNSIGNED NULL DEFAULT 0 AFTER `articlePointLimit`,ADD COLUMN `authorLikePointLimit` INT UNSIGNED NULL DEFAULT 0 AFTER `commentPointLimit`,ADD COLUMN `userLikePointLimit` INT UNSIGNED NULL DEFAULT 0 AFTER `authorLikePointLimit`;"
+  },
+  {
+    "hash": "1.0.120",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `joinPoint` INT NULL DEFAULT 0 AFTER `checkPoint`;"
+  },
+  {
+    "hash": "1.0.121",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `lastLogin` DATETIME NULL DEFAULT CURRENT_TIMESTAMP AFTER `checkTotal`;"
+  },
+  {
+    "hash": "1.0.122",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `kakaoJavascriptKey` VARCHAR(200) NULL AFTER `googleCloudPlatformApiKey`;"
+  },
+  {
+    "hash": "1.0.123",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `freePointTerm` VARCHAR(45) NULL DEFAULT 'daily' AFTER `userLikePointLimit`,ADD COLUMN `freePoint` INT UNSIGNED NULL DEFAULT 0 AFTER `freePointTerm`;"
+  },
+  {
+    "hash": "1.0.124",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `gmailPassword` VARCHAR(200) NULL AFTER `gmailUser`;"
+  },
+  {
+    "hash": "1.0.125",
+    "sql": "ALTER TABLE `cms`.`log` ADD COLUMN `type` VARCHAR(45) NULL AFTER `log_article_ID`, ADD INDEX `type` (`type` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.126",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `logoImageSize` `logoImageDesktopSize` INT NULL DEFAULT '200' ;"
+  },
+  {
+    "hash": "1.0.127",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `logoImageMobileSize` INT NULL DEFAULT 200 AFTER `logoImageDesktopSize`;"
+  },
+  {
+    "hash": "1.0.128",
+    "sql": "ALTER TABLE `cms`.`page` CHANGE COLUMN `js` `javascript` LONGTEXT NULL DEFAULT NULL;"
+  },
+  {
+    "hash": "1.0.129",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `images` LONGTEXT NULL AFTER `content`;"
+  },
+  {
+    "hash": "1.0.130",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `usePermissionLimit` TINYINT NULL DEFAULT 0 AFTER `useHtml`;"
+  },
+  {
+    "hash": "1.0.131",
+    "sql": "ALTER TABLE `cms`.`sectionGroup` DROP INDEX `type_UNIQUE`;"
+  },
+  {
+    "hash": "1.0.132",
+    "sql": "ALTER TABLE `cms`.`board` ADD COLUMN `content` MEDIUMTEXT NULL AFTER `summary`;"
+  },
+  {
+    "hash": "1.0.133",
+    "sql": "ALTER TABLE `cms`.`setting` CHANGE COLUMN `headerLayout` `headerTemplate` VARCHAR(45) NOT NULL DEFAULT 'basic' ,CHANGE COLUMN `footerLayout` `footerTemplate` VARCHAR(45) NOT NULL DEFAULT 'basic' ,CHANGE COLUMN `mainLayout` `mainTemplate` VARCHAR(45) NULL DEFAULT 'basic' ,CHANGE COLUMN `indexLayout` `indexTemplate` VARCHAR(45) NOT NULL DEFAULT 'basic' ;"
+  },
+  {
+    "hash": "1.0.135",
+    "sql": "ALTER TABLE `cms`.`article` ADD COLUMN `slug` VARCHAR(200) NULL AFTER `title`;"
+  },
+  {
+    "hash": "1.0.136",
+    "sql": "ALTER TABLE `cms`.`article` CHANGE COLUMN `slug` `slug` VARCHAR(200) NOT NULL ,ADD UNIQUE INDEX `slug_UNIQUE` (`slug` ASC) VISIBLE;"
+  },
+  {
+    "hash": "1.0.138",
+    "sql": "ALTER TABLE `cms`.`user` ADD COLUMN `authCode` VARCHAR(45) NULL AFTER `lastLogin`;"
+  },
+  {
+    "hash": "1.0.139",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `logoImageDarkMode` VARCHAR(45) NULL AFTER `logoImage`;"
+  },
+  {
+    "hash": "1.0.140",
+    "sql": "ALTER TABLE `cms`.`setting` ADD COLUMN `parsingServer` VARCHAR(45) NULL AFTER `kakaoJavascriptKey`;"
+  }
+]

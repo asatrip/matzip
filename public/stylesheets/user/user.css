@@ -1,0 +1,531 @@
+/* header */
+#header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  color: #fff;
+  background-color: #cacfd8;
+  border-radius: 8px;
+}
+
+[data-theme='dark'] #header {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#header a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 10px 0;
+}
+
+[data-theme='dark'] #header a {
+  color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 255, 255, 0.1); */
+}
+
+#header a:hover {
+  background-color: #B5B9C1;
+}
+
+[data-theme='dark'] #header a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#header a.selected {
+  color: #000;
+  background-color: #fff;
+}
+
+[data-theme='dark'] #header a.selected {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 1281px) {
+  #header a:nth-child(1) {
+    border-top-left-radius: 8px;
+  }
+
+  #header a:nth-child(4) {
+    border-top-right-radius: 8px;
+  }
+
+  #header a:nth-child(5) {
+    border-bottom-left-radius: 8px;
+  }
+  
+  #header a:nth-child(8) {
+    border-bottom-right-radius: 8px;
+  }
+}
+
+@media (max-width: 1280px) {
+  #header {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #header a {
+    font-size: 0.8em;
+  }
+
+  #header a:nth-child(1) {
+    border-top-left-radius: 8px;
+  }
+
+  #header a:nth-child(2) {
+    border-top-right-radius: 8px;
+  }
+
+  #header a:nth-child(5) {
+    border-bottom-left-radius: 8px;
+  }
+  
+  #header a:nth-child(6) {
+    border-bottom-right-radius: 8px;
+  }
+}
+
+/* item */
+#item {
+  width: 100%;
+}
+
+#item .items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#item .item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+[data-theme='dark'] #item .item {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] #item .item a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#item .item > div {
+  flex: 1;
+}
+
+#item .item .main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+#item .item .info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+#item .item .info div {
+  text-align: right;
+}
+
+/* article */
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+article .userImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+article .userImage label {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+article .userImage input {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  width: 10px;
+}
+
+article h2 {
+  display: flex;
+  justify-content: flex-start;
+  border-top: 1px solid #E6E6E6;
+  padding-top: 20px;
+  margin-left: 0;
+}
+
+article form {
+  width: 100%;
+  flex-direction: column;
+}
+
+#mypage form {
+  width: 400px;
+}
+
+#mypage form > div {
+  width: 100%;
+}
+
+#mypage input {
+  width: 100%;
+  height: 50px;
+  font-size: 1em;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 0;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+[data-theme='dark'] #mypage input {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#mypage button {
+  width: 100%;
+  height: 50px;
+  font-size: 1em;
+  color: #fff;
+  background-color: rgb(66, 75, 87);
+  padding: 10px;
+  border: 0;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mypage button:hover {
+  background-color: #353C45;
+}
+
+#mypage .second button {
+  background-color: #697183;
+}
+
+#mypage .second button:hover {
+  background-color: #545A68;
+}
+
+#mypage select {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+#mypage .permission {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+[data-theme='dark'] #mypage .permission {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#mypage .point {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#mypageEdit .items {
+  width: 500px;
+}
+
+#mypageEdit .item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#mypageEdit label {
+  width: 100px;
+  display: flex;
+  align-items: center;
+}
+
+#mypageEdit .phone {
+  flex: 1;
+}
+
+#mypageEdit .item__inputs {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+#mypageEdit input {
+  flex: 1;
+  height: 100%;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  margin-right: 10px;
+  padding-left: 10px;
+  font-size: 1em;
+  border-radius: 20px;
+}
+
+#mypageEdit .permission {
+  font-weight: bold;
+  font-size: 1.2em;
+  display: flex;
+}
+
+#mypageEdit button {
+  width: 80px;
+  height: 100%;
+  color: #fff;
+  border: 0;
+  font-size: 1em;
+  border-radius: 20px;
+}
+
+#mypageEdit .button {
+  width: 80px;
+  height: 100%;
+  color: #fff;
+  border: 0;
+  font-size: 1em;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mypageEdit .password {
+  width: 120px;
+}
+
+#mypage article input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #bbb;
+  font-size: 1em;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+#mypage article button {
+  width: 100%;
+  height: 50px;
+  font-size: 1em;
+  margin: 0;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: #bbb;
+  border: 0;
+}
+
+#changeUserPassword form {
+  width: 400px;
+}
+
+#changeUserPassword input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #bbb;
+  font-size: 1em;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+#changeUserPassword button {
+  width: 100%;
+  height: 50px;
+  font-size: 1em;
+  margin: 0;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: #bbb;
+  border: 0;
+}
+
+/* My Article & Comment */
+#myArticleAndComment {
+  width: 700px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+#myArticleAndComment form {
+  width: 100%;
+}
+
+#myArticleAndComment .items {
+  width: 100%;
+}
+
+#myArticleAndComment .item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+#myArticleAndComment .space__between {
+  display: flex;
+  justify-content: space-between;
+}
+
+#myArticleAndComment .space__between button {
+  width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 1em;
+  background-color: unset;
+  border: 0;
+}
+
+#myArticleAndComment .space__between button span {
+  margin-right: 10px;
+}
+
+#myArticleAndComment .left {
+  display: flex;
+  flex: 1;
+}
+
+#myArticleAndComment .parent {
+  font-size: 0.8em;
+  color: #B3B3B3;
+}
+
+#myArticleAndComment .right {
+  font-size: 0.9em;
+  width: 60px;
+  color: #B3B3B3;
+}
+
+#myArticleAndComment .item {
+  border-bottom: 1px solid #E6E6E6;
+  display: flex;
+}
+
+#myArticleAndComment .item:first-child {
+  border-top: 1px solid #E6E6E6;
+}
+
+#myArticleAndComment .left {
+  display: flex;
+  color: #4D4D4D;
+}
+
+#myArticleAndComment .title_and_info {
+  margin-left: 30px;
+}
+
+#myArticleAndComment .title {
+  font-size: 1.1em;
+}
+
+#myArticleAndComment .etc_info {
+  font-size: 0.9em;
+}
+
+/* Phone */
+article .verifyNumber {
+  display: none;
+}
+
+article .verifyNumber.active {
+  display: flex;
+}
+
+article .phoneVerifyCompleteBtn {
+  display: none;
+}
+
+article .phoneVerifyCompleteBtn.active {
+  display: flex;
+}
+
+article .phoneNextBtn {
+  display: none;
+}
+
+article .phoneNextBtn.active {
+  display: flex;
+}
+
+@media (max-width: 1130px) {
+  #mypageEdit .items {
+    width: 95%;
+  }
+
+  #myArticleAndComment {
+    width: 95%;
+  }
+
+  article label {
+    width: 80px;
+  }
+
+  article .items {
+    width: 95%;
+  }
+
+  #changeUserPassword form {
+    width: 95%;
+  }
+}
+
+@media (max-width: 1280px) {
+  #mypage form {
+    width: 100%;
+  }
+}

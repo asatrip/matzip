@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section id="list">
+        <%- include('./title', {
+          title: '메뉴',
+          info: 'https://waffleboard.io/support/manage/menu',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>연결 타입</th>
+                <th>연결 대상</th>
+                <th>표시 순서</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>표시</th>
+                <th>하위메뉴 추가</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% menus.forEach(menu => { %>
+              <form action="/admin/menu/edit/<%= menu.id %>" method="POST">
+                <tr class="menu">
+                  <td><%= menu.id %></td>
+                  <td><input type="text" name="title" value="<%= menu.title %>" placeholder="예) 뉴스"></td>
+                  <td>
+                    <select name="type">
+                      <option value="board"<% if (menu.type === 'board') { %> selected<% } %>>게시판</option>
+                      <option value="page"<% if (menu.type === 'page') { %> selected<% } %>>페이지</option>
+                      <option value="go"<% if (menu.type === 'go') { %> selected<% } %>>GO</option>
+                      <option value="etc"<% if (menu.type === 'etc') { %> selected<% } %>>기타</option>
+                    </select>
+                  </td>
+                  <td>
+                    <% if (menu.type === 'board') { %>
+                    <select name="target">
+                      <option value="#">없음</option>
+                      <% boards.forEach(board => { %>
+                        <option value="<%= board.slug %>"<% if (menu.target === board.slug) { %> selected<% } %>><%= board.title %></option>
+                      <% }) %>
+                    </select>
+                    <% } else if (menu.type === 'page') { %>
+                    <select name="target">
+                      <option value="#">없음</option>
+                      <% pages.forEach(page => { %>
+                        <option value="<%= page.slug %>"<% if (menu.target === page.slug) { %> selected<% } %>><%= page.title %></option>
+                      <% }) %>
+                    </select>
+                    <% } else if (menu.type === 'go') { %>
+                      <select name="target">
+                        <option value="#">없음</option>
+                        <% gos.forEach(go => { %>
+                          <option value="go/<%= go.slug %>"<% if (menu.target === `go/${go.slug}`) { %> selected<% } %>><%= go.slug %></option>
+                        <% }) %>
+                      </select>
+                    <% } else if (menu.type === 'etc') { %>
+                    <select name="target">
+                      <option value="check"<% if (menu.target === 'check') { %> selected<% } %>>출석체크</option>
+                      <option value="new"<% if (menu.target === 'new') { %> selected<% } %>>새글</option>
+                      <option value="best"<% if (menu.target === 'best') { %> selected<% } %>>인기게시글 전체</option>
+                      <option value="best/day"<% if (menu.target === 'best/day') { %> selected<% } %>>인기게시글 일간</option>
+                      <option value="best/week"<% if (menu.target === 'best/week') { %> selected<% } %>>인기게시글 주간</option>
+                      <option value="best/month"<% if (menu.target === 'best/month') { %> selected<% } %>>인기게시글 월간</option>
+                      <option value="rank"<% if (menu.target === 'rank') { %> selected<% } %>>포인트 랭킹</option>
+                    </select>
+                    <% } %>
+                  </td>
+                  <td><input type="text" name="viewOrder" value="<%= menu.viewOrder %>" placeholder="표시 순서"></td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                  <td><button name="submit" value="status">
+                    <% if (menu.status) { %>
+                      표시
+                    <% } else { %>
+                      표시안함
+                    <% } %>
+                  </button></td>
+                  <td><button name="submit" value="add">추가</button></td>
+                </tr>
+              </form>
+              <% menu.subMenus.forEach(subMenu => { %>
+                <form action="/admin/menu/edit/<%= subMenu.id %>" method="POST">
+                  <tr class="menu">
+                    <td>ㄴ</td>
+                    <td><input type="text" name="title" value="<%= subMenu.title %>" placeholder="예) 뉴스"></td>
+                    <td>
+                      <select name="type">
+                        <option value="board"<% if (subMenu.type === 'board') { %> selected<% } %>>게시판</option>
+                        <option value="page"<% if (subMenu.type === 'page') { %> selected<% } %>>페이지</option>
+                        <option value="go"<% if (subMenu.type === 'go') { %> selected<% } %>>GO</option>
+                        <option value="etc"<% if (subMenu.type === 'etc') { %> selected<% } %>>기타</option>
+                      </select>
+                    </td>
+                    <td>
+                      <% if (subMenu.type === 'board') { %>
+                      <select name="target">
+                        <option value="#">없음</option>
+                        <% boards.forEach(board => { %>
+                          <option value="<%= board.slug %>"<% if (subMenu.target === board.slug) { %> selected<% } %>><%= board.title %></option>
+                        <% }) %>
+                      </select>
+                      <% } else if (subMenu.type === 'page') { %>
+                      <select name="target">
+                        <option value="#">없음</option>
+                        <% pages.forEach(page => { %>
+                          <option value="<%= page.slug %>"<% if (subMenu.target === page.slug) { %> selected<% } %>><%= page.title %></option>
+                        <% }) %>
+                      </select>
+                      <% } else if (subMenu.type === 'go') { %>
+                      <select name="target">
+                        <option value="#">없음</option>
+                        <% gos.forEach(go => { %>
+                          <option value="go/<%= go.slug %>"<% if (subMenu.target === `go/${go.slug}`) { %> selected<% } %>><%= go.slug %></option>
+                        <% }) %>
+                      </select>
+                      <% } else if (subMenu.type === 'etc') { %>
+                      <select name="target">
+                        <option value="check"<% if (subMenu.target === 'check') { %> selected<% } %>>출석체크</option>
+                        <option value="new"<% if (subMenu.target === 'new') { %> selected<% } %>>새글</option>
+                        <option value="best"<% if (subMenu.target === 'best') { %> selected<% } %>>인기게시글 전체</option>
+                        <option value="best/day"<% if (subMenu.target === 'best/day') { %> selected<% } %>>인기게시글 일간</option>
+                        <option value="best/week"<% if (subMenu.target === 'best/week') { %> selected<% } %>>인기게시글 주간</option>
+                        <option value="best/month"<% if (subMenu.target === 'best/month') { %> selected<% } %>>인기게시글 월간</option>
+                        <option value="rank"<% if (subMenu.target === 'rank') { %> selected<% } %>>포인트 랭킹</option>
+                      </select>
+                      <% } %>
+                    </td>
+                    <td><input type="text" name="viewOrder" value="<%= subMenu.viewOrder %>" placeholder="표시 순서"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                    <td><button name="submit" value="status">
+                      <% if (subMenu.status) { %>
+                        표시
+                      <% } else { %>
+                        표시안함
+                      <% } %>
+                    </button></td>
+                  </tr>
+                </form>
+              <% }) %>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="new">
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>연결 타입</th>
+                <th>연결 대상</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/menu/new" method="POST">
+                <tr>
+                  <td><input type="text" name="title" placeholder="예) 뉴스"></td>
+                  <td>
+                    <select name="type">
+                      <option value="board">게시판</option>
+                      <option value="page">페이지</option>
+                      <option value="go">GO</option>
+                      <option value="etc">기타</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="target">
+                      <option value="#">없음</option>
+                      <% boards.forEach(board => { %>
+                        <option value="<%= board.slug %>"><%= board.title %></option>
+                      <% }) %>
+                    </select>
+                  </td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script>
+      (async () => {
+        const menus = document.querySelectorAll('.menu');
+        const boards = await getBoards();
+        const pages = await getPages();
+        const gos = await getGos();
+        const targetSelectors = document.querySelector
+        menus.forEach(menu => {
+          const selector = menu.querySelector('select[name=type]');
+          const targetSelector = menu.querySelector('select[name=target]');
+          if (selector) {
+            selector.addEventListener('change', () => {
+              if (selector.value === 'board') {
+                let line = '';
+                line += `<option value="#">없음</option>`;
+                boards.forEach(board => {
+                  line += `<option value="${board.slug}">${board.title}</option>`;
+                });
+                targetSelector.innerHTML = line;
+              } else if (selector.value === 'page') {
+                let line = '';
+                line += `<option value="#">없음</option>`;
+                pages.forEach(page => {
+                  line += `<option value="${page.slug}">${page.title}</option>`;
+                });
+                targetSelector.innerHTML = line;
+              } else if (selector.value === 'go') {
+                let line = '';
+                line += `<option value="#">없음</option>`;
+                gos.forEach(go => {
+                  line += `<option value="go/${go.slug}">${go.slug}</option>`;
+                });
+                targetSelector.innerHTML = line;
+              } else if (selector.value === 'etc') {
+                let line = '';
+                line += `<option value="check">출석체크</option>`;
+                line += `<option value="new">새글</option>`;
+                line += `<option value="best">인기게시글 전체</option>`;
+                line += `<option value="best/day">인기게시글 일간</option>`;
+                line += `<option value="best/week">인기게시글 주간</option>`;
+                line += `<option value="best/month">인기게시글 월간</option>`;
+                line += `<option value="rank">포인트 랭킹</option>`;
+                targetSelector.innerHTML = line;
+              }
+            });
+          }
+        });
+        const newSelector = document.querySelector('#new select[name=type]');
+        const newTargetSelector = document.querySelector('#new select[name=target]');
+        if (newSelector) {
+          newSelector.addEventListener('change', () => {
+            if (newSelector.value === 'board') {
+              let line = '';
+              line += `<option value="#">없음</option>`;
+              boards.forEach(board => {
+                line += `<option value="${board.slug}">${board.title}</option>`;
+              });
+              newTargetSelector.innerHTML = line;
+            } else if (newSelector.value === 'page') {
+              let line = '';
+              line += `<option value="#">없음</option>`;
+              pages.forEach(page => {
+                line += `<option value="${page.slug}">${page.title}</option>`;
+              });
+              newTargetSelector.innerHTML = line;
+            } else if (newSelector.value === 'go') {
+              let line = '';
+              line += `<option value="#">없음</option>`;
+              gos.forEach(go => {
+                line += `<option value="go/${go.slug}">${go.slug}</option>`;
+              });
+              newTargetSelector.innerHTML = line;
+            } else if (newSelector.value === 'etc') {
+              let line = '';
+              line += `<option value="check">출석체크</option>`;
+              line += `<option value="new">새글</option>`;
+              line += `<option value="best">인기게시글 전체</option>`;
+              line += `<option value="best/day">인기게시글 일간</option>`;
+              line += `<option value="best/week">인기게시글 주간</option>`;
+              line += `<option value="best/month">인기게시글 월간</option>`;
+              newTargetSelector.innerHTML = line;
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

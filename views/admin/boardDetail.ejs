@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: `${board.title} 상세설정`,
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>쓰기 포인트 +</th>
+                <th>댓글쓰기 포인트 +</th>
+                <th>읽기 포인트 -</th>
+                <th>비밀글</th>
+                <th>익명</th>
+                <th>링크 사용</th>
+                <th>자료실 사용</th>
+                <th>HTML 사용</th>
+                <th>등급별 제한 사용</th>
+                <th>회원그룹 권한 사용</th>
+                <th>새글 회원 알람</th>
+                <th>새글 관리자 알람</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/board/detail/<%= board.id %>" method="POST" enctype="multipart/form-data">
+                <tr>
+                  <td><input type="text" name="writePoint" value="<%= board.writePoint %>" placeholder="쓰기 포인트 +"></td>
+                  <td><input type="text" name="commentPoint" value="<%= board.commentPoint %>" placeholder="댓글쓰기 포인트 +"></td>
+                  <td><input type="text" name="readPoint" value="<%= board.readPoint %>" placeholder="읽기 포인트 -"></td>
+                  <td><input type="checkbox" name="useSecret" value="1"<% if (board.useSecret) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useAnonymous" value="1"<% if (board.useAnonymous) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useLinks" value="1"<% if (board.useLinks) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useFiles" value="1"<% if (board.useFiles) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useHtml" value="1"<% if (board.useHtml) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="usePermissionLimit" value="1"<% if (board.usePermissionLimit) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useUserGroupPermission" value="1"<% if (board.useUserGroupPermission) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useUserAlarm" value="1"<% if (board.useUserAlarm) { %> checked<% } %>></td>
+                  <td><input type="checkbox" name="useAdminAlarm" value="1"<% if (board.useAdminAlarm) { %> checked<% } %>></td>
+                  <td><button name="submit" value="detail">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: `${board.title} 추가설정`,
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>소개</th>
+                <th>이미지</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/board/detail/<%= board.id %>" method="POST" enctype="multipart/form-data">
+                <tr>
+                  <td><textarea name="content"><%= board.content %></textarea></td>
+                  <td>
+                    <% if (board.image) { %>
+                    <a href="<%= storage %>/board/<%= board.image %>" target="_blank"><img src="<%= storage %>/board/<%= board.image %>"></a>
+                    <% } %>
+                    <input type="file" name="image">
+                  </td>
+                  <td><button name="submit" value="introduce">설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '커스텀 태그',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>상단 HTML</th>
+                <th>하단 HTML</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/board/detail/<%= board.id %>/customHtml" method="POST">
+                <tr>
+                  <td><textarea name="headerHtml"><%= board.headerHtml %></textarea></td>
+                  <td><textarea name="footerHtml"><%= board.footerHtml %></textarea></td>
+                  <td><button>설정</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '등급별 제한',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>등급</th>
+                <th>글쓰기 제한 타입</th>
+                <th>제한 갯수</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% permissions.forEach(permission => { %>
+              <form action="/admin/board/detail/<%= board.id %>/permission/<%= permission.id %>" method="POST">
+                <tr>
+                  <td><%= permission.title %></td>
+                  <td>
+                    <select name="articleLimitType">
+                      <option value="none"<% if (permission.articleLimitType === 'none') { %> selected<% } %>>없음</option>
+                      <option value="day"<% if (permission.articleLimitType === 'day') { %> selected<% } %>>일</option>
+                      <option value="week"<% if (permission.articleLimitType === 'week') { %> selected<% } %>>주간</option>
+                      <option value="month"<% if (permission.articleLimitType === 'month') { %> selected<% } %>>월간</option>
+                      <option value="infinite"<% if (permission.articleLimitType === 'infinite') { %> selected<% } %>>영구</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="articleLimitCount" value="<%= permission.articleLimitCount %>" placeholder="제한 갯수"></td>
+                  <td><button>설정</button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '회원그룹 권한',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>회원그룹명</th>
+                <th>목록 조회</th>
+                <th>게시글 읽기</th>
+                <th>게시글 쓰기</th>
+                <th>댓글 쓰기</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% userGroups.forEach(userGroup => { %>
+                <form action="/admin/board/detail/<%= board.id %>/userGroup/<%= userGroup.id %>" method="POST">
+                  <tr>
+                    <td><%= userGroup.title %></td>
+                    <td><input type="checkbox" name="listPermission" value="1"<% if (userGroup.listPermission) { %> checked<% } %>></td>
+                    <td><input type="checkbox" name="readPermission" value="1"<% if (userGroup.readPermission) { %> checked<% } %>></td>
+                    <td><input type="checkbox" name="writePermission" value="1"<% if (userGroup.writePermission) { %> checked<% } %>></td>
+                    <td><input type="checkbox" name="commentPermission" value="1"<% if (userGroup.commentPermission) { %> checked<% } %>></td>
+                    <td><button>설정</button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '카테고리',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>카테고리 이름</th>
+                <th>표시 순서</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% board.categories.forEach(category => { %>
+                <form action="/admin/category/edit/<%= category.id %>" method="POST" enctype="multipart/form-data">
+                <form>
+                  <tr>
+                    <td><%= category.id %></td>
+                    <td><input type="text" name="title" value="<%= category.title %>" placeholder="카테고리 이름"></td>
+                    <td><input type="text" name="viewOrder" value="<%= category.viewOrder %>" placeholder="표시 순서"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '새로 등록',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>카테고리 이름</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/category/new" method="POST">
+                <tr>
+                  <input type="hidden" name="boardId" value="<%= board.id %>">
+                  <td><input type="text" name="title" placeholder="카테고리 이름"></td>
+                  <td><button name="submit" value="new">등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '커스텀 필드',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <td>순번</td>
+                <th>필드 사용</th>
+                <th>필드 문구</th>
+                <th>설정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/board/detail/<%= board.id %>" method="POST">
+                <tr>
+                  <td>1</td>
+                  <td><input type="checkbox" name="useCustomField01" value="1"<% if (board.useCustomField01) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle01" value="<%= board.customFieldTitle01 %>" placeholder="필드 문구"></td>
+                  <td rowspan="10"><button name="submit" value="customField">설정</button></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><input type="checkbox" name="useCustomField02" value="1"<% if (board.useCustomField02) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle02" value="<%= board.customFieldTitle02 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><input type="checkbox" name="useCustomField03" value="1"<% if (board.useCustomField03) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle03" value="<%= board.customFieldTitle03 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><input type="checkbox" name="useCustomField04" value="1"<% if (board.useCustomField04) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle04" value="<%= board.customFieldTitle04 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><input type="checkbox" name="useCustomField05" value="1"<% if (board.useCustomField05) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle05" value="<%= board.customFieldTitle05 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><input type="checkbox" name="useCustomField06" value="1"<% if (board.useCustomField06) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle06" value="<%= board.customFieldTitle06 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><input type="checkbox" name="useCustomField07" value="1"<% if (board.useCustomField07) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle07" value="<%= board.customFieldTitle07 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><input type="checkbox" name="useCustomField08" value="1"<% if (board.useCustomField08) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle08" value="<%= board.customFieldTitle08 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><input type="checkbox" name="useCustomField09" value="1"<% if (board.useCustomField09) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle09" value="<%= board.customFieldTitle09 %>" placeholder="필드 문구"></td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td><input type="checkbox" name="useCustomField10" value="1"<% if (board.useCustomField10) { %> checked<% } %>></td>
+                  <td><input type="text" name="customFieldTitle10" value="<%= board.customFieldTitle10 %>" placeholder="필드 문구"></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '배너',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이미지</th>
+                <th>연결 주소</th>
+                <th>표시 순서</th>
+                <th>새창</th>
+                <th>데스크탑 숨김</th>
+                <th>모바일 숨김</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>숨기기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% banners.forEach(banner => { %>
+              <form action="/admin/banner/edit/<%= banner.id %>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="position" value="board">
+                <tr>
+                  <td class="bannerImage">
+                    <a href="<%= storage %>/banner/<%= banner.image %>" target="_blank"><img src="<%= storage %>/banner/<%= banner.image %>" alt="<%= banner.image %>"></a>
+                    <input type="file" name="image">
+                  </td>
+                  <td><input type="text" name="link" value="<%= banner.link %>" placeholder="연결 주소"></td>
+                  <td><input type="text" name="viewOrder" value="<%= banner.viewOrder %>" placeholder="표시 순서"></td>
+                  <td><input type="checkbox" name="newPage" value="1"<% if (banner.newPage === 1) { %>checked<% } %>></td>
+                  <td><input type="checkbox" name="desktopHide" value="1"<% if (banner.desktopHide === 1) { %>checked<% } %>></td>
+                  <td><input type="checkbox" name="mobileHide" value="1"<% if (banner.mobileHide === 1) { %>checked<% } %>></td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                  <% if (banner.status === 1) { %>
+                  <td><button name="submit" value="hide">숨기기</button></td>
+                  <% } else if (banner.status === 0) { %>
+                  <td><button name="submit" value="hide">숨기기 해제</button></td>
+                  <% } %>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '배너 추가',
+          info: 'https://waffleboard.io/support/manage/board',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이미지</th>
+                <th>연결 주소</th>
+                <th>표시 순서</th>
+                <th>새창</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/banner/new" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="position" value="board">
+                <input type="hidden" name="boardId" value="<%= board.id %>">
+                <tr>
+                  <td><input type="file" name="image"></td>
+                  <td><input type="text" name="link" placeholder="연결 주소"></td>
+                  <td><input type="text" name="viewOrder" value="100"></td>
+                  <td><input type="checkbox" name="newPage" value="1"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

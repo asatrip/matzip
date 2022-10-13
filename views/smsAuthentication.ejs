@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/smsAuthentication">
+    <link rel="canonical" href="<%= setting.siteDomain %>/smsAuthentication">
+    <link rel="stylesheet" href="/stylesheets/authentication.css">
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <h1>SMS 인증</h1>
+      <form action="/smsAuthentication" method="POST">
+        <div><input type="text" name="hash" placeholder="코드 입력"></div>
+        <div><button name="submit" value="authentication">SMS 인증</button></div>
+        <div><button class="second" name="submit" value="smsResend">SMS 재발송</button></div>
+      </form>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

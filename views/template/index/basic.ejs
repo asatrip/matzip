@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../../head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= setting.siteName %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <%- include('../../ogImage') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>">
+    <meta name="keywords" content="<%= setting.siteKeywords %>">
+    <link rel="canonical" href="<%= setting.siteDomain %>">
+    <link rel="stylesheet" href="/stylesheets/template/index/<%= setting.indexTemplate %>.css">
+  </head>
+  <body>
+    <%- include('../../commons') %>
+    <%- include('../../header') %>
+    <main>
+      <%- include('../../aside', { mobile: false }) %>
+      <article>
+        <%- include('../../banner', { position: 'popup' }) %>
+        <%- include('../../banner', { position: 'indexTop' }) %>
+        <% if (setting.indexH1) { %><h1><%= setting.indexH1 %></h1><% } %>
+        <% if (setting.indexH2) { %><h2><%= setting.indexH2 %></h2><% } %>
+        <%- include('../../sectionGroup', { sectionGroups: indexSectionGroups }) %>
+        <%- include('../../banner', { position: 'indexBottom' }) %>
+      </article>
+      <%- include('../../aside', { mobile: true }) %>
+    </main>
+    <%- include('../../footer') %>
+  </body>
+</html>

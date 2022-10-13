@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '히든 설정',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">인덱스</th>
+                <th colspan="5">레이아웃</th>
+                <th rowspan="2">라이센스</th>
+                <th rowspan="2">등록</th>
+              </tr>
+              <tr>
+                <th>메인</th>
+                <th>상단</th>
+                <th>하단</th>
+                <th>첫페이지</th>
+                <th>랜딩페이지</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/hidden" method="POST">
+                <tr>
+                  <td>
+                    <select name="index">
+                      <option value="basic"<% if (setting.index === 'basic') { %> selected<% } %>>Basic</option>
+                      <option value="location"<% if (setting.index === 'location') { %> selected<% } %>>Location</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="mainLayout">
+                      <option value="basic"<% if (setting.mainLayout === 'basic') { %> selected<% } %>>basic</option>
+                      <option value="wrap"<% if (setting.mainLayout === 'wrap') { %> selected<% } %>>wrap</option>
+                      <option value="nowrap"<% if (setting.mainLayout === 'nowrap') { %> selected<% } %>>nowrap</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="headerLayout" value="<%= setting.headerLayout %>" placeholder="상단"></td>
+                  <td><input type="text" name="footerLayout" value="<%= setting.footerLayout %>" placeholder="하단"></td>
+                  <td><input type="text" name="indexLayout" value="<%= setting.indexLayout %>" placeholder="첫페이지"></td>
+                  <td><input type="text" name="landingLayout" value="<%= setting.landingLayout %>" placeholder="랜딩페이지"></td>
+                  <td><input type="checkbox" name="license" value="1"<% if (setting.license) { %> checked<% } %>></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', {
+          title: '스토어 설정',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>네이버 앱 클라이언트 아이디</th>
+                <th>네이버 앱 클라이언트 시크릿</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" name="naverApplicationClientId" placeholder="네이버 앱 클라이언트 아이디"></td>
+                <td><input type="text" name="naverApplicationClientSecret" placeholder="네이버 앱 클라이언트 시크릿"></td>
+                <td><button>등록</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

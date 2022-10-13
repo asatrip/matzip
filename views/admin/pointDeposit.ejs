@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header') %>
+          <h2>포인트 입금</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>아이디 (닉네임)</th>
+                <th>포인트</th>
+                <th>입금자명</th>
+                <th>영수증 발행여부</th>
+                <th>상태</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% deposits.forEach(d => { %>
+              <form action="/admin/deposit/edit/<%= d.id %>" method="POST">
+                <tr>
+                  <td><%= d.datetime %></td>
+                  <td><%= d.nickName %></td>
+                  <td><%= d.point.toLocaleString() %></td>
+                  <td><%= d.depositor %></td>
+                  <td><%= d.receipt %></td>
+                  <td>
+                    <select name="status">
+                      <option value="1"<% if (d.status === 1) { %> selected<% } %>>입금대기</option>
+                      <option value="2"<% if (d.status === 2) { %> selected<% } %>>입금확인</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+          <%- include('../pagination') %>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

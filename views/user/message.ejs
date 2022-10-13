@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/message">
+    <link rel="canonical" href="<%= setting.siteDomain %>/message">
+    <link rel="stylesheet" href="/stylesheets/user/message.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="message">
+        <%- include('../title', { title: '메시지' }) %>
+        <section class="buttons">
+          <a href="/message">메시지 목록</a>
+          <% if (setting.useMessage) { %>
+          <a href="/message/send">메시지 보내기</a>
+          <% } %>
+        </section>
+        <section class="items">
+          <% locals.messages.forEach(message => { %>
+            <% if (message.status === 1) { %>
+            <div class="item" messageId="<%= message.id %>">
+              <div>
+                <div class="info"><%= message.senderNickName %> / <%= message.datetime %></div>
+                <div><%- message.content %></div>
+              </div>
+              <div class="etc">
+                <div class="status">새 메시지</div>
+                <div class="button">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-v" class="svg-inline--fa fa-ellipsis-v fa-w-6" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#AAAAAA" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>
+                  <ul id="popUp">
+                    <form action="/message/edit/<%= message.id %>" method="POST">
+                      <li class="report"><button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#9DA5B6" d="M476.3 0c-6.365 0-13.01 1.35-19.34 4.233c-45.69 20.86-79.56 27.94-107.8 27.94c-59.96 0-94.81-31.86-163.9-31.87c-34.63 0-77.87 8.003-137.2 32.05V24C48 10.75 37.25 0 24 0S0 10.75 0 24v464C0 501.3 10.75 512 24 512s24-10.75 24-24v-104c53.59-23.86 96.02-31.81 132.8-31.81c73.63 0 124.9 31.78 198.6 31.78c31.91 0 68.02-5.971 111.1-23.09C504.1 355.9 512 344.4 512 332.1V30.73C512 11.1 495.3 0 476.3 0zM464 319.8c-30.31 10.82-58.08 16.1-84.6 16.1c-30.8 0-58.31-7-87.44-14.41c-32.01-8.141-68.29-17.37-111.1-17.37c-42.35 0-85.99 9.09-132.8 27.73V84.14l18.03-7.301c47.39-19.2 86.38-28.54 119.2-28.54c28.24 .0039 49.12 6.711 73.31 14.48c25.38 8.148 54.13 17.39 90.58 17.39c35.43 0 72.24-8.496 114.9-26.61V319.8z"/></svg>신고</button></li>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <% } else if (message.status === 2) { %>
+            <div class="item read" messageId="<%= message.id %>">
+              <div>
+                <div class="info"><%= message.senderNickName %> / <%= message.datetime %></div>
+                <div><%- message.content %></div>
+              </div>
+              <div class="etc">
+                <div class="status">읽음</div>
+                <div class="button">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-v" class="svg-inline--fa fa-ellipsis-v fa-w-6" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#fff" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>
+                  <ul id="popUp">
+                    <form action="/message/edit/<%= message.id %>" method="POST">
+                      <li class="report"><button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#9DA5B6" d="M476.3 0c-6.365 0-13.01 1.35-19.34 4.233c-45.69 20.86-79.56 27.94-107.8 27.94c-59.96 0-94.81-31.86-163.9-31.87c-34.63 0-77.87 8.003-137.2 32.05V24C48 10.75 37.25 0 24 0S0 10.75 0 24v464C0 501.3 10.75 512 24 512s24-10.75 24-24v-104c53.59-23.86 96.02-31.81 132.8-31.81c73.63 0 124.9 31.78 198.6 31.78c31.91 0 68.02-5.971 111.1-23.09C504.1 355.9 512 344.4 512 332.1V30.73C512 11.1 495.3 0 476.3 0zM464 319.8c-30.31 10.82-58.08 16.1-84.6 16.1c-30.8 0-58.31-7-87.44-14.41c-32.01-8.141-68.29-17.37-111.1-17.37c-42.35 0-85.99 9.09-132.8 27.73V84.14l18.03-7.301c47.39-19.2 86.38-28.54 119.2-28.54c28.24 .0039 49.12 6.711 73.31 14.48c25.38 8.148 54.13 17.39 90.58 17.39c35.43 0 72.24-8.496 114.9-26.61V319.8z"/></svg>신고</button></li>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          <% }) %>
+        </section>
+        <%- include('../pagination') %>
+        <section id="modal">
+          <div class="container report">
+            <input type="hidden" name="type">
+            <input type="hidden" name="id">
+            <textarea name="content" placeholder="신고 내용"></textarea>
+            <button>확인</button>
+          </div>
+          <div class="background"></div>
+        </section>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+    <script>
+      const messages = document.querySelectorAll('.item');
+      messages.forEach(message => {
+        const messageId = message.getAttribute('messageId');
+        const etcBtn = message.querySelector('.etc .button');
+        const popUp = message.querySelector('#popUp');
+        const reportBtn = message.querySelector('.report');
+        etcBtn.addEventListener('click', () => {
+          popUp.classList.toggle('active');
+        });
+        reportBtn.addEventListener('click', async () => {
+          reportType.value = 'message';
+          reportId.value = messageId;
+          modal.create(reportContainer);
+        });
+      });
+    </script>
+  </body>
+</html>

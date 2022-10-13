@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../../../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/<%= board.slug %>/new">
+    <link rel="canonical" href="<%= setting.siteDomain %>/<%= board.slug %>/new">
+    <link rel="stylesheet" href="/stylesheets/board/content.css">
+    <link rel="stylesheet" href="/stylesheets/editor/ckeditor5/editor.css">
+    <%- include('./editor') %>
+    <style>
+      .content a {
+        color: <%= setting.pointColor %>;
+      }
+    </style>
+    <script src="/javascripts/editor/ckeditor5/editor.js?v=0.06" defer></script>
+  </head>
+  <body>
+    <input type="hidden" name="blockWords" value="<%= JSON.stringify(setting.blockWords) %>">
+    <%- include('../../../header') %>
+    <main>
+      <%- include('../../../aside', { mobile: false }) %>
+      <article>
+        <%- include('../../../title', { title: board.title }) %>
+        <form action="/<%= board.slug %>/new" method="POST" enctype="multipart/form-data" onsubmit="onSubmit(this); return false;">
+          <input type="hidden" name="articleId" value="<%= articleId %>">
+          <% if (board.categories?.length || locals.user?.isAdmin) { %>
+          <div class="subContainer">
+            <% if (board.categories?.length) { %>
+            <div class="categoryContainer">
+              <select name="category" id="category">
+                <% board.categories.forEach(category => { %>
+                <option value="<%= category.id %>"><%= category.title %></option>
+                <% }) %>
+              </select>
+            </div>
+            <% } else { %>
+            <input type="hidden" id="category" value="0">
+            <% } %>
+            <div class="checkBox">
+              <% if (locals.user?.isAdmin) { %>
+              <div class="notice">
+                <label for="notice">공지</label>
+                <input type="checkbox" name="notice" id="notice" value="1">
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <% } %>
+          <% if (!locals.user && board.writePermission === 0) { %>
+          <div class="nonMember">
+            <input type="text" name="nickName" placeholder="닉네임">
+            <input type="password" name="password" placeholder="비밀번호">
+          </div>
+          <% } %>
+          <div class="title"><input type="text" name="title" id="title" placeholder="제목"></div>
+          <% if (board.useCustomField01 || board.useCustomField02 || board.useCustomField03 || board.useCustomField04 || board.useCustomField05 || board.useCustomField06 || board.useCustomField07 || board.useCustomField08 || board.useCustomField09 || board.useCustomField10) { %>
+          <div class="customFieldContainer">
+            <% if (board.useCustomField01) { %><div><input type="text" name="customField01" placeholder="<%= board.customFieldTitle01 %>"></div><% } %>
+            <% if (board.useCustomField02) { %><div><input type="text" name="customField02" placeholder="<%= board.customFieldTitle02 %>"></div><% } %>
+            <% if (board.useCustomField03) { %><div><input type="text" name="customField03" placeholder="<%= board.customFieldTitle03 %>"></div><% } %>
+            <% if (board.useCustomField04) { %><div><input type="text" name="customField04" placeholder="<%= board.customFieldTitle04 %>"></div><% } %>
+            <% if (board.useCustomField05) { %><div><input type="text" name="customField05" placeholder="<%= board.customFieldTitle05 %>"></div><% } %>
+            <% if (board.useCustomField06) { %><div><input type="text" name="customField06" placeholder="<%= board.customFieldTitle06 %>"></div><% } %>
+            <% if (board.useCustomField07) { %><div><input type="text" name="customField07" placeholder="<%= board.customFieldTitle07 %>"></div><% } %>
+            <% if (board.useCustomField08) { %><div><input type="text" name="customField08" placeholder="<%= board.customFieldTitle08 %>"></div><% } %>
+            <% if (board.useCustomField09) { %><div><input type="text" name="customField09" placeholder="<%= board.customFieldTitle09 %>"></div><% } %>
+            <% if (board.useCustomField10) { %><div><input type="text" name="customField10" placeholder="<%= board.customFieldTitle10 %>"></div><% } %>
+          </div>
+          <% } %>
+          <div class="content">
+            <div class="textareaContainer">
+              <textarea name="content" id="editor"></textarea>
+            </div>
+          </div>
+          <% if (board.useHtml) { %>
+          <div class="html">
+            <textarea name="html" placeholder="HTML"></textarea>
+          </div>
+          <% } %>
+          <div class="tags">
+            <input type="text" name="tags" placeholder="태그">
+          </div>
+          <% if (board.useLinks) { %>
+          <div class="links">
+            <input type="text" name="links" placeholder="링크">
+          </div>
+          <% } %>
+          <% if (board.useFiles) { %>
+          <div class="files">
+            <input type="file" name="files" placeholder="파일" multiple>
+          </div>
+          <% } %>
+          <div class="button"><button>등록</button></div>
+        </form>
+      </article>
+      <%- include('../../../aside', { mobile: true }) %>
+    </main>
+    <%- include('../../../footer') %>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>01</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="permission" transform="translate(-77.000000, -37.000000)">
+            <g id="01" transform="translate(77.000000, 37.000000)">
+                <rect id="Rectangle" stroke="#1A1A1A" stroke-width="5" fill="#5B5B5B" x="2.5" y="2.5" width="45" height="45" rx="10"></rect>
+                <path d="M28.4643555,35 L28.4643555,13.4375 L25.1245117,13.4375 C24.6557617,14.7460938 23.7915039,15.8911133 22.5317383,16.8725586 C21.2719727,17.8540039 20.1049805,18.5205078 19.0307617,18.8720703 L19.0307617,18.8720703 L19.0307617,22.6074219 C21.0717773,21.9335938 22.8442383,20.8935547 24.3481445,19.4873047 L24.3481445,19.4873047 L24.3481445,35 L28.4643555,35 Z" id="1" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

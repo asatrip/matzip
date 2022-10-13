@@ -1,0 +1,28 @@
+<div class="sections <%= sectionGroup.type %>">
+  <% sectionGroup.sections.forEach(section => { %>
+  <div class="section <%= section.type %>">
+    <% if (sectionGroup.showTitleAndContent) { %>
+    <div class="sectionTitleContainer">
+      <h2><a href="/<%= section.slug %>"><%= section.title %></a></h2>
+      <div class="content"><%- sectionGroup.content %></div>
+    </div>
+    <% } %>
+    <div class="articles <%= section.type %>">
+      <% section.articles.forEach(article => { %>
+      <div class="article">
+        <div class="image">
+          <a href="/<%= article.boardSlug %>/<%= article.slug %>">
+            <% if (article.image) { %>
+            <img src="<%= article.image %>">
+            <% } else { %>
+            <img src="/assets/none.png">
+            <% } %>
+          </a>
+        </div>
+        <div class="title"><a href="/<%= article.boardSlug %>/<%= article.slug %>"><%= article.title %></a></div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <% }) %>
+</div>

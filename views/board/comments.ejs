@@ -1,0 +1,29 @@
+<div class="commentsTitle">댓글</div>
+<div class="newComment" id="newComment">
+  <% if (!locals.user && board.commentPermission === 0) { %>
+  <div class="nonMember">
+    <input type="text" name="nickName" placeholder="닉네임">
+    <input type="password" name="password" placeholder="비밀번호">
+  </div>
+  <% } %>
+  <div class="contentContainer">
+    <% if (locals.user && commentPermission || board.commentPermission === 0) { %>
+      <div class="newCommentContent"><textarea name="content" placeholder="댓글을 작성해주세요"></textarea></div>
+      <div class="button"><button>등록</button></div>
+    <% } else if (locals.user && !commentPermission) { %>
+      <div class="newCommentContent"><textarea name="content" placeholder="권한이 없습니다" disabled></textarea></div>
+      <div class="button"><button disabled>등록</button></div>
+    <% } else { %>
+      <div class="newCommentContent"><textarea name="content" placeholder="로그인 필요" disabled></textarea></div>
+      <div class="button"><button disabled>등록</button></div>
+    <% } %>
+  </div>
+</div>
+<div class="comments" id="comments">
+  <% comments.forEach(comment => { %>
+    <%- include('./comment', { comment }) %>
+    <% comment.replies.forEach(reply => { %>
+      <%- include('./comment', { comment: reply }) %>
+    <% }) %>
+  <% }) %>
+</div>

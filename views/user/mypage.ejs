@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/mypage">
+    <link rel="canonical" href="<%= setting.siteDomain %>/mypage">
+    <link rel="stylesheet" href="/stylesheets/user/user.css">
+    <style>
+      article .userImage {
+        <% if (locals.user.image) { %>
+        background-image: url('<%= storage %>/user/<%= locals.user.image %>');
+        <% } else { %>
+        background-image: url('/assets/user.svg');
+        <% } %>
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="mypage">
+        <%- include('./header') %>
+        <%- include('../title', { title: '회원 정보 변경' }) %>
+        <div class="userImage">
+          <label for="imageUpload"></label>
+          <input type="file" name="userImage" id="imageUpload">
+        </div>
+        <form action="/mypage" method="POST">
+          <div class="permission">회원등급 : <%= user.permissionName %> / 포인트 : <%= Number(user.point).toLocaleString() %> / 최대 포인트 : <%= Number(user.maxPoint).toLocaleString() %></div>
+          <div class="nickName">
+            <div><input type="text" name="nickName" value="<%= user.nickName %>" placeholder="닉네임"></div>
+          </div>
+          <div class="password">
+            <div><input type="password" name="oldPassword" placeholder="기존 비밀번호"></div>
+            <div><input type="password" name="password" placeholder="비밀번호"></div>
+            <div><input type="password" name="passwordCheck" placeholder="비밀번호 확인"></div>
+          </div>
+          <div><button>정보 수정</button></div>
+          <div class="second"><a href="/mypage/withdraw"><button type="button" id="withdraw">회원 탈퇴</button></a></div>
+          <% if (setting.usePointWithdraw) { %>
+          <div class="pointWithdraw"><a href="/mypage/pointWithdraw"><button type="button">포인트 출금신청</button></a></div>
+          <% } %>
+        </form>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+    <script>
+      const userImages = document.querySelectorAll('.userImage');
+      const imageUpload = document.querySelector('#imageUpload');
+      imageUpload.addEventListener('change', async () => {
+        const result = await setUserImage(imageUpload.files[0]);
+        if (result.status) {
+          userImages.forEach(userImage => {
+            userImage.style.backgroundImage = `url('<%= storage %>/user/${result.key}')`;
+          });
+        }
+      });
+    
+      const setUserImage = (image) => {
+        return new Promise((resolve, reject) => {
+          const data = new FormData();
+          data.append('image', image);
+          const xhr = new XMLHttpRequest();
+          xhr.onload = () => {
+            if (xhr.status === 200 || xhr.status === 201) {
+              const result = JSON.parse(xhr.responseText);
+              resolve(result.key);
+            } else {
+              console.error(xhr.responseText);
+            }
+          };
+          xhr.open('POST', '/api/user/image');
+          xhr.send(data);
+        });
+      };
+
+      const withdrawBtn = document.querySelector('#withdraw');
+      withdrawBtn.addEventListener('click', (e) => {
+        const userHash = withdrawBtn.getAttribute('userHash');
+        const message = prompt(`'탈퇴 확인'을 입력해주세요`);
+          if (message === '탈퇴 확인') {
+            
+          } else if (message !== '탈퇴 확인' && message !== null) {
+            alert(`'탈퇴 확인'을 입력해주세요`);
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          } else {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+      });
+    </script>
+  </body>
+</html>

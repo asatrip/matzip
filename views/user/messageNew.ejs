@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/message/send">
+    <link rel="canonical" href="<%= setting.siteDomain %>/message/send">
+    <link rel="stylesheet" href="/stylesheets/user/message.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="message">
+        <h1>메시지 보내기</h1>
+        <div class="buttons">
+          <a href="/message">메시지 목록</a>
+          <% if (thisSite.setting.useMessage) { %>
+          <a href="/message/send">메시지 보내기</a>
+          <% } %>
+        </div>
+        <form action="/message/send" method="POST">
+          <input type="text" name="nickName" value="<%= nickName %>" placeholder="닉네임">
+          <div class="content"><textarea name="content" placeholder="메시지 내용"></textarea></div>
+          <button class="submit">보내기</button>
+        </form>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

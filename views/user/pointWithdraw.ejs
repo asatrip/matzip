@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/mypage/pointWithdraw">
+    <link rel="canonical" href="<%= setting.siteDomain %>/mypage/pointWithdraw">
+    <link rel="stylesheet" href="/stylesheets/user.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="mypage">
+        <h1>포인트 출금신청</h1>
+        <div class="center">
+          <div class="member_image">
+          </div>
+          <form action="/mypage/pointWithdraw/<%= locals.user.id %>" method="POST">
+            <div class="point">보유 포인트 : <%= Number(locals.user.point).toLocaleString() %></div>
+            <% if (locals.setting.pointWithdrawLimit) { %>
+            <div class="point">최소 출금가능 포인트 : <%= Number(locals.setting.pointWithdrawLimit).toLocaleString() %></div>
+            <% } %>
+            <div>
+              <select name="type">
+                <option value="money">현금</option>
+                <option value="banner">배너</option>
+              </select>
+            </div>
+            <div><input type="text" name="point" placeholder="출금요청 포인트"></div>
+            <div><input type="text" name="comment" placeholder="코멘트"></div>
+            <div><button>포인트 출금신청</button></div>
+          </form>
+        </div>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<section id="searchAndWrite">
+  <div></div>
+  <div>
+    <form action="/<%= searchUrl %>">
+      <div class="search">
+        <select name="searchType">
+          <option value="title"<% if (searchType === 'title') { %> selected<% } %>>제목</option>
+          <option value="titleAndContent"<% if (searchType === 'titleAndContent') { %> selected<% } %>>제목 + 내용</option>
+          <option value="nickName"<% if (searchType === 'nickName') { %> selected<% } %>>글쓴이</option>
+        </select>
+        <input type="text" name="keyword" value="<%= keyword %>" placeholder="검색어">
+        <button>검색</button>
+      </div>
+    </form>
+  </div>
+  <div class="write">
+    <% if (typeof (board) !== 'undefined' && typeof (board) !== 'null' && board) { %>
+      <% if (writePermission && typeof (pullUp) !== 'undefined' && typeof (pullUp) !== 'null' && pullUp && !locals.user?.isAdmin) { %>
+        <a href="/<%= board.slug %>/pullUp">끌어 올리기</a>
+      <% } else if (writePermission) { %>
+        <a href="/<%= board.slug %>/new">글쓰기</a>
+      <% } %>
+    <% } %>
+  </div>
+</section>

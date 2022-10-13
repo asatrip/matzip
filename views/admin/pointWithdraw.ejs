@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header') %>
+          <h2>포인트 출금신청</h2>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <!-- <th>상태</th> -->
+                  <th>신청일</th>
+                  <th>신청인</th>
+                  <th>출금타입</th>
+                  <th>포인트</th>
+                  <th>코멘트</th>
+                  <th>지급완료</th>
+                  <th>거절</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% pointWithDrawList.forEach(p => { %>
+                <form action="/admin/pointWithdraw/<%= p.id %>" method="POST">
+                  <input type="hidden" name="userId" value="<%= p.pointWithdraw_user_ID %>">
+                  <input type="hidden" name="point" value="<%= p.point %>">
+                  <tr>
+                    <!-- <td>
+                      <% if (p.status === 1) { %>
+                        미출금
+                      <% } else if (p.status === 0) { %>
+                        출금완료
+                      <% } %>
+                    </td> -->
+                    <td><%= p.datetime %></td>
+                    <td><%= p.nickName %></td>
+                    <td>
+                      <% if (p.type === 'money') { %>
+                        현금
+                      <% } else if (p.type === 'banner') { %>
+                        배너
+                      <% } %>
+                    </td>
+                    <td><%= Number(p.point).toLocaleString() %></td>
+                    <td><%= p.comment %></td>
+                    <td><button name="submit" value="complete">지급완료</button></td>
+                    <td><button name="submit" value="reject">거절</button></td>
+                  </tr>
+                </form>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+          <%- include('../pagination') %>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

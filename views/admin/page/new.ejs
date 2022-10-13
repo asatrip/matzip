@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <section id="page">
+        <%- include('../title', {
+          title: '페이지',
+          info: 'https://waffleboard.io/support/manage/page',
+        }) %>
+        <form name="frm" action="/admin/page/new" method="POST">
+          <input type="text" name="title"  placeholder="제목">
+          <input type="text" name="slug" placeholder="연결 주소">
+          <textarea name="html" placeholder="HTML"></textarea>
+          <textarea name="css" placeholder="CSS"></textarea>
+          <textarea name="javascript" placeholder="Javascript"></textarea>
+          <button>등록</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

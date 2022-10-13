@@ -1,0 +1,11 @@
+<% if (position === 'indexTop') { %>
+  <% if (locals.setting.adsenseIndexTop) { %><section id="adsense"><%- locals.setting.adsenseIndexTop %></section><% } %>
+<% } else if (position === 'indexBottom') { %>
+  <% if (locals.setting.adsenseIndexBottom) { %><section id="adsense"><%- locals.setting.adsenseIndexBottom %></section><% } %>
+<% } else if (position === 'articleTop') { %>
+  <% if (locals.setting.adsenseArticleTop) { %><section id="adsense"><%- locals.setting.adsenseArticleTop %></section><% } %>
+<% } else if (position === 'articleBottom') { %>
+  <% if (locals.setting.adsenseArticleBottom) { %><section id="adsense"><%- locals.setting.adsenseArticleBottom %></section><% } %>
+<% } else if (position === 'articleCenter') { %>
+  <% if (locals.setting.adsenseArticleCenter) { %><section id="adsense"><%- locals.setting.adsenseArticleCenter %></section><% } %>
+<% } %>

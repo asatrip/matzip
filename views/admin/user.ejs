@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '회원',
+          info: 'https://waffleboard.io/support/manage/user',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>이메일</th>
+                <th>비밀번호</th>
+                <th>닉네임</th>
+                <th>연락처</th>
+                <th>권한</th>
+                <th>포인트</th>
+                <th>포인트 지급/차감</th>
+                <th>작업회원</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>상세</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user => { %>
+                <form action="/admin/user/edit/<%= user.id %>" method="POST">
+                  <tr>
+                    <td><%= user.id %></td>
+                    <td><input type="text" name="email" value="<%= user.email %>" placeholder="이메일"></td>
+                    <td><input type="password" name="password" placeholder="비밀번호 변경"></td>
+                    <td><input type="text" name="nickName" value="<%= user.nickName %>" placeholder="닉네임"></td>
+                    <td><input type="text" name="phone" value="<%= user.phone %>" placeholder="연락처"></td>
+                    <td>
+                      <select name="permission">
+                        <option value="0"<% if (user.permission === 0) { %> selected<% } %>>차단</option>
+                        <% locals.permissions.forEach(permission => { %>
+                          <option value="<%= permission.permission %>"<% if (user.permission === permission.permission) { %> selected<% } %>><%= permission.title %></option>
+                        <% }) %>
+                      </select>
+                    </td>
+                    <td><%= user.point.toLocaleString() %></td>
+                    <td>
+                      <div class="row">
+                        <select name="pointMethod">
+                          <option value="create">+</option>
+                          <option value="remove">-</option>
+                        </select>
+                        <input type="text" name="point" placeholder="포인트">
+                      </div>
+                    </td>
+                    <td><input type="checkbox" name="workingUser" value="1"<% if (user.workingUser) { %> checked<% } %>></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                    <td><a href="/admin/user/detail/<%= user.id %>"><button type="button">상세</button></a></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <div class="search">
+        <form action="/admin/user" method="GET">
+          <select name="searchType">
+            <option value="nickName">닉네임</option>
+            <option value="email">이메일</option>
+            <option value="phone">연락처</option>
+          </select>
+          <input type="text" name="keyword">
+          <button>검색</button>
+        </form>
+      </div>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이메일</th>
+                <th>비밀번호</th>
+                <th>닉네임</th>
+                <th>권한</th>
+                <th>작업회원</th>
+                <th>등록</th>
+                <th>랜덤회원 생성</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/user/new" method="POST">
+                <tr>
+                  <td><input type="text" name="email" placeholder="이메일"></td>
+                  <td><input type="password" name="password" placeholder="비밀번호"></td>
+                  <td><input type="text" name="nickName" placeholder="닉네임"></td>
+                  <td>
+                    <select name="permission">
+                      <option value="0">차단</option>
+                      <% locals.permissions.forEach(permission => { %>
+                        <option value="<%= permission.permission %>"<% if (permission.permission === 1) { %> selected<% } %>><%= permission.title %></option>
+                      <% }) %>
+                    </select>
+                  </td>
+                  <td><input type="checkbox" name="workingUser" value="1"></td>
+                  <td><button name="submit" value="new">등록</button></td>
+                  <td><button name="submit" value="random">생성</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

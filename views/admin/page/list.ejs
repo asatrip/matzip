@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <section>
+        <%- include('../title', {
+          title: '페이지',
+          info: 'https://waffleboard.io/support/manage/page',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>연결 주소</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% pages.forEach(page => { %>
+              <form action="/admin/page/edit/<%= page.id %>" method="POST">
+                <tr>
+                  <td><%= page.id %></td>
+                  <td><%= page.title %></td>
+                  <td><%= page.slug %></td>
+                  <td><a href="/admin/page/edit/<%= page.id %>"><button type="button">수정</button></a></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                  <% if (page.status === 1) { %>
+                  <td><button name="submit" value="status">발행</button></td>
+                  <% } else { %>
+                  <td><button name="submit" value="status">임시저장</button></td>
+                  <% } %>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../../pagination') %>
+      <section id="new">
+        <a href="/admin/page/new"><button>새로 생성</button></a>
+      </section>
+    </main>
+  </body>
+</html>

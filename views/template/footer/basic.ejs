@@ -1,0 +1,48 @@
+<style>
+  <% if (locals.setting.theme === 'black') { %>
+  footer .buttons,
+  footer .license {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  footer .buttons a,
+  footer .license a {
+    color: #888;
+  }
+
+  footer .buttons a:hover,
+  footer .license a:hover,
+  footer .license a:active {
+    color: #aaa;
+  }
+
+  footer .introduce {
+    color: #888;
+  }
+
+  footer .copyright {
+    color: #888;
+  }
+
+  footer .counter {
+    color: #888;
+  }
+  <% } %>
+</style>
+<footer>
+  <div class="buttons">
+    <a href="/terms">이용약관</a>
+    <div>|</div>
+    <a href="/privacy">개인정보처리방침</a>
+    <div>|</div>
+    <a href="/feed">RSS</a>
+  </div>
+  <div class="introduce"><%= locals.setting.siteNameRaw %></div>
+  <% if (locals.setting.useVisitCount) { %>
+  <div class="counter">
+    <div>오늘 <%= Number(locals.count?.today).toLocaleString() %></div>
+    <div>어제 <%= Number(locals.count?.yesterday).toLocaleString() %></div>
+    <div>한달 <%= Number(locals.count?.month).toLocaleString() %></div>
+  </div>
+  <% } %>
+</footer>

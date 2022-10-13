@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/mypage/article">
+    <link rel="canonical" href="<%= setting.siteDomain %>/mypage/article">
+    <link rel="stylesheet" href="/stylesheets/user/user.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article>
+        <%- include('./header') %>
+        <%- include('../title', { title: '좋아요 한 글' }) %>
+        <section id="item">
+          <div class="items">
+            <% articles.forEach(article => { %>
+              <div class="item">
+                <div class="main">
+                  <a href="/<%= article.boardSlug %>/<%= article.articleSlug %>" class="title"><%= article.title %></a>
+                </div>
+                <div class="info">
+                  <div class="user"><%= article.nickName %></div>
+                  <div class="datetime"><%= article.datetime %></div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </section>
+        <%- include('../pagination') %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

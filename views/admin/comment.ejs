@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '댓글',
+          info: 'https://waffleboard.io/support/manage/comment',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>날짜</th>
+                <th>글쓴이</th>
+                <th>댓글</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% comments.forEach(comment => { %>
+              <form name="frm" action="/admin/comment/edit/<%= comment.id %>" method="POST">
+                <tr>
+                  <td><%= comment.id %></td>
+                  <td><input type="datetime" name="datetime" value="<%= comment.datetime %>"></td>
+                  <td><input type="text" name="nickName" value="<%= comment.nickName %>"></td>
+                  <td><textarea name="content"><%= comment.content %></textarea></td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <div class="search">
+        <form action="/admin/comment" method="GET">
+          <select name="searchType">
+            <option value="content">내용</option>
+          </select>
+          <input type="text" name="keyword">
+          <button>검색</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

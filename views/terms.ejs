@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= setting.siteName %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <meta property="og:url" content="<%= setting.siteDomain %>/terms">
+    <link rel="canonical" href="<%= setting.siteDomain %>/terms">
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <%- include('./aside', { mobile: false }) %>
+      <article id="page">
+        <%- include('./title', { title: '이용약관' }) %>
+        <section>
+          <div class="content"><%- terms %></div>
+        </section>
+      </article>
+      <%- include('./aside', { mobile: true }) %>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

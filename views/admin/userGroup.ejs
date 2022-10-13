@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '회원그룹',
+          info: 'https://waffleboard.io/support/manage/userGroup',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>그룹명</th>
+                <th>연결주소</th>
+                <th>표시순서</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% userGroups.forEach(userGroup => { %>
+                <form action="/admin/userGroup/edit/<%= userGroup.id %>" method="POST">
+                  <tr>
+                    <td><input type="text" name="title" value="<%= userGroup.title %>" placeholder="그룹명"></td>
+                    <td><input type="text" name="slug" value="<%= userGroup.slug %>" placeholder="연결주소"></td>
+                    <td><input type="text" name="viewOrder" value="<%= userGroup.viewOrder %>" placeholder="표시순서"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                  </tr>
+                </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>그룹명</th>
+                <th>연결주소</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/userGroup/new" method="POST">
+                <tr>
+                  <td><input type="text" name="title" placeholder="그룹명"></td>
+                  <td><input type="text" name="slug" placeholder="연결주소"></td>
+                  <td><button name="submit" value="new">등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

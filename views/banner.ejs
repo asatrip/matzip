@@ -1,0 +1,71 @@
+<% let banners = locals.banners.filter(banner => banner.position === position && banner.status === 1) %>
+<% let bannerAlign = null %>
+<% if (position === 'header') { %><% bannerAlign = setting.bannerAlignHeader %><% } %>
+<% if (position === 'indexTop') { %><% bannerAlign = setting.bannerAlignIndexTop %><% } %>
+<% if (position === 'indexBottom') { %><% bannerAlign = setting.bannerAlignIndexBottom %><% } %>
+<% if (position === 'sideTop') { %><% bannerAlign = setting.bannerAlignSideTop %><% } %>
+<% if (position === 'sideBottom') { %><% bannerAlign = setting.bannerAlignSideBottom %><% } %>
+<% if (position === 'articleTop') { %><% bannerAlign = setting.bannerAlignArticleTop %><% } %>
+<% if (position === 'articleBottom') { %><% bannerAlign = setting.bannerAlignArticleBottom %><% } %>
+<% if (position === 'leftWing') { %><% bannerAlign = setting.bannerAlignLeftWing %><% } %>
+<% if (position === 'rightWing') { %><% bannerAlign = setting.bannerAlignRightWing %><% } %>
+<% if (position === 'custom') { %><% bannerAlign = setting.bannerAlignCustom %><% } %>
+<% if (bannerAlign === 'random') { %><% banners = shuffle(banners) %><% } %>
+<%- include('./adsense', { position }) %>
+<% if (banners.length) { %>
+<% if (position === 'leftWing' || position === 'rightWing') { %>
+<section id="banner" class="fixedBannerContainer <%= position %>">
+<div id="fixedBanner">
+<% } %>
+<% if (position !== 'popup') { %>
+<section id="banner" class="banner_box banner__box__<%= position %>">
+  <% banners.forEach(banner => { %>
+    <div class="banner" id="banner<%= banner.id %>">
+      <% if (setting.bannerFollow) { %>
+      <a href="<%= banner.link %>"<% if (banner.newPage) { %> target="_blank"<% } %>><img src="<%= locals.storage %>/banner/<%= banner.image %>" alt="<%= banner.image %>"></a>
+      <% } else { %>
+      <a rel="nofollow" href="<%= banner.link %>"<% if (banner.newPage) { %> target="_blank"<% } %>><img src="<%= locals.storage %>/banner/<%= banner.image %>" alt="<%= banner.image %>"></a>
+      <% } %>
+    </div>
+    <% if (banner.desktopHide) { %>
+      <style>
+        @media (min-width: 1281px) {
+          #banner<%= banner.id %> {
+            display: none !important;
+          }
+        }
+      </style>
+    <% } %>
+    <% if (banner.mobileHide) { %>
+      <style>
+        @media (max-width: 1280px) {
+          #banner<%= banner.id %> {
+            display: none !important;
+          }
+        }
+      </style>
+    <% } %>
+  <% }) %>
+</section>
+<% if (position === 'leftWing' || position === 'rightWing') { %>
+</div>
+</section>
+<% } %>
+<% } else { %>
+  <section id="popupBanner">
+  <% banners.forEach(banner => { %>
+    <div class="banner" bannerId="<%= banner.id %>">
+      <% if (setting.bannerFollow) { %>
+      <a href="<%= banner.link %>"<% if (banner.newPage) { %> target="_blank"<% } %>><img src="<%= locals.storage %>/banner/<%= banner.image %>" alt="<%= banner.image %>"></a>
+      <% } else { %>
+      <a rel="nofollow" href="<%= banner.link %>"<% if (banner.newPage) { %> target="_blank"<% } %>><img src="<%= locals.storage %>/banner/<%= banner.image %>" alt="<%= banner.image %>"></a>
+      <% } %>
+      <div class="info">
+        <div class="permanentClose">더 이상 보지 않기</div>
+        <div class="close">닫기</div>
+      </div>
+    </div>
+  <% }) %>
+  </section>
+<% } %>
+<% } %>

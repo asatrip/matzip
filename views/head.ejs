@@ -1,0 +1,77 @@
+<title><%= pageTitle %></title>
+<meta charset="UTF-8">
+<meta name="robots" content="index,follow">
+<meta name="viewport" content="width=device-width">
+<meta name="hash" content="<%= setting.hash %>">
+<script>
+  if (localStorage.theme) {
+    document.documentElement.setAttribute("data-theme", localStorage.theme);
+  }
+</script>
+<link rel="stylesheet" href="/stylesheets/reset.css?v=0.04">
+<link rel="stylesheet" href="/stylesheets/style.css?v=0.16">
+<link rel="stylesheet" href="/stylesheets/template/header/<%= setting.headerTemplate %>.css?v=0.05">
+<link rel="stylesheet" href="/stylesheets/template/footer/<%= setting.footerTemplate %>.css?v=0.01">
+<link rel="stylesheet" href="/stylesheets/aside.css?v=0.06">
+<link rel="stylesheet" href="/stylesheets/chat.css?v=0.01">
+<link rel="stylesheet" href="/stylesheets/section.css?v=0.04">
+<link rel="stylesheet" href="/stylesheets/commons.css?v=0.01">
+<script src="/javascripts/function.js?v=0.03"></script>
+<script src="/javascripts/main.js?v=0.03" defer></script>
+<% if (setting.useChat) { %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone.min.js"></script>
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="/javascripts/chat.js?v=0.14" defer></script>
+<% } %>
+<% if (setting.font === 'basic') { %>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700;900&display=swap" rel="stylesheet">
+<% } %>
+<!-- Favicon Start -->
+<% if (locals.favicon) { %>
+<link rel="icon" type="<%= favicon.type %>" sizes="512x512" href="<%= storage %>/assets/<%= favicon.fileName %>-512x512<%= favicon.extension %>">
+<link rel="icon" type="<%= favicon.type %>" sizes="300x300" href="<%= storage %>/assets/<%= favicon.fileName %>-300x300<%= favicon.extension %>">
+<link rel="icon" type="<%= favicon.type %>" sizes="180x180" href="<%= storage %>/assets/<%= favicon.fileName %>-180x180<%= favicon.extension %>">
+<link rel="icon" type="<%= favicon.type %>" sizes="96x96" href="<%= storage %>/assets/<%= favicon.fileName %>-96x96<%= favicon.extension %>">
+<link rel="icon" type="<%= favicon.type %>" sizes="32x32" href="<%= storage %>/assets/<%= favicon.fileName %>-32x32<%= favicon.extension %>">
+<link rel="icon" type="<%= favicon.type %>" sizes="16x16" href="<%= storage %>/assets/<%= favicon.fileName %>-16x16<%= favicon.extension %>">
+<% } %>
+<!-- Favicon End -->
+<%- setting.customHeadTags %>
+<style>
+  header {
+    color: <%= setting.headerFontColor %>;
+    background-color: <%= setting.headerBackgroundColor %>;
+  }
+</style>
+<!-- Template -->
+<% if (setting.mainTemplate === 'basic') { %>
+<style>
+  aside {
+    order: 1;
+  }
+
+  article {
+    order: 2;
+  }
+</style>
+<% } else if (setting.mainTemplate === 'reverse') { %>
+<style>
+  aside {
+    order: 2;
+  }
+
+  article {
+    order: 1;
+  }
+</style>
+<% } else if (setting.mainTemplate === 'wrap') { %>
+<style>
+  aside {
+    display: none;
+  }
+</style>
+<% } else if (setting.mainTemplate === 'nowrap') { %>
+<% } %>

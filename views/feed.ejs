@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title><%= locals.setting.siteName %></title>
+    <link><%= locals.setting.siteDomain %></link>
+    <description><%= locals.setting.siteDescription %></description>
+    <language>ko</language>
+    <pubDate><%= lastDatetime %></pubDate>
+    <generator><%= locals.setting.siteName %></generator>
+    <ttl>100</ttl>
+    <managingEditor><%= locals.setting.siteName %></managingEditor>
+    <% articles.forEach(article => { %>
+    <item>
+      <title><%= article.title %></title>
+      <link><%= locals.setting.siteDomain %>/<%= article.boardSlug %>/<%= article.slug %></link>
+      <description><%= article.content %></description>
+      <% if (article.category) { %><category><%= article.category %></category><% } %>
+      <author><%= article.nickName %></author>
+      <guid isPermaLink="true"><%= locals.setting.siteDomain %>/<%= article.boardSlug %>/<%= article.slug %></guid>
+      <comments><%= locals.setting.siteDomain %>/<%= article.boardSlug %>/<%= article.slug %>#comments</comments>
+      <pubDate><%= article.datetime %></pubDate>
+    </item>
+    <% }) %>
+  </channel>
+</rss>

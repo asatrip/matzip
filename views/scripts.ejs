@@ -1,0 +1,83 @@
+<!-- Banner Fixed -->
+<script>
+  const sticky = document.querySelector('header').offsetHeight;
+  const leftWing = document.querySelector(".leftWing #fixedBanner");
+  const rightWing = document.querySelector(".rightWing #fixedBanner");
+  window.onscroll = () => {
+    if (window.pageYOffset > sticky && window.innerWidth > 1280) {
+      if (leftWing) leftWing.classList.add('sticky');
+      if (rightWing) rightWing.classList.add('sticky');
+    } else {
+      if (leftWing) leftWing.classList.remove('sticky');
+      if (rightWing) rightWing.classList.remove('sticky');
+    }
+  };
+</script>
+<!-- Banner Popup -->
+<script>
+  const popupBanners = document.querySelectorAll('#popupBanner .banner');
+  popupBanners.forEach(popupBanner => {
+    const closeBtn = popupBanner.querySelector('.close');
+    const permanentCloseBtn = popupBanner.querySelector('.permanentClose');
+    const bannerId = popupBanner.getAttribute('bannerId');
+    closeBtn.addEventListener('click', () => {
+      popupBanner.classList.add('deactivate');
+    });
+    permanentCloseBtn.addEventListener('click', () => {
+      popupBanner.classList.add('deactivate');
+      const blockBannerDatas = getCookie('blockBanners');
+      if (blockBannerDatas) {
+        const cookieDatas = JSON.parse(blockBannerDatas);
+        if (!cookieDatas.find(cookieData => cookieData === bannerId)) {
+          cookieDatas.push(bannerId);
+          setCookie('blockBanners', JSON.stringify(cookieDatas));
+        }
+      } else {
+        const datas = [bannerId];
+        setCookie('blockBanners', JSON.stringify(datas));
+      }
+    });
+  });
+</script>
+<!-- sections -->
+<script>
+  // tab
+  const tabBoards = document.querySelectorAll('#section .sectionGroups .tab');
+  tabBoards.forEach(tabBoard => {
+    const titles = tabBoard.querySelectorAll('.titles .title');
+    const articlesGroup = tabBoard.querySelectorAll('.articles');
+    titles.forEach(title => {
+      title.addEventListener('click', () => {
+        const tabId = title.getAttribute('tabId');
+        articlesGroup.forEach(articles => {
+          const articlesTabId = articles.getAttribute('tabId');
+          if (tabId === articlesTabId) {
+            articles.classList.add('selected');
+          } else {
+            articles.classList.remove('selected');
+          }
+        });
+      });
+    });
+  });
+
+  // dropdown
+  const dropdowns = document.querySelectorAll('#section .sectionGroups .dropdown .article');
+  dropdowns.forEach(dropdown => {
+    const title = dropdown.querySelector('.titleContainer');
+    if (title) {
+      title.addEventListener('click', () => {
+        const itemId = dropdown.getAttribute('itemId');
+        dropdowns.forEach(ctl => {
+          const content = ctl.querySelector('.content');
+          if (itemId === ctl.getAttribute('itemId')) {
+            if (content.className === 'content') content.classList.add('active');
+            else content.classList.remove('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+      });
+    }
+  });
+</script>

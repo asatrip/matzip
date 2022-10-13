@@ -1,0 +1,161 @@
+<% if (mobile === false) { %><%- include('./banner', { position: 'leftWing' }); %><% } %>
+<% if (setting.mainTemplate === 'basic') { %>
+<% let socialAuthCount = 0 %>
+<% if (setting.useSocialApple) socialAuthCount ++ %>
+<% if (setting.useSocialGoogle) socialAuthCount ++ %>
+<% if (setting.useSocialFacebook) socialAuthCount ++ %>
+<% if (setting.useSocialTwitter) socialAuthCount ++ %>
+<% if (setting.useSocialNaver) socialAuthCount ++ %>
+<% if (setting.useSocialKakao) socialAuthCount ++ %>
+<style>
+  <% if (socialAuthCount < 4) { %>
+  #socialAuth.aside {
+    grid-template-columns: repeat(<%= socialAuthCount %>, 1fr);
+  }
+  <% } else { %>
+  #socialAuth.aside {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  <% } %>
+</style>
+<% if (mobile) { %>
+<aside class="desktopHide">
+<% } else if (!setting.useChat) { %>
+<aside class="mobileHide">
+<% } else { %>
+<aside>
+<% } %>
+  <section class="userBox">
+    <!-- <h2>로그인</h2> -->
+    <% if (locals.user) { %>
+    <div class="user">
+      <div class="info">
+        <div class="nickName">
+          <% if (locals.user.permission !== 0) { %>
+          <div><img src="<%= locals.user.permissionImage %>"></div>
+          <% } %>
+          <div><%= locals.user.nickName %></div>
+        </div>
+        <div class="permission">회원등급 : <%= locals.user.permissionName %> / 포인트 : <%= Number(locals.user.point).toLocaleString() %></div>
+      </div>
+      <div class="userMenu">
+        <div class="mypage"><a href="/mypage">마이페이지</a></div>
+        <div class="logout"><a href="/logout">로그아웃</a></div>
+      </div>
+      <% const globalAlarms = locals.alarms?.filter(alarm => alarm.status === 1) %>
+      <div class="alarm <% if (globalAlarms?.length) { %> getAlarm<% } %>">
+        <a href="/alarm">
+          <% newAlarms = locals.alarms?.filter(alarm => alarm.status === 1) %>
+          <% if (newAlarms?.length) { %>
+          <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="bell" class="svg-inline--fa fa-bell fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M439.39 362.29c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71zM67.53 368c21.22-27.97 44.42-74.33 44.53-159.42 0-.2-.06-.38-.06-.58 0-61.86 50.14-112 112-112s112 50.14 112 112c0 .2-.06.38-.06.58.11 85.1 23.31 131.46 44.53 159.42H67.53zM224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64z"></path></svg>
+          <span>새 알림 도착</span>
+          <% } else { %>
+          <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="bell" class="svg-inline--fa fa-bell fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M439.39 362.29c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71zM67.53 368c21.22-27.97 44.42-74.33 44.53-159.42 0-.2-.06-.38-.06-.58 0-61.86 50.14-112 112-112s112 50.14 112 112c0 .2-.06.38-.06.58.11 85.1 23.31 131.46 44.53 159.42H67.53zM224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64z"></path></svg>
+          <span>알림 없음</span>
+          <% } %>
+        </a>
+      </div>
+      <div class="message">
+        <a href="/message">
+          <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" class="svg-inline--fa fa-envelope fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path></svg>
+          <span>메시지</span>
+        </a>
+      </div>
+      <% if (locals.user?.isAdmin) { %>
+      <div class="admin"><a href="/admin">관리자</a></div>
+      <% } %>
+    </div>
+    <% } else { %>
+    <div class="inputsAndButtons">
+      <form action="/login" method="POST">
+        <input type="text" name="email" placeholder="이메일">
+        <input type="password" name="password" placeholder="비밀번호">
+        <button name="login" class="login">로그인</button>
+      </form>
+    </div>
+    <% if (socialAuthCount) { %>
+    <section id="socialAuth" class="aside">
+      <% if (setting.useSocialApple) { %><a href="/auth/apple" class="apple"><img src="/assets/social/apple.svg"></a><% } %>
+      <% if (setting.useSocialGoogle) { %><a href="/auth/google" class="google"><img src="/assets/social/google.svg"></a><% } %>
+      <% if (setting.useSocialFacebook) { %><a href="/auth/facebook" class="facebook"><img src="/assets/social/facebook.svg"></a><% } %>
+      <% if (setting.useSocialTwitter) { %><a href="/auth/twitter" class="twitter"><img src="/assets/social/twitter.svg"></a><% } %>
+      <% if (setting.useSocialNaver) { %><a href="/auth/naver" class="naver"><img src="/assets/social/naver.svg"></a><% } %>
+      <% if (setting.useSocialKakao) { %><a href="/auth/kakao" class="kakao"><img src="/assets/social/kakao.svg"></a><% } %>
+    </section>
+    <% } %>
+    <div class="joinAndFindPassword">
+      <div class="join"><a href="/join">회원가입</a></div>
+      <div class="findPassword"><a href="/findInfo">비밀번호 찾기</a></div>
+    </div>
+    <% } %>
+  </section>
+  <% if (setting.counter === 'aside') { %>
+  <section id="counter"<% if (!mobile) { %> class="mobileHide"<% } %>>
+    <div class="item">
+      <div>오늘</div>
+      <div><%= locals.counter.today.toLocaleString() %></div>
+    </div>
+    <div class="item">
+      <div>어제</div>
+      <div><%= locals.counter.yesterday.toLocaleString() %></div>
+    </div>
+    <div class="item">
+      <div>한달</div>
+      <div><%= locals.counter.month.toLocaleString() %></div>
+    </div>
+  </section>
+  <% } %>
+  <% if (!mobile && setting.useChat) { %>
+  <div id="chat" class="chatContainer">
+    <div class="chatBanner">
+      <div class="title">실시간채팅</div>
+      <div id="userCount" class="userCount"></div>
+    </div>
+    <div class="chatBox" id="chatBox">
+      <ul id="chatList">
+      </ul>
+      <div id="chatEnd"></div>
+      <div id="newMessage">새 채팅메시지</div>
+    </div>
+    <% if (locals.user?.permission) { %>
+    <div class="messageBox">
+      <input type="text" name="msg" id="msg" class="msg" autocomplete="off" onkeydown="moveFocus('send')" placeholder="채팅 입력">
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')">전송</button>
+    </div>
+    <% } else if (locals.user?.permission === 0 || locals.user?.permission === null) { %>
+    <div class="messageBox">
+      <input type="text" name="msg" id="msg" class="msg" autocomplete="off" onkeydown="moveFocus('send')" placeholder="차단 되었습니다" disabled>
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')" disabled>전송</button>
+    </div>
+    <% } else { %>
+    <div class="messageBox">
+      <input type="text" name="msg" id="msg" class="msg" autocomplete="off" onkeydown="moveFocus('send')" placeholder="로그인 필요" disabled>
+      <button name="submit" id="send" class="send" onkeydown="moveFocus('msg')" disabled>전송</button>
+    </div>
+    <% } %>
+    <div class="chatExpand" id="chatExpand">채팅방 펼치기</div>
+  </div>
+  <% } %>
+  <% if (locals.banners.filter(b => b.position === 'sideTop').length) { %>
+  <section<% if (!mobile) { %> class="mobileHide"<% } %>>
+    <%- include('banner', { position: 'sideTop' }); %>
+  </section>
+  <% } %>
+  <% if (locals.sideSectionGroups?.length) { %>
+  <section<% if (!mobile) { %> class="mobileHide"<% } %>>
+    <%- include('./sectionGroup', { sectionGroups: sideSectionGroups }); %>
+  </section>
+  <% } %>
+  <% if (setting.adsenseSide) { %>
+  <section class="adsense"<% if (!mobile) { %> id="desktop"<% } %>>
+    <%- setting.adsenseSide %>
+  </section>
+  <% } %>
+  <% if (locals.banners.filter(banner => banner.position === 'sideBottom').length) { %>
+  <section<% if (!mobile) { %> class="mobileHide"<% } %>>
+    <%- include('banner', { position: 'sideBottom' }); %>
+  </section>
+  <% } %>
+</aside>
+<% } %>
+<% if (mobile === true) { %><%- include('./banner', { position: 'rightWing' }); %><% } %>

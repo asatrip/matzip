@@ -1,0 +1,316 @@
+/* New Comment */
+.commentsTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+[data-theme='dark'] .commentsTitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.newComment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newComment .nonMember {
+  display: flex;
+  gap: 10px;
+}
+
+.newComment .nonMember input {
+  width: 100%;
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fc;
+  border-radius: 8px;
+  border: 0;
+}
+
+.newComment .contentContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #f8f9fc;
+}
+
+[data-theme='dark'] .newComment .nonMember input,
+[data-theme='dark'] .newComment .contentContainer {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.newComment .newCommentContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.newComment textarea {
+  flex: 1;
+  width: 100%;
+  height: 60px;
+  font-size: 1em;
+  line-height: 1.2em;
+  border: 0;
+  background-color: transparent;
+}
+
+[data-theme='dark'] .newComment textarea {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.newComment .button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  padding-top: 0;
+}
+
+.newComment button {
+  font-size: 1em;
+  color: #fff;
+  background-color: #cacfd8;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+
+[data-theme='dark'] .newComment button {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .newComment button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.newComment button:hover {
+  background-color: #B5B9C1;
+}
+
+.etcCommentContainer button:hover {
+  background-color: #B5B9C1;
+}
+
+@media (max-width: 1280px) {
+  .newComment button {
+    font-size: 0.8em;
+  }
+}
+
+/* Comments */
+.comment {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--list-line);
+}
+
+.comment:last-child {
+  border-bottom: 0;
+}
+
+.comment .isReply {
+  margin-left: 40px;
+}
+
+.comment .userImage {
+  width: 30px;
+  height: 30px;
+  background-color: #f8f9fc;
+  border-radius: 100%;
+  margin-right: 10px;
+  background-position: center;
+  background-size: cover;
+}
+
+.comment .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .main .info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.comment .main .info .left {
+  display: flex;
+}
+
+.comment .main .info .right {
+  position: relative;
+  cursor: pointer;
+}
+
+.comment .main .info .right svg {
+  width: 14px;
+  height: 14px;
+}
+
+.comment .main .info .right ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .main .nickName {
+  position: relative;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+[data-theme='dark'] .comment .main .nickName {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.comment .main .permissionName,
+.comment .main .datetime,
+.comment .main .likeCount,
+.comment .main .unlikeCount {
+  color: #9da5b6;
+}
+
+.comment .main svg {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+article .main .commentContent {
+  margin-bottom: 15px;
+  color: #000;
+  word-break: break-word;
+}
+
+[data-theme='dark'] article .main .commentContent {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+article .main .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+article .main .buttons .right {
+  display: flex;
+  gap: 10px;
+}
+
+article .main .buttons .right div {
+  display: flex;
+  gap: 10px;
+}
+
+article .main .buttons button {
+  font-size: 0.8em;
+  color: #697183;
+  background-color: #F5F6F9;
+  border-radius: 6px;
+  padding: 10px 20px;
+  border: 0;
+  word-break: keep-all;
+}
+
+[data-theme='dark'] article .main .buttons button {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+article .main .buttons button:hover {
+  background-color: #EEF0F4;
+}
+
+[data-theme='dark'] article .main .buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Rewrite Comment */
+.commentEtc .etcCommentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.commentEtc .etcCommentContainer .contentContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #f8f9fc;
+  margin-bottom: 15px;
+}
+
+[data-theme='dark'] .commentEtc .etcCommentContainer .contentContainer {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.commentEtc .etcCommentContainer .nonMember {
+  display: flex;
+  gap: 10px;
+}
+
+.commentEtc .etcCommentContainer .nonMember input {
+  flex: 1;
+  width: 100%;
+  padding: 20px;
+  background-color: #f8f9fc;
+  border-radius: 8px;
+  border: 0;
+}
+
+[data-theme='dark'] .commentEtc .etcCommentContainer .nonMember input {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.commentEtc .etcCommentContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.commentEtc textarea {
+  font-size: 1em;
+  width: 100%;
+  height: 60px;
+  flex: 1;
+  border: 0;
+  background-color: transparent;
+}
+
+[data-theme='dark'] .commentEtc textarea {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.commentEtc .button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  padding-top: 0;
+}
+
+.commentEtc button {
+  font-size: 1em;
+  color: #fff;
+  background-color: #cacfd8;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+
+[data-theme='dark'] .commentEtc button {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .commentEtc button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

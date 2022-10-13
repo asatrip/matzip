@@ -1,0 +1,195 @@
+<style>
+  :root {
+    --site-width: 1280px;
+  }
+
+  header {
+    background-color: <%= setting.headerBackgroundColor %>;
+  }
+
+  header #toggleBtn,
+  header #alarmBtn,
+  header #alarmBtn a {
+    color: <%= setting.headerFontColor %>;
+  }
+
+  @media (min-width: 1281px) {
+    header #sub ul li a {
+      color: <%= setting.headerFontColor %>;
+    }
+    
+    header .logo img {
+      width: <%= setting.logoImageDesktopSize %>px;
+    }
+
+    header #nav {
+      background-color: <%= setting.pointBackgroundColor %>;
+    }
+    
+    header nav > ul > li:hover > .menu > a {
+      color: <%= setting.pointColor %>;
+    }
+
+    #banner .sticky {
+      top: 80px;
+    }
+  }
+
+  @media (max-width: 1280px) {
+    header .logo img {
+      width: <%= setting.logoImageMobileSize %>px;
+    }
+
+    header nav > ul > li > ul > li > a:hover {
+      background-color: <%= setting.pointColor %>;
+    }
+  }
+</style>
+<header>
+  <div id="toggleBtn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+  </div>
+  <div id="alarmBtn">
+    <a href="/alarm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M256 32V49.88C328.5 61.39 384 124.2 384 200V233.4C384 278.8 399.5 322.9 427.8 358.4L442.7 377C448.5 384.2 449.6 394.1 445.6 402.4C441.6 410.7 433.2 416 424 416H24C14.77 416 6.365 410.7 2.369 402.4C-1.628 394.1-.504 384.2 5.26 377L20.17 358.4C48.54 322.9 64 278.8 64 233.4V200C64 124.2 119.5 61.39 192 49.88V32C192 14.33 206.3 0 224 0C241.7 0 256 14.33 256 32V32zM216 96C158.6 96 112 142.6 112 200V233.4C112 281.3 98.12 328 72.31 368H375.7C349.9 328 336 281.3 336 233.4V200C336 142.6 289.4 96 232 96H216zM288 448C288 464.1 281.3 481.3 269.3 493.3C257.3 505.3 240.1 512 224 512C207 512 190.7 505.3 178.7 493.3C166.7 481.3 160 464.1 160 448H288z"/></svg></a>
+    <% newAlarms = locals.alarms?.filter(alarm => alarm.status === 1) %>
+    <% if (newAlarms?.length) { %>
+    <div class="count"><%= newAlarms.length %></div>
+    <% } %>
+  </div>
+  <section id="sub">
+    <ul>
+      <li id="datetime"><a href="#"><%= locals.datetime %></a></li>
+      <li class="slash">|</li>
+      <li><a href="/best">인기글</a></li>
+      <li class="slash">|</li>
+      <li><a href="/new">새글</a></li>
+      <li class="slash">|</li>
+      <li><a href="#" id="toggleTheme"><%= locals.userThemeReverseKorean %></a></li>
+    </ul>
+    <ul>
+      <% if (locals.user && locals.user.permission >= 10) { %>
+        <li><a href="/admin">관리자</a></li>
+        <li class="slash">|</li>
+      <% } %>
+      <% if (locals.user) { %>
+        <li><a href="/message">메시지</a></li>
+        <li class="slash">|</li>
+        <li><a href="/mypage">마이페이지</a></li>
+        <li class="slash">|</li>
+        <li><a href="/logout">로그아웃</a></li>
+      <% } else { %>
+        <li><a href="/join">회원가입</a></li>
+        <li class="slash">|</li>
+        <li><a href="/login">로그인</a></li>
+      <% } %>
+    </ul>
+  </section>
+  <section id="main">
+    <div class="logo">
+      <% if (setting.logoType === 'text') { %>
+      <a href="/"><%= setting.siteNameRaw %></a>
+      <% } else if (setting.logoType === 'image') { %>
+      <a href="/"><img src="<%= storage %>/assets/<%= setting.logoImage %>" alt="<%= setting.siteNameRaw %>"></a>
+      <% } %>
+    </div>
+    <div class="search">
+      <form action="/search" method="GET">
+        <input type="text" name="keyword" placeholder="검색어">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+  <section id="nav">
+    <div class="navWrap">
+      <ul class="mypage">
+        <% if (locals.user && locals.user.permission >= 10) { %>
+          <li><a href="/admin">관리자</a></li>
+        <% } %>
+        <% if (locals.user) { %>
+          <li><a href="/message">메시지</a></li>
+          <li><a href="/mypage">마이페이지</a></li>
+          <li><a href="/logout">로그아웃</a></li>
+        <% } else { %>
+          <li><a href="/join">회원가입</a></li>
+          <li><a href="/login">로그인</a></li>
+        <% } %>
+      </ul>
+      <nav>
+        <ul>
+          <% locals.menus.forEach(menu => { %>
+            <li>
+              <div class="menu">
+                <a href="/<%= menu.target %>"><%= menu.title %></a>
+                <% if (menu.subMenus.length) { %>
+                <div class="dropdownBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"/></svg>
+                </div>
+                <% } %>
+              </div>
+              <% if (menu.subMenus.length) { %>
+              <ul>
+                <% menu.subMenus.forEach(subMenu => { %>
+                <li><a href="/<%= subMenu.target %>"><%= subMenu.title %></a></li>
+                <% }) %>
+              </ul>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+      </nav>
+    </div>
+    <div class="navBackground"></div>
+  </section>
+</header>
+<script>
+  const html = document.querySelector('html');
+  const body = document.querySelector('body');
+  const header = document.querySelector('header');
+  const nav = document.querySelector('#nav');
+  const subHeight = header.querySelector('#sub').clientHeight;
+  const mainHeight = header.querySelector('#main').clientHeight;
+  const headerHeight = subHeight + mainHeight + 20;
+
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > subHeight + mainHeight + 20) {
+      nav.classList.add('hover');
+      header.style.marginBottom = `${subHeight + 20}px`;
+    } else {
+      nav.classList.remove('hover');
+      header.style.marginBottom = 'unset';
+    }
+  });
+
+  const toggleBtn = document.querySelector('header #toggleBtn');
+  const navContainer = document.querySelector('header #nav');
+  const navBackground = document.querySelector('header #nav .navBackground');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      navContainer.classList.toggle('active');
+      html.classList.toggle('active');
+      body.classList.toggle('active');
+    });
+  }
+  if (navBackground) {
+    navBackground.addEventListener('click', () => {
+      navContainer.classList.toggle('active');
+      html.classList.toggle('active');
+      body.classList.toggle('active');
+    });
+  }
+
+  const menus = document.querySelectorAll('header nav > ul > li');
+  menus.forEach(menu => {
+    const dropdownBtn = menu.querySelector('.dropdownBtn');
+    const subMenu = menu.querySelector('ul');
+    if (dropdownBtn) {
+      dropdownBtn.addEventListener('click', () => {
+        if (subMenu) {
+          subMenu.classList.toggle('active');
+        }
+      });
+    }
+  });
+</script>

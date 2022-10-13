@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header') %>
+          <section>
+            <h2>전체 쪽지</h2>
+            <div class="tableWrap">
+              <table>
+                <thead>
+                  <tr>
+                    <td>메시지</td>
+                    <td>발송</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <form action="/admin/totalMessage/sendMessage" method="POST">
+                    <tr>
+                      <td><textarea name="content" placeholder="메시지"></textarea></td>
+                      <td><button>발송</button></td>
+                    </tr>
+                  </form>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <!-- <section>
+            <h2>전체 이메일</h2>
+            <div class="tableWrap">
+              <table>
+                <thead>
+                  <form action="/admin/totalMessage/sendEmail" method="POST">
+                    <tr>
+                      <th>제목</th>
+                      <td>내용</td>
+                      <td>발송</td>
+                    </tr>
+                  </form>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" name="title" placeholder="제목"></td>
+                    <td><textarea name="content" placeholder="내용"></textarea></td>
+                    <td><button>발송</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section> -->
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= pageTitle %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <meta property="og:url" content="<%= setting.siteDomain %>/findInfo">
+    <link rel="canonical" href="<%= setting.siteDomain %>/findInfo">
+    <link rel="stylesheet" href="/stylesheets/findInfo.css">
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <article>
+        <h1>비밀번호 찾기</h1>
+        <form action="/findInfo" method="POST">
+          <input type="text" name="email" placeholder="이메일">
+          <button>비밀번호 찾기</button>
+        </form>
+      </article>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

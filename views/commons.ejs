@@ -1,0 +1,85 @@
+<style>
+  body {
+    color: <%= setting.bodyFontColor %>;
+    background-color: <%= setting.bodyBackgroundColor %>;
+  }
+
+  /* banner */
+  :root {
+    --banner-gap: <%= setting.bannerGapDesktop %>px;
+    --banner-mobile-gap: <%= setting.bannerGapMobile %>px;
+  }
+
+  #banner.banner img {
+    <% if (setting.bannerBorderRounding) { %>
+      border-radius: 12px;
+    <% } else { %>
+      border-radius: 0;
+    <% } %>
+  }
+
+  #banner.banner__box__header {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsHeader %>, 1fr);
+  }
+
+  #banner.banner__box__indexTop {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsIndexTop %>, 1fr);
+  }
+
+  #banner.banner__box__indexBottom {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsIndexBottom %>, 1fr);
+  }
+
+  #banner.banner__box__articleTop {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsArticleTop %>, 1fr);
+  }
+
+  #banner.banner__box__articleBottom {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsArticleBottom %>, 1fr);
+  }
+
+  #banner.banner__box__sideTop {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsSideTop %>, 1fr);
+  }
+
+  #banner.banner__box__sideBottom {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsSideBottom %>, 1fr);
+  }
+
+  #banner.banner__box__custom {
+    grid-template-columns: repeat(<%= setting.desktopBannerRowsCustom %>, 1fr);
+  }
+  @media (max-width: 1280px) {
+    #banner.banner__box__header {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsHeader %>, 1fr);
+    }
+
+    #banner.banner__box__indexTop {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsIndexTop %>, 1fr);
+    }
+
+    #banner.banner__box__indexBottom {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsIndexBottom %>, 1fr);
+    }
+
+    #banner.banner__box__articleTop {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsArticleTop %>, 1fr);
+    }
+
+    #banner.banner__box__articleBottom {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsArticleBottom %>, 1fr);
+    }
+
+    #banner.banner__box__sideTop {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsSideTop %>, 1fr);
+    }
+
+    #banner.banner__box__sideBottom {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsSideBottom %>, 1fr);
+    }
+
+    #banner.banner__box__custom {
+      grid-template-columns: repeat(<%= setting.mobileBannerRowsCustom %>, 1fr);
+    }
+  }
+</style>

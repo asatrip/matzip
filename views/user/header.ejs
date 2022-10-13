@@ -1,0 +1,8 @@
+<section id="header">
+  <a href="/mypage"<% if (typeof (position) !== 'undefined' && position === 'mypage') { %> class="selected"<% } %>>회원 정보 변경</a>
+  <a href="/mypage/article"<% if (typeof (position) !== 'undefined' && position === 'article') { %> class="selected"<% } %>>내가 쓴 글</a>
+  <a href="/mypage/comment"<% if (typeof (position) !== 'undefined' && position === 'comment') { %> class="selected"<% } %>>내가 쓴 댓글</a>
+  <a href="/mypage/point"<% if (typeof (position) !== 'undefined' && position === 'point') { %> class="selected"<% } %>>포인트 내역</a>
+  <a href="/mypage/article/like"<% if (typeof (position) !== 'undefined' && position === 'articleLike') { %> class="selected"<% } %>>좋아요 한 글</a>
+  <a href="/mypage/comment/like"<% if (typeof (position) !== 'undefined' && position === 'commentLike') { %> class="selected"<% } %>>좋아요 한 댓글</a>
+</section>

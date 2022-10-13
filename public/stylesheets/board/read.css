@@ -1,0 +1,442 @@
+/* userPopup */
+#article .userPopup {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: normal;
+  top: 30px;
+  left: 0;
+  width: max-content;
+  padding: 8px;
+  gap: 4px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1),0 0 2px 0 rgba(0,0,0,0.05);
+  word-break: keep-all;
+  z-index: 1;
+}
+
+#article .userPopup.active {
+  display: flex;
+}
+
+#article .userPopup li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 0;
+  border-radius: 8px;
+  color: #525662;
+}
+
+#article .userPopup li:hover {
+  background-color: #F7F8F9;
+}
+
+#article .userPopup a {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #525662;
+}
+
+#article .userPopup li svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#article > .sub {
+  width: 100%;
+}
+
+#article > .sub .back {
+  display: flex;
+}
+
+#article > .sub .back a {
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+}
+
+[data-theme='dark'] #article > .sub .back a {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#article .customHtml {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#article > .item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  gap: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 30px 0 rgba(0,0,0,0.06);
+  box-sizing: border-box;
+}
+
+[data-theme='dark'] #article > .item {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#article > .item > .info {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 20px;
+}
+
+[data-theme='dark'] #article > .item > .info {
+  border-bottom: 1px solid #666;
+}
+
+#article > .item > .info .etc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#article > .item > .info .etc .left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#article > .item > .info .etc .nickName {
+  position: relative;
+  cursor: pointer;
+}
+
+#article > .item > .info .etc .right {
+  position: relative;
+}
+
+#article > .item > .info .etc .right .buttons svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+#article > .item > .info .etc .right .popUp {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 30px;
+  right: 0;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1),0 0 2px 0 rgba(0,0,0,0.05);
+  word-break: keep-all;
+  z-index: 1;
+}
+
+#article > .item > .info .etc .right .popUp form {
+  flex-direction: column;
+  gap: 4px;
+}
+
+#article > .item > .info .etc .right .popUp.active {
+  display: flex;
+}
+
+#article > .item > .info .etc .right .popUp button {
+  width: 100%;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 8px;
+  color: #525662;
+}
+
+#article > .item > .info .etc .right .popUp li {
+  display: flex;
+  align-items: center;
+}
+
+#article > .item > .info .etc .right .popUp button:hover {
+  background-color: #F7F8F9;
+}
+
+#article > .item > .info .etc .right .popUp svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#article > .item > .info .titleContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#article > .item > .info .category {
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #687182;
+  background-color: #f5f6f9;
+  margin-right: 10px;
+  word-break: keep-all;
+}
+
+[data-theme='dark'] #article > .item > .info .category {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#article > .item > .info h1 {
+  color: #000;
+  display: inline;
+}
+
+[data-theme='dark'] #article > .item > .info h1 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#article > .item > .info .etc {
+  color: #9da5b6;
+  padding: 5px 0;
+}
+
+#article > .item > .info .etc svg {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+}
+
+#article > .item > .links {
+  color: #9da5b6;
+}
+
+#article > .item > .files {
+  color: #9da5b6;
+}
+
+#article > .item > .links a,
+#article > .item > .files a {
+  color: #9da5b6;
+}
+
+#article > .item > .links a:hover,
+#article > .item > .files a:hover {
+  text-decoration: underline;
+}
+
+#article > .item > .customField {
+  color: #9da5b6;
+}
+
+#article > .item > .content {
+  color: #000;
+}
+
+#article > .item > .content .image {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#article > .item > .content .media {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#article > .item > .content .media [data-oembed-url] {
+  width: 100%;
+}
+
+#article > .item .listAndEdit {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#article > .item .listAndEdit > div {
+  display: flex;
+  gap: 10px;
+}
+
+#article > .item .listAndEdit .likeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#article > .item .listAndEdit .likeContainer button,
+#article > .item .listAndEdit button {
+  font-size: 1em;
+  color: #697183;
+  background-color: #F5F6F9;
+  border-radius: 6px;
+  padding: 10px 20px;
+  border: 0;
+  word-break: keep-all;
+}
+
+[data-theme='dark'] #article > .item .listAndEdit .likeContainer button,
+[data-theme='dark'] #article > .item .listAndEdit button {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#article > .item .listAndEdit .likeContainer button:hover,
+#article > .item .listAndEdit button:hover {
+  background-color: #EEF0F4;
+}
+
+[data-theme='dark'] #article > .item .listAndEdit .likeContainer button:hover,
+[data-theme='dark'] #article > .item .listAndEdit button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#article > .item .listAndEdit .articleButton form {
+  display: flex;
+}
+
+#article > .item .listAndEdit .articleButton .edit {
+  margin-right: 10px;
+}
+
+#article > .item .tags {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  word-break: break-word;
+  color: #9DA5B6;
+  font-size: 1em;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+#article > .item .tag {
+  display: flex;
+}
+
+#article .writeBtn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#article .writeBtn a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: #fff;
+  background-color: #434B57;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+#article .writeBtn a:hover {
+  background-color: #353C45;
+}
+
+@media (max-width: 1280px) {
+  #article > .item > .info h1 {
+    font-size: 1.3em;
+  }
+
+  #article > .item > .info .category {
+    font-size: 0.8em;
+  }
+
+  #article > .item .listAndEdit {
+    font-size: 0.8em;
+  }
+
+  #article > .item > .info .etc .right .popUp button {
+    font-size: 0.8em;
+  }
+}
+
+/* share */
+#modal .share {
+  display: none;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+#modal .container.active {
+  display: grid;
+}
+
+#modal .share a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal .share .shareItem {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #999;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+#modal .share .facebook {
+  background-color: #1A76F2;
+}
+
+#modal .share .twitter {
+  background-color: #1EA1F1;
+}
+
+#modal .share .naver {
+  background-color: #1EC800;
+}
+
+#modal .share .kakaoTalk,
+#modal .share .kakaoStory {
+  color: #000;
+  background-color: #FFE003;
+}
+
+#modal .share .tumblr {
+  background-color: #001935;
+}
+
+#modal .share .pinterest {
+  background-color: #E70022;
+}
+
+#modal .share img {
+  width: 20px;
+  height: 20px;
+}

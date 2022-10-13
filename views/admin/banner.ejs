@@ -1,0 +1,199 @@
+<% const setting = locals.setting %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '배너',
+          info: 'https://waffleboard.io/support/manage/banner',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>위치</th>
+                <th>등록 갯수</th>
+                <th>정렬</th>
+                <th>수정</th>
+                <th>보기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="header">
+                <tr>
+                  <td>헤더</td>
+                  <td><%= headerCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignHeader === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignHeader === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/header"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="indexTop">
+                <tr>
+                  <td>첫페이지 상단</td>
+                  <td><%= indexTopCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignIndexTop === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignIndexTop === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/indexTop"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="indexBottom">
+                <tr>
+                  <td>첫페이지 하단</td>
+                  <td><%= indexBottomCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignIndexBottom === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignIndexBottom === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/indexBottom"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="sideTop">
+                <tr>
+                  <td>사이드 상단</td>
+                  <td><%= sideTopCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignSideTop === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignSideTop === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/sideTop"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="sideBottom">
+                <tr>
+                  <td>사이드 하단</td>
+                  <td><%= sideBottomCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignSideBottom === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignSideBottom === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/sideBottom"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="articleTop">
+                <tr>
+                  <td>본문 상단</td>
+                  <td><%= articleTopCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignArticleTop === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignArticleTop === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/articleTop"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="articleBottom">
+                <tr>
+                  <td>본문 하단</td>
+                  <td><%= articleBottomCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignArticleBottom === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignArticleBottom === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/articleBottom"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="leftWing">
+                <tr>
+                  <td>날개 좌측</td>
+                  <td><%= leftWingCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignLeftWing === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignLeftWing === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/leftWing"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="rightWing">
+                <tr>
+                  <td>날개 우측</td>
+                  <td><%= rightWingCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignRightWing === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignRightWing === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/rightWing"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="custom">
+                <tr>
+                  <td>커스텀</td>
+                  <td><%= customCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignCustom === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignCustom === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/custom"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+              <form action="/admin/banner" method="POST">
+                <input type="hidden" name="position" value="popup">
+                <tr>
+                  <td>팝업</td>
+                  <td><%= popupCount.toLocaleString() %></td>
+                  <td>
+                    <select name="align">
+                      <option value="lately"<% if (setting.bannerAlignCustom === 'lately') { %> selected<% } %>>최신</option>
+                      <option value="random"<% if (setting.bannerAlignCustom === 'random') { %> selected<% } %>>랜덤</option>
+                    </select>
+                  </td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><a href="/admin/banner/popup"><button type="button">보기</button></a></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+    </main>
+  </body>
+</html>

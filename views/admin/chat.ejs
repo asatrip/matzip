@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('./header') %>
+          <section>
+            <h2>채팅</h2>
+            <div class="tableWrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>날짜</th>
+                    <th>글쓴이</th>
+                    <th>메시지</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% chats.forEach(chat => { %>
+                  <form action="/admin/chat/edit/<%= chat.id %>" method="POST">
+                  <tr>
+                    <td><%= chat.datetime %></td>
+                    <td><%= chat.nickName %></td>
+                    <td><input type="text" name="message" value="<%= chat.message %>"></td>
+                    <td><button name="submit" value="edit">수정</button></td>
+                    <td><button name="submit" value="delete">삭제</button></td>
+                  </tr>
+                  </form>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section>
+            <h2>전체 삭제</h2>
+            <form action="/admin/chat/deleteAll" method="POST">
+            <div><button>전체 삭제</button></div>
+            </form>
+          </section>
+          <%- include('../pagination') %>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

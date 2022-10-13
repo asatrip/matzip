@@ -1,0 +1,33 @@
+<section id="section">
+  <div class="sectionGroups">
+    <% let i = 1; %>
+    <% sectionGroups.forEach(sectionGroup => { %>
+    <% if (typeof (scope) === 'undefined' || typeof (scope) === 'null' || i === scope) { %>
+    <div class="sectionGroup">
+      <% if (sectionGroup.type === 'rowTwo' || sectionGroup.type === 'rowOne' || sectionGroup.type === 'side') { %>
+        <%- include('./section/row', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'tab') { %>
+        <%- include('./section/tab', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'dropdown') { %>
+        <%- include('./section/dropdown', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'blog') { %>
+        <%- include('./section/blog', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'contentTwo') { %>
+        <%- include('./section/contentTwo', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'contentOne') { %>
+        <%- include('./section/contentOne', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'imageAndTitle') { %>
+        <%- include('./section/imageAndTitle', { sectionGroup }); %>
+      <% } else if (sectionGroup.type.match('bookmark')) { %>
+        <%- include('./section/bookmark', { sectionGroup }); %>
+      <% } else if (sectionGroup.type.match('youtube')) { %>
+        <%- include('./section/youtube', { sectionGroup }); %>
+      <% } else if (sectionGroup.type === 'customBanner') { %>
+        <%- include('./section/customBanner', { sectionGroup }); %>
+      <% } %>
+    </div>
+    <% } %>
+    <% i ++ %>
+    <% }) %>
+  </div>
+</section>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: `${positionTitle} 배너`,
+          info: 'https://waffleboard.io/support/manage/section',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이미지</th>
+                <th>연결 주소</th>
+                <th>표시 순서</th>
+                <th>새창</th>
+                <th>데스크탑 숨김</th>
+                <th>모바일 숨김</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>숨기기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% banners.forEach(banner => { %>
+              <form action="/admin/banner/edit/<%= banner.id %>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="position" value="<%= position %>">
+                <tr>
+                  <td class="bannerImage">
+                    <a href="<%= storage %>/banner/<%= banner.image %>" target="_blank"><img src="<%= storage %>/banner/<%= banner.image %>" alt="<%= banner.image %>"></a>
+                    <input type="file" name="image">
+                  </td>
+                  <td><input type="text" name="link" value="<%= banner.link %>" placeholder="연결 주소"></td>
+                  <td><input type="text" name="viewOrder" value="<%= banner.viewOrder %>" placeholder="표시 순서"></td>
+                  <td><input type="checkbox" name="newPage" value="1"<% if (banner.newPage === 1) { %>checked<% } %>></td>
+                  <td><input type="checkbox" name="desktopHide" value="1"<% if (banner.desktopHide === 1) { %>checked<% } %>></td>
+                  <td><input type="checkbox" name="mobileHide" value="1"<% if (banner.mobileHide === 1) { %>checked<% } %>></td>
+                  <td><button name="submit" value="edit">수정</button></td>
+                  <td><button name="submit" value="delete">삭제</button></td>
+                  <% if (banner.status === 1) { %>
+                  <td><button name="submit" value="hide">숨기기</button></td>
+                  <% } else if (banner.status === 0) { %>
+                  <td><button name="submit" value="hide">숨기기 해제</button></td>
+                  <% } %>
+                </tr>
+              </form>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+      <section>
+        <%- include('./title', { title: '새로 등록' }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>이미지</th>
+                <th>연결 주소</th>
+                <th>표시 순서</th>
+                <th>새창</th>
+                <th>등록</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form action="/admin/banner/new" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="position" value="<%= position %>">
+                <tr>
+                  <td><input type="file" name="image"></td>
+                  <td><input type="text" name="link" placeholder="연결 주소"></td>
+                  <td><input type="text" name="viewOrder" value="100"></td>
+                  <td><input type="checkbox" name="newPage" value="1"></td>
+                  <td><button>등록</button></td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

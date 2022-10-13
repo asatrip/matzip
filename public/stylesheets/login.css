@@ -1,0 +1,142 @@
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+[data-theme='dark'] article {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+article h1 {
+  padding: 50px 0;
+}
+
+article a {
+  color: #1B73E8;
+}
+
+article a:hover {
+  color: #4495ff;
+}
+
+article form {
+  width: 400px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+article input[type=text],
+article input[type=password] {
+  width: 100%;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: unset;
+}
+
+[data-theme='dark'] article input[type=text],
+[data-theme='dark'] article input[type=password] {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+article button {
+  width: 100%;
+  height: 50px;
+  color: #fff;
+  background-color: #434B57;
+  border-radius: 8px;
+  border: 0;
+}
+
+article button:hover {
+  background-color: #353C45;
+}
+
+article input[type=checkbox],
+article label {
+  cursor: pointer;
+}
+
+article .agreement {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+article .agreement .all {
+  font-weight: bold;
+}
+
+article .agreement > div {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 400px) {
+  article form {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+#socialAuth {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#socialAuth a {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  background-color: #bbb;
+  border-radius: 8px;
+}
+
+#socialAuth a img {
+  color: #fff;
+  width: 16px;
+  height: 16px;
+}
+
+#socialAuth a:hover::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#socialAuth .apple {
+  background-color: #000;
+}
+
+#socialAuth .google {
+  background-color: #1B73E8;
+}
+
+@media (max-width: 400px) {
+  #socialAuth {
+    width: 100%;
+    padding: 0 10px;
+  }
+}

@@ -1,0 +1,31 @@
+<div class="sections <%= sectionGroup.type %>">
+  <% sectionGroup.sections.forEach(section => { %>
+  <div class="section <%= section.type %>">
+    <% if (sectionGroup.showTitleAndContent) { %>
+    <div class="sectionTitleContainer">
+      <h2><a href="/<%= section.slug %>"><%= section.title %></a></h2>
+      <div class="content"><%- sectionGroup.content %></div>
+    </div>
+    <% } %>
+    <div class="articles <%= section.type %>">
+      <% section.articles.forEach(article => { %>
+      <div class="article">
+        <div class="image">
+          <a href="/<%= article.boardSlug %>/<%= article.id %>">
+            <% if (article.images.length) { %>
+            <img src="/assets/empty.png" style="background-image: url('<%= storage %>/article/<%= article.images[0].key %>');">
+            <% } else { %>
+            <img src="/assets/empty.png" style="background-image: url('/assets/none.png');">
+            <% } %>
+          </a>
+        </div>
+        <div class="info">
+          <h3><a href="/<%= article.boardSlug %>/<%= article.id %>"><%= article.title %></a></h3>
+          <div class="content"><%= article.content %></div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <% }) %>
+</div>

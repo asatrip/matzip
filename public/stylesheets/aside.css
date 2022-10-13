@@ -1,0 +1,427 @@
+aside {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+aside .user {
+  background-color: #fff;
+  padding: 20px 0;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] aside .user {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+aside .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+aside .info .nickName {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+
+[data-theme='dark'] aside .info .nickName {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+aside .info .nickName img {
+  width: 20px;
+  margin-right: 5px;
+}
+
+aside .info .permission {
+  color: #000;
+}
+
+[data-theme='dark'] aside .info .permission {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+aside .userMenu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+  gap: 10px;
+  margin: 0 10px;
+}
+
+aside .userMenu div {
+  background-color: #f5f6f9;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+aside .userMenu div a {
+  color: #697183;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+aside .userBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+aside .userBox .message {
+  border-radius: 6px;
+}
+
+aside .alarm svg,
+aside .userBox .message svg {
+  width: 12px;
+  margin-right: 6px;
+}
+
+aside .userBox .message .messageCount {
+  margin-left: 6px;
+}
+
+aside .alarm,
+aside .userBox .message,
+aside .admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f6f9;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin: 10px 10px 0 10px;
+}
+
+[data-theme='dark'] aside .userMenu div,
+[data-theme='dark'] aside .alarm,
+[data-theme='dark'] aside .userBox .message,
+[data-theme='dark'] aside .admin {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] aside .userMenu div a,
+[data-theme='dark'] aside .alarm a,
+[data-theme='dark'] aside .userBox .message a,
+[data-theme='dark'] aside .admin a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme='dark'] aside .userMenu div a:hover,
+[data-theme='dark'] aside .alarm a:hover,
+[data-theme='dark'] aside .userBox .message a:hover,
+[data-theme='dark'] aside .admin a:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+aside .getAlarm,
+aside .getMessage {
+  background-color: yellow;
+}
+
+aside .alarm a,
+aside .message a,
+aside .admin a {
+  color: #697183;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+aside .getAlarm a,
+aside .getMessage a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+aside .userMenu a:hover,
+aside .alarm a:hover,
+aside .message a:hover,
+aside .admin a:hover {
+  font-weight: bold;
+  background-color: #EEF0F4;
+  border-radius: 6px;
+}
+
+aside .getMessage a:hover {
+  background-color: yellow;
+}
+
+aside .inputsAndButtons {
+  
+}
+
+aside .inputsAndButtons form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+aside .inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+aside .buttons {
+  width: 100%;
+}
+
+aside .inputsAndButtons form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+aside .inputsAndButtons input {
+  width: 100%;
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 0;
+  margin: 0;
+}
+
+[data-theme='dark'] aside .inputsAndButtons input {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+aside .inputsAndButtons button {
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 10px 0;
+  color: #fff;
+  background-color: #434B57;
+  border: 0;
+  border-radius: 8px;
+}
+
+aside .inputsAndButtons button:hover {
+  background-color: #353C45;
+}
+
+aside .joinAndFindPassword {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+aside .joinAndFindPassword a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+aside .joinAndFindPassword a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme='dark'] aside .joinAndFindPassword a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme='dark'] aside .joinAndFindPassword a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+aside #counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9em;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 10px 14px;
+}
+
+[data-theme='dark'] aside #counter {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+aside #counter .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Chat */
+aside .chatContainer {
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+}
+
+[data-theme='dark'] aside .chatContainer {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+aside .chatBanner {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+}
+
+aside .chatBanner .title {
+  font-weight: bold;
+}
+
+aside .chatBanner .userCount {
+  min-width: 30px;
+  min-height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.7em;
+  padding: 2px 10px;
+  color: #697183;
+  background-color: #f5f6f9;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] aside .chatBanner .userCount {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+aside .chatBox {
+  padding: 0 10px;
+  height: 260px;
+  box-sizing: border-box;
+}
+
+aside .messageBox {
+  display: flex;
+  box-sizing: border-box;
+}
+
+aside .messageBox .msg {
+  width: 100%;
+  font-size: 1em;
+  flex: 1;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #E9EBF1;
+  /* background-color: #f5f6f9; */
+  border-radius: 6px;
+  margin: 10px;
+  margin-right: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+[data-theme='dark'] aside .messageBox .msg {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+aside .messageBox .msg:hover {
+  /* background-color: #EEF0F4; */
+}
+
+aside .messageBox .send {
+  font-size: 1em;
+  width: 50px;
+  height: 40px;
+  margin: 10px;
+  color: #fff;
+  background-color: #697183;
+  border-radius: 6px;
+  border: 0;
+  box-sizing: border-box;
+  word-break: keep-all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+aside .messageBox .send:hover {
+  background-color: #545A68;
+}
+
+aside .chatExpand {
+  display: none;
+}
+
+aside .chatWindow {
+  width: 100%;
+  height: 100%;
+}
+
+aside .testMode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background-color: yellow;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+}
+
+@media (max-width: 1280px) {
+  aside {
+    width: 100%;
+  }
+
+  aside .userBox {
+    display: none;
+  }
+
+  aside .chatContainer {
+    padding-bottom: 10px;
+  }
+
+  aside .chatBanner {
+    /* font-size: 0.8em; */
+  }
+
+  aside .chatBox {
+    height: 80px;
+  }
+
+  aside .chatExpand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 6px;
+    box-sizing: border-box;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  [data-theme='dark'] aside .chatExpand {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}

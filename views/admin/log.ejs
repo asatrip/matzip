@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <main>
+      <section>
+        <%- include('./title', {
+          title: '로그',
+          info: 'https://waffleboard.io/support/manage/log',
+        }) %>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>타입</th>
+                <th>게시글</th>
+                <th>IP</th>
+                <th>이전 위치</th>
+                <th>유저 에이전트</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% logs.forEach(log => { %>
+              <tr>
+                <td><%= log.datetime %></td>
+                <td><%= log.typeKorean %></td>
+                <td class="article"><a href="/<%= log.boardSlug %>/<%= log.log_article_ID %>"><%= log.title %></a></td>
+                <td><%= log.ip %></td>
+                <td class="referer"><a href="<%= log.referer %>" target="_blank"><%= log.referer %></a></td>
+                <td class="userAgent"><%= log.userAgent %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <%- include('../pagination') %>
+    </main>
+  </body>
+</html>

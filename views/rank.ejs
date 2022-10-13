@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/rank">
+    <link rel="canonical" href="<%= setting.siteDomain %>/rank">
+    <link rel="stylesheet" href="/stylesheets/rank.css">
+    <style>
+      <% if (setting.theme === 'black') { %>
+      article .buttons a {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      article .pointRank {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      <% } %>
+    </style>
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <%- include('./aside', { mobile: false }) %>
+      <article>
+        <h1>포인트 랭킹</h1>
+        <section class="buttons">
+          <a href="/rank?date=today" class="button<% if (date === 'today') { %> selected<% } %>">오늘</a>
+          <a href="/rank?date=week" class="button<% if (date === 'week') { %> selected<% } %>">일주일</a>
+          <a href="/rank?date=month" class="button<% if (date === 'month') { %> selected<% } %>">한달</a>
+          <a href="/rank?date=total" class="button<% if (date === 'total' || date === undefined) { %> selected<% } %>">전체</a>
+        </section>
+        <section class="pointRanks">
+          <% pointRanks.forEach(pointRank => { %>
+            <div class="pointRank">
+              <div class="number"><%= Number(pointRank.number).toLocaleString() %> 등</div>
+              <div class="nickName">
+                <img src="<%= pointRank.permissionImage %>" class="permissionImage">
+                <div class="text"><%= pointRank.nickName %></div>
+              </div>
+              <div class="point"><%= Number(pointRank.point).toLocaleString() %></div>
+            </div>
+          <% }) %>
+        </section>
+      </article>
+      <%- include('./aside', { mobile: true }) %>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<% const setting = locals.setting %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../head') %>
+    <%- include('./head') %>
+  </head>
+  <body>
+    <%- include('../header') %>
+    <main>
+      <article>
+        <div class="wrap">
+          <%- include('../admin/header') %>
+          <h2>랜딩페이지 설정</h2>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>테마</th>
+                  <th>메인 폭</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/landing" method="POST">
+                  <tr>
+                    <td>
+                      <select name="landingLayout">
+                        <option value="basic"<% if (setting.landingLayout === 'basic') { %> selected<% } %>>기본</option>
+                        <option value="m2ps1y"<% if (setting.landingLayout === 'm2ps1y') { %> selected<% } %>>m2ps1y</option>
+                      </select>
+                    </td>
+                    <td><input type="text" name="mainWidth" value="<%= landing.mainWidth %>" placeholder="메인 폭"></td>
+                    <td><button name="submit" value="main">설정</button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>메인 이미지</th>
+                  <th>배경 이미지</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/landing" method="POST" enctype="multipart/form-data">
+                  <tr>
+                    <td>
+                      <div><img src="<%= locals.storage %>/landing/<%= landing.mainImage %>"></div>
+                      <div><input type="file" name="mainImage"></div>
+                    </td>
+                    <td>
+                      <!-- <div><video autoplay muted loop id="myVideo"><source src="<%= locals.storage %>/landing/<%= landing.backgroundImage %>" type="video/mp4"></video></div> -->
+                      <div><img src="<%= locals.storage %>/landing/<%= landing.backgroundImage %>"></div>
+                      <div><input type="file" name="backgroundImage"></div>
+                    </td>
+                    <td><button name="submit" value="image">설정</button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>컨텐츠</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/landing" method="POST">
+                  <tr>
+                    <td><textarea name="content" style="height: 200px;" placeholder="컨텐츠"><%= landing.content %></textarea></td>
+                    <td><button name="submit" value="content">설정</button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>도착 URL</th>
+                  <th>트위터 URL</th>
+                  <th>설정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form action="/admin/landing" method="POST">
+                  <tr>
+                    <td><input type="text" name="targetUrl" value="<%= landing.targetUrl %>" placeholder="도착 URL"></td>
+                    <td><input type="text" name="twitterUrl" value="<%= landing.twitterUrl %>" placeholder="트위터 URL"></td>
+                    <td><button name="submit" value="url">설정</button></td>
+                  </tr>
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
