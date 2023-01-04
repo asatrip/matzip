@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap");
+h3 {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+#green {
+  color: green;
+}
+
+[href="https://www.google.com"]
+{
+  background-color: black;
+  color: white;
+}
+
+[href="https://www.naver.com"]
+{
+  background-color: pink;
+  color: black;
+}
+
+p {
+  font-family: "Yeon Sung", cursive;
+  background-color: grey;
+  color: yellow;
+}
+
+t1 {
+  font-family: "Yeon Sung", cursive;
+  font-weight: 800;
+  text-align: left;
+  color: aqua;
+}
+
+div {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  border: 1px solid black;
+}
+
+#tar {
+  background-color: yellow;
+  position: sticky;
+  top: 20px;
+}
+.container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+#tar2 {
+  background-color: red;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}

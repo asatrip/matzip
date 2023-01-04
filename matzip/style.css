@@ -1,0 +1,121 @@
+@font-face {
+  font-family: "KyoboHandwriting2020A";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  font-family: "KyoboHandwriting2020A";
+}
+
+nav {
+  /* background-color: gold; */
+}
+
+.nav-title {
+  font-size: 2rem;
+}
+
+.category-item {
+  width: 25%;
+  height: 2rem;
+  background: none;
+  border-style: dotted;
+  font-family: inherit;
+  font-size: 1.2rem;
+}
+.category-item:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.category-title {
+  padding: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.nav-container {
+  border-style: dotted;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-container:hover {
+  background-color: gray;
+}
+
+.nav-contact {
+  font-size: 2rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.inner {
+  padding: 0 1.5rem;
+}
+
+body {
+  height: 100vh;
+}
+
+nav {
+  height: 59px;
+}
+
+main {
+  padding-top: 1.5rem;
+  height: calc(100% - 59px);
+  display: flex;
+  flex-direction: column;
+}
+
+#map {
+  border-style: dotted;
+  flex-grow: 1;
+  width: 90%;
+  height: 100%;
+}
+
+@media all and (min-width: 1024px) {
+  .inner {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+.infoWindow {
+  width: 13rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.infoWindow-img-container {
+  width: 100%;
+  overflow: hidden;
+}
+.infoWindow-img {
+  width: 100%;
+}
+.infoWindow-title {
+  font-size: 1.3rem;
+}
+.infoWindow-address {
+  font-size: 1rem;
+}
+
+.infoWindow-btn {
+  font-size: 1rem;
+}
