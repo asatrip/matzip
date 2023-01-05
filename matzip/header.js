@@ -12,7 +12,7 @@
 
 */
 
-let url = "http://127.0.0.1:3000";
+let url = "http://15.165.86.91:3000";
 
 // 1. 로컬스토리지에서 x-access-token 확인
 const jwt = localStorage.getItem("x-access-token");

@@ -9,7 +9,7 @@
 
 */
 
-let url = "http://127.0.0.1:3000";
+let url = "http://15.165.86.91:3000";
 
 const btnSignUp = document.querySelector("#signup");
 
