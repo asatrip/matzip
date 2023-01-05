@@ -4,7 +4,43 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./sign.css" />
+    <title>로그인아웃</title>
   </head>
-  <body></body>
+  <body>
+    <nav>
+      <div class="inner">
+        <div class="nav-container">
+          <h1 class="nav-title"><a href="./index.html">홈으로</a></h1>
+
+          <div class="sign-container">
+            <!-- 비회원 -->
+            <div class="unsigned">
+              <a href="./signin.html">로그인/회원가입</a>
+            </div>
+
+            <!-- 회원 -->
+            <div class="signed hidden">
+              <div class="dropdown">
+                <div class="dropdown-button">
+                  안녕하세요. <span class="nickname"></span>님.
+                </div>
+                <div class="dropdown-content">
+                  <button id="sign-out">로그아웃</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+      integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./header.js"></script>
+  </body>
 </html>

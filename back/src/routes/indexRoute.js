@@ -15,4 +15,13 @@ module.exports = function (app) {
   app.patch("/students/:studentIdx", index.updateStudent);
   //학생 삭제
   app.delete("/students/:studentIdx", index.deleteStudent);
+
+  //회원목록조회
+  app.get("/users/", index.readUsers);
+  //회원가입
+  app.post("/sign-up", index.createUsers);
+  //로그인
+  app.post("/sign-in", index.createJwt);
+  //로그인유지, 토큰 검증
+  app.get("/jwt", jwtMiddleware, index.readJwt);
 };

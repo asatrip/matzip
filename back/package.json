@@ -1,5 +1,5 @@
 {
-  "name": "api-server-node",
+  "name": "back",
   "version": "1.0.0",
   "description": "Node.js API Server",
   "main": "index.js",
