@@ -7,3 +7,10 @@ SSREADME.md
 config/secret.js
 .vscode/*
 nmovie/
+node_modules
+config.json
+public/storage
+plugins/*/
+custom/*/
+.DS_Store
+test.js
