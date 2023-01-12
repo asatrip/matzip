@@ -1,22 +1,22 @@
-const { timezone } = require('../config');
-const moment = require('moment');
-require('moment-timezone');
+const { timezone } = require("../config");
+const moment = require("moment");
+require("moment-timezone");
 moment.tz.setDefault(timezone);
-const pool = require('../middleware/database');
-const flash = require('../middleware/flash');
-const hashCreate = require('../middleware/hash');
-const datetime = require('../middleware/datetime');
-const doAsync = require('../middleware/doAsync');
-const emptyCheck = require('../middleware/emptyCheck');
-const shuffle = require('../middleware/shuffle');
-const Section = require('../services/section');
-const User = require('../services/user');
-const Go = require('../services/go');
-const Article = require('../services/article');
-const Email = require('../services/email');
-const Phone = require('../services/phone');
-const Point = require('../services/point');
-const Log = require('../services/log');
+const pool = require("../middleware/database");
+const flash = require("../middleware/flash");
+const hashCreate = require("../middleware/hash");
+const datetime = require("../middleware/datetime");
+const doAsync = require("../middleware/doAsync");
+const emptyCheck = require("../middleware/emptyCheck");
+const shuffle = require("../middleware/shuffle");
+const Section = require("../services/section");
+const User = require("../services/user");
+const Go = require("../services/go");
+const Article = require("../services/article");
+const Email = require("../services/email");
+const Phone = require("../services/phone");
+const Point = require("../services/point");
+const Log = require("../services/log");
 const {
   AppleLogin,
   GoogleLogin,
@@ -24,8 +24,8 @@ const {
   TwitterLogin,
   NaverLogin,
   KakaoLogin,
-} = require('../services/socialLogin');
-const cache = require('../services/cache');
+} = require("../services/socialLogin");
+const cache = require("../services/cache");
 
 exports.authApple = doAsync(async (req, res, next) => {
   try {
@@ -34,7 +34,7 @@ exports.authApple = doAsync(async (req, res, next) => {
     res.redirect(appleAuthUrl);
   } catch (e) {
     console.error(e);
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
@@ -45,7 +45,7 @@ exports.authGoogle = doAsync(async (req, res, next) => {
     res.redirect(googleAuthUrl);
   } catch (e) {
     console.error(e);
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
@@ -56,7 +56,7 @@ exports.authFacebook = doAsync(async (req, res, next) => {
     res.redirect(facebookAuthUrl);
   } catch (e) {
     console.error(e);
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
@@ -67,7 +67,7 @@ exports.authTwitter = doAsync(async (req, res, next) => {
     res.redirect(twitterAuthUrl);
   } catch (e) {
     console.error(e);
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
@@ -78,7 +78,7 @@ exports.authNaver = doAsync(async (req, res, next) => {
     res.redirect(naverAuthUrl);
   } catch (e) {
     console.error(e);
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
@@ -89,14 +89,12 @@ exports.authKakao = doAsync(async (req, res, next) => {
     res.redirect(kakaoAuthUrl);
   } catch (e) {
     console.error(e);
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
 exports.authAppleCallback = doAsync(async (req, res, next) => {
-  const {
-    code,
-  } = req.body;
+  const { code } = req.body;
   if (code) {
     const conn = await pool.getConnection();
     try {
@@ -108,19 +106,19 @@ exports.authAppleCallback = doAsync(async (req, res, next) => {
         if (user) {
           req.session.user = user;
           req.session.save(async () => {
-            if (type === 'join') {
+            if (type === "join") {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: res.locals.setting.joinPoint,
                 force: true,
               });
             }
-            res.redirect('/');
+            res.redirect("/");
           });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
       } catch (e) {
         console.error(e);
@@ -128,7 +126,7 @@ exports.authAppleCallback = doAsync(async (req, res, next) => {
           status: false,
           message: e.message,
         });
-        res.redirect('/login');
+        res.redirect("/login");
       }
     } finally {
       conn.release();
@@ -139,9 +137,7 @@ exports.authAppleCallback = doAsync(async (req, res, next) => {
 });
 
 exports.authGoogleCallback = doAsync(async (req, res, next) => {
-  const {
-    code,
-  } = req.query;
+  const { code } = req.query;
   if (code) {
     const conn = await pool.getConnection();
     try {
@@ -153,19 +149,19 @@ exports.authGoogleCallback = doAsync(async (req, res, next) => {
         if (user) {
           req.session.user = user;
           req.session.save(async () => {
-            if (type === 'join') {
+            if (type === "join") {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: res.locals.setting.joinPoint,
                 force: true,
               });
             }
-            res.redirect('/');
+            res.redirect("/");
           });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
       } catch (e) {
         console.error(e);
@@ -173,7 +169,7 @@ exports.authGoogleCallback = doAsync(async (req, res, next) => {
           status: false,
           message: e.message,
         });
-        res.redirect('/login');
+        res.redirect("/login");
       }
     } finally {
       conn.release();
@@ -184,9 +180,7 @@ exports.authGoogleCallback = doAsync(async (req, res, next) => {
 });
 
 exports.authFacebookCallback = doAsync(async (req, res, next) => {
-  const {
-    code,
-  } = req.query;
+  const { code } = req.query;
   if (code) {
     const conn = await pool.getConnection();
     try {
@@ -198,19 +192,19 @@ exports.authFacebookCallback = doAsync(async (req, res, next) => {
         if (user) {
           req.session.user = user;
           req.session.save(async () => {
-            if (type === 'join') {
+            if (type === "join") {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: res.locals.setting.joinPoint,
                 force: true,
               });
             }
-            res.redirect('/');
+            res.redirect("/");
           });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
       } catch (e) {
         console.error(e);
@@ -218,7 +212,7 @@ exports.authFacebookCallback = doAsync(async (req, res, next) => {
           status: false,
           message: e.message,
         });
-        res.redirect('/login');
+        res.redirect("/login");
       }
     } finally {
       conn.release();
@@ -229,9 +223,7 @@ exports.authFacebookCallback = doAsync(async (req, res, next) => {
 });
 
 exports.authTwitterCallback = doAsync(async (req, res, next) => {
-  const {
-    oauth_verifier,
-  } = req.query;
+  const { oauth_verifier } = req.query;
   if (oauth_verifier) {
     const conn = await pool.getConnection();
     try {
@@ -243,19 +235,19 @@ exports.authTwitterCallback = doAsync(async (req, res, next) => {
         if (user) {
           req.session.user = user;
           req.session.save(async () => {
-            if (type === 'join') {
+            if (type === "join") {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: res.locals.setting.joinPoint,
                 force: true,
               });
             }
-            res.redirect('/');
+            res.redirect("/");
           });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
       } catch (e) {
         console.error(e);
@@ -263,7 +255,7 @@ exports.authTwitterCallback = doAsync(async (req, res, next) => {
           status: false,
           message: e.message,
         });
-        res.redirect('/login');
+        res.redirect("/login");
       }
     } finally {
       conn.release();
@@ -274,10 +266,7 @@ exports.authTwitterCallback = doAsync(async (req, res, next) => {
 });
 
 exports.authNaverCallback = doAsync(async (req, res, next) => {
-  const {
-    code,
-    state,
-  } = req.query;
+  const { code, state } = req.query;
   if (code && state) {
     const conn = await pool.getConnection();
     try {
@@ -289,19 +278,19 @@ exports.authNaverCallback = doAsync(async (req, res, next) => {
         if (user) {
           req.session.user = user;
           req.session.save(async () => {
-            if (type === 'join') {
+            if (type === "join") {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: res.locals.setting.joinPoint,
                 force: true,
               });
             }
-            res.redirect('/');
+            res.redirect("/");
           });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
       } catch (e) {
         console.error(e);
@@ -309,7 +298,7 @@ exports.authNaverCallback = doAsync(async (req, res, next) => {
           status: false,
           message: e.message,
         });
-        res.redirect('/login');
+        res.redirect("/login");
       }
     } finally {
       conn.release();
@@ -320,9 +309,7 @@ exports.authNaverCallback = doAsync(async (req, res, next) => {
 });
 
 exports.authKakaoCallback = doAsync(async (req, res, next) => {
-  const {
-    code,
-  } = req.query;
+  const { code } = req.query;
   if (code) {
     const conn = await pool.getConnection();
     try {
@@ -334,19 +321,19 @@ exports.authKakaoCallback = doAsync(async (req, res, next) => {
         if (user) {
           req.session.user = user;
           req.session.save(async () => {
-            if (type === 'join') {
+            if (type === "join") {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: res.locals.setting.joinPoint,
                 force: true,
               });
             }
-            res.redirect('/');
+            res.redirect("/");
           });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
       } catch (e) {
         console.error(e);
@@ -354,7 +341,7 @@ exports.authKakaoCallback = doAsync(async (req, res, next) => {
           status: false,
           message: e.message,
         });
-        res.redirect('/login');
+        res.redirect("/login");
       }
     } finally {
       conn.release();
@@ -365,38 +352,52 @@ exports.authKakaoCallback = doAsync(async (req, res, next) => {
 });
 
 exports.emailAuthentication = doAsync(async (req, res, next) => {
-  const {
-    method,
-  } = req;
-  if (method === 'GET') {
+  const { method } = req;
+  if (method === "GET") {
     const user = res.locals.user;
-    if (user && res.locals.setting.useEmailAuthentication && !user.emailAuthentication && !user.isAdmin && !user.workingUser) {
-      res.render('emailAuthentication', {
+    if (
+      user &&
+      res.locals.setting.useEmailAuthentication &&
+      !user.emailAuthentication &&
+      !user.isAdmin &&
+      !user.workingUser
+    ) {
+      res.render("emailAuthentication", {
         pageTitle: `이메일 인증 - ${res.locals.setting.siteName}`,
       });
     } else {
-      if (req.headers.referer && !req.headers.referer.match(/emailAuthentication/)) {
+      if (
+        req.headers.referer &&
+        !req.headers.referer.match(/emailAuthentication/)
+      ) {
         res.redirect(req.headers.referer);
       } else {
-        res.redirect('/');
+        res.redirect("/");
       }
     }
-  } else if (method === 'POST') {
-    const {
-      gmailUser,
-    } = res.locals.setting;
+  } else if (method === "POST") {
+    const { gmailUser } = res.locals.setting;
     if (gmailUser) {
       const conn = await pool.getConnection();
       try {
         const { submit } = req.body;
         const user = req.session.user;
-        if (submit === 'authentication') {
+        if (submit === "authentication") {
           const { hash } = req.body;
-          const [check, ] = await conn.query(`SELECT * FROM authentication WHERE authentication_user_ID = ? AND type = ?`, [user.id, 'email']);
+          const [check] = await conn.query(
+            `SELECT * FROM authentication WHERE authentication_user_ID = ? AND type = ?`,
+            [user.id, "email"]
+          );
           if (check.length) {
             if (hash === check[0].hash) {
-              await conn.query(`DELETE FROM authentication WHERE authentication_user_ID = ? AND type = ?`, [user.id, 'email']);
-              await conn.query(`UPDATE user SET emailAuthentication = ? WHERE id = ?`, [1, user.id]);
+              await conn.query(
+                `DELETE FROM authentication WHERE authentication_user_ID = ? AND type = ?`,
+                [user.id, "email"]
+              );
+              await conn.query(
+                `UPDATE user SET emailAuthentication = ? WHERE id = ?`,
+                [1, user.id]
+              );
               const userClass = new User(req, res, conn);
               const newUser = await userClass.get({ id: user.id });
               req.session.user = newUser;
@@ -406,22 +407,32 @@ exports.emailAuthentication = doAsync(async (req, res, next) => {
             } else {
               flash.create({
                 status: false,
-                message: '인증번호가 틀립니다',
+                message: "인증번호가 틀립니다",
               });
-              res.redirect('/emailAuthentication');
+              res.redirect("/emailAuthentication");
             }
           } else {
             flash.create({
               status: false,
-              message: '인증번호가 틀립니다',
+              message: "인증번호가 틀립니다",
             });
             res.redirect(req.headers.referer);
           }
-        } else if (submit === 'emailResend') {
+        } else if (submit === "emailResend") {
           const hash = hashCreate(8);
-          const [oldHash, ] = await conn.query(`SELECT * FROM authentication WHERE authentication_user_ID = ? AND type = ?`, [user.id, 'email']);
-          if (oldHash.length) await conn.query(`DELETE FROM authentication WHERE authentication_user_ID = ? AND type = ?`, [user.id, 'email']);
-          await conn.query(`INSERT INTO authentication (authentication_user_ID, type, hash) VALUES (?, ?, ?)`, [user.id, 'email', hash]);
+          const [oldHash] = await conn.query(
+            `SELECT * FROM authentication WHERE authentication_user_ID = ? AND type = ?`,
+            [user.id, "email"]
+          );
+          if (oldHash.length)
+            await conn.query(
+              `DELETE FROM authentication WHERE authentication_user_ID = ? AND type = ?`,
+              [user.id, "email"]
+            );
+          await conn.query(
+            `INSERT INTO authentication (authentication_user_ID, type, hash) VALUES (?, ?, ?)`,
+            [user.id, "email", hash]
+          );
           const emailClass = new Email(req, res, conn);
           try {
             emailClass.create(user.email, {
@@ -433,7 +444,7 @@ exports.emailAuthentication = doAsync(async (req, res, next) => {
             });
             flash.create({
               status: true,
-              message: '이메일이 발송되었습니다',
+              message: "이메일이 발송되었습니다",
             });
           } catch (e) {
             flash.create({
@@ -441,7 +452,7 @@ exports.emailAuthentication = doAsync(async (req, res, next) => {
               message: e.message,
             });
           }
-          res.redirect('/emailAuthentication');
+          res.redirect("/emailAuthentication");
         }
       } finally {
         conn.release();
@@ -449,7 +460,7 @@ exports.emailAuthentication = doAsync(async (req, res, next) => {
     } else {
       flash.create({
         status: false,
-        message: '해당 사이트의 이메일 설정이 되어있지 않습니다',
+        message: "해당 사이트의 이메일 설정이 되어있지 않습니다",
       });
       res.redirect(req.headers.referer);
     }
@@ -459,63 +470,81 @@ exports.emailAuthentication = doAsync(async (req, res, next) => {
 });
 
 exports.smsAuthentication = doAsync(async (req, res, next) => {
-  const {
-    method,
-  } = req;
-  if (method === 'GET') {
-    if (res.locals.user && res.locals.setting.useSmsAuthentication && !res.locals.user.phoneAuthentication && !res.locals.user.isAdmin && !res.locals.user.workingUser) {
-      res.render('smsAuthentication', {
+  const { method } = req;
+  if (method === "GET") {
+    if (
+      res.locals.user &&
+      res.locals.setting.useSmsAuthentication &&
+      !res.locals.user.phoneAuthentication &&
+      !res.locals.user.isAdmin &&
+      !res.locals.user.workingUser
+    ) {
+      res.render("smsAuthentication", {
         pageTitle: `SMS 인증 - ${res.locals.setting.siteName}`,
       });
     } else {
-      if (req.headers.referer && !req.headers.referer.match(/smsAuthentication/)) {
+      if (
+        req.headers.referer &&
+        !req.headers.referer.match(/smsAuthentication/)
+      ) {
         res.redirect(req.headers.referer);
       } else {
-        res.redirect('/');
+        res.redirect("/");
       }
     }
-  } else if (method === 'POST') {
+  } else if (method === "POST") {
     const conn = await pool.getConnection();
     try {
-      const {
-        submit,
-      } = req.body;
+      const { submit } = req.body;
       const user = res.locals.user;
-      if (submit === 'authentication') {
-        const {
-          hash,
-        } = req.body;
-        const [check, ] = await conn.query(`SELECT * FROM authentication WHERE authentication_user_ID = ? AND type = ? ORDER BY id DESC`, [user.id, 'sms']);
+      if (submit === "authentication") {
+        const { hash } = req.body;
+        const [check] = await conn.query(
+          `SELECT * FROM authentication WHERE authentication_user_ID = ? AND type = ? ORDER BY id DESC`,
+          [user.id, "sms"]
+        );
         if (check.length) {
           if (hash === check[0].hash) {
-            await conn.query(`DELETE FROM authentication WHERE authentication_user_ID = ? AND type = ?`, [user.id, 'email']);
-            await conn.query(`UPDATE user SET phoneAuthentication = ? WHERE id = ?`, [1, user.id]);
-            if (req.headers.referer && !req.headers.referer.match(/smsAuthentication/)) {
+            await conn.query(
+              `DELETE FROM authentication WHERE authentication_user_ID = ? AND type = ?`,
+              [user.id, "email"]
+            );
+            await conn.query(
+              `UPDATE user SET phoneAuthentication = ? WHERE id = ?`,
+              [1, user.id]
+            );
+            if (
+              req.headers.referer &&
+              !req.headers.referer.match(/smsAuthentication/)
+            ) {
               res.redirect(`${req.headers.referer}`);
             } else {
-              res.redirect('/');
+              res.redirect("/");
             }
           } else {
             flash.create({
               status: false,
-              message: '인증번호가 틀립니다',
+              message: "인증번호가 틀립니다",
             });
-            res.redirect('/smsAuthentication');
+            res.redirect("/smsAuthentication");
           }
         }
-      } else if (submit === 'smsResend') {
+      } else if (submit === "smsResend") {
         const verifyNumber = Math.random().toString().slice(3, 7);
         const query = `INSERT INTO authentication
         (authentication_user_ID, type, hash)
         VALUES (?, ?, ?)`;
-        await conn.query(query, [user.id, 'sms', verifyNumber]);
+        await conn.query(query, [user.id, "sms", verifyNumber]);
         const phoneClass = new Phone(req, res, conn);
-        await phoneClass.create(user.phone, `[${res.locals.setting.siteNameRaw}] 인증번호는 ${verifyNumber} 입니다`);
+        await phoneClass.create(
+          user.phone,
+          `[${res.locals.setting.siteNameRaw}] 인증번호는 ${verifyNumber} 입니다`
+        );
         flash.create({
           status: true,
-          message: 'SMS가 발송되었습니다',
+          message: "SMS가 발송되었습니다",
         });
-        res.redirect('/smsAuthentication');
+        res.redirect("/smsAuthentication");
       } else {
         next();
       }
@@ -529,13 +558,14 @@ exports.smsAuthentication = doAsync(async (req, res, next) => {
 
 exports.index = doAsync(async (req, res, next) => {
   const index = res.locals.setting.index;
-  if (index === 'basic') {
+  if (index === "basic") {
     const conn = await pool.getConnection();
     try {
-      
       // 인덱스 섹션
       const sectionClass = new Section(req, res, conn);
-      const indexSectionGroups = cache.sectionGroups.filter(sectionGroup => sectionGroup.type !== 'side')
+      const indexSectionGroups = cache.sectionGroups.filter(
+        (sectionGroup) => sectionGroup.type !== "side"
+      );
       for await (let sectionGroup of indexSectionGroups) {
         for await (let section of sectionGroup.sections) {
           section.articles = await sectionClass.getSectionArticles(section.id, {
@@ -549,17 +579,19 @@ exports.index = doAsync(async (req, res, next) => {
       // 로그 추가
       const logClass = new Log(req, res, conn);
       logClass.createUnsync({
-        type: 'index',
+        type: "index",
       });
 
       // 팝업 배너
       let banners = cache.banners;
-      if (req.cookies['blockBanners']) {
-        const blockBanners = JSON.parse(req.cookies['blockBanners']);
-        banners = cache.banners.filter(banner => !blockBanners.includes(`${banner.id}`));
+      if (req.cookies["blockBanners"]) {
+        const blockBanners = JSON.parse(req.cookies["blockBanners"]);
+        banners = cache.banners.filter(
+          (banner) => !blockBanners.includes(`${banner.id}`)
+        );
       }
 
-      res.render('index', {
+      res.render("index", {
         pageTitle: `${res.locals.setting.siteName}`,
         indexSectionGroups,
         banners,
@@ -573,10 +605,8 @@ exports.index = doAsync(async (req, res, next) => {
 });
 
 exports.go = doAsync(async (req, res, next) => {
-  const {
-    slug,
-  } = req.params;
-  const go = cache.gos.find(go => go.slug === slug);
+  const { slug } = req.params;
+  const go = cache.gos.find((go) => go.slug === slug);
   if (go) {
     res.redirect(go.url);
   } else {
@@ -585,16 +615,16 @@ exports.go = doAsync(async (req, res, next) => {
 });
 
 exports.terms = doAsync(async (req, res, next) => {
-  const terms = cache.setting.terms?.replaceAll('\r\n', '<br>');
-  res.render('terms', {
+  const terms = cache.setting.terms?.replaceAll("\r\n", "<br>");
+  res.render("terms", {
     pageTitle: `이용약관 - ${res.locals.setting.siteName}`,
     terms,
   });
 });
 
 exports.privacy = doAsync(async (req, res, next) => {
-  const privacy = cache.setting.privacy?.replaceAll('\r\n', '<br>');
-  res.render('privacy', {
+  const privacy = cache.setting.privacy?.replaceAll("\r\n", "<br>");
+  res.render("privacy", {
     pageTitle: `개인정보보호 정책 - ${res.locals.setting.siteName}`,
     privacy,
   });
@@ -603,14 +633,12 @@ exports.privacy = doAsync(async (req, res, next) => {
 exports.changeUser = doAsync(async (req, res, next) => {
   const conn = await pool.getConnection();
   try {
-    const {
-      method,
-    } = req;
-    if (method === 'GET') {
+    const { method } = req;
+    if (method === "GET") {
       const query = `SELECT *
       FROM user
       WHERE workingUser = 1`;
-      const [users, ] = await conn.query(query);
+      const [users] = await conn.query(query);
       if (users.length > 1) {
         const existingUser = res.locals.user;
         let random = Math.floor(Math.random() * users.length);
@@ -625,17 +653,15 @@ exports.changeUser = doAsync(async (req, res, next) => {
           // res.redirect(req.headers.referer);
         });
       }
-    } else if (method === 'POST') {
-      const {
-        keyword,
-      } = req.body;
+    } else if (method === "POST") {
+      const { keyword } = req.body;
       const query = `SELECT u.*
       FROM user AS u
       LEFT JOIN permission AS p
       ON u.permission = p.permission
       WHERE u.workingUser = 1 AND u.nickName LIKE CONCAT('%',?,'%')
       OR p.isAdmin AND u.nickName LIKE CONCAT('%',?,'%')`;
-      const [users,] = await conn.query(query, [
+      const [users] = await conn.query(query, [
         keyword,
         keyword,
         keyword,
@@ -660,24 +686,19 @@ exports.changeUser = doAsync(async (req, res, next) => {
 });
 
 exports.login = doAsync(async (req, res, next) => {
-  const {
-    method,
-  } = req;
-  if (method === 'GET') {
+  const { method } = req;
+  if (method === "GET") {
     if (res.locals.user) {
-      res.redirect('/');
+      res.redirect("/");
     } else {
-      res.render('login', {
+      res.render("login", {
         pageTitle: `로그인 - ${res.locals.setting.siteName}`,
       });
     }
-  } else if (method === 'POST') {
+  } else if (method === "POST") {
     const conn = await pool.getConnection();
     try {
-      const {
-        email,
-        password,
-      } = req.body;
+      const { email, password } = req.body;
       const data = {
         email,
         password,
@@ -713,14 +734,12 @@ exports.logout = doAsync(async (req, res, next) => {
 });
 
 exports.join = doAsync(async (req, res, next) => {
-  const {
-    method,
-  } = req;
-  if (method === 'GET') {
-    res.render('join', {
-      pageTitle: `회원가입 - ${res.locals.setting.siteName}`,
+  const { method } = req;
+  if (method === "GET") {
+    res.render("join", {
+      pageTitle: `회원가입- ${res.locals.setting.siteName}`,
     });
-  } else if (method === 'POST') {
+  } else if (method === "POST") {
     const conn = await pool.getConnection();
     const setting = res.locals.setting;
     try {
@@ -752,18 +771,18 @@ exports.join = doAsync(async (req, res, next) => {
               const pointClass = new Point(req, res, conn);
               await pointClass.create({
                 user,
-                type: 'join',
+                type: "join",
                 point: setting.joinPoint,
                 force: true,
               });
-              res.redirect('/');
+              res.redirect("/");
             });
           }
         } else {
-          res.redirect('/join');
+          res.redirect("/join");
         }
       } else {
-        res.redirect('/join');
+        res.redirect("/join");
       }
     } finally {
       conn.release();
@@ -777,34 +796,32 @@ exports.join = doAsync(async (req, res, next) => {
 exports.check = doAsync(async (req, res, next) => {
   const conn = await pool.getConnection();
   try {
-    const {
-      method,
-    } = req;
+    const { method } = req;
     const user = res.locals.user;
     const setting = res.locals.setting;
-    if (method === 'GET') {
-      const {
-        date,
-      } = req.query;
-      const today = date || datetime(Date.now(), 'date');
-      const yesterday = moment(today).subtract(1, 'days').format('YYYY-MM-DD');
-      const tomorrow = moment(today).subtract(-1, 'days').format('YYYY-MM-DD');
-      const now = datetime(Date.now(), 'date');
+    if (method === "GET") {
+      const { date } = req.query;
+      const today = date || datetime(Date.now(), "date");
+      const yesterday = moment(today).subtract(1, "days").format("YYYY-MM-DD");
+      const tomorrow = moment(today).subtract(-1, "days").format("YYYY-MM-DD");
+      const now = datetime(Date.now(), "date");
       const query = `SELECT c.*, u.nickName, u.checkContinue AS \`continue\`, u.checkTotal AS total
       FROM \`check\` AS c
       LEFT JOIN user AS u
       ON c.check_user_ID = u.id
       WHERE date_format(CONVERT_TZ(c.createdAt, @@session.time_zone, '+09:00'), '%Y-%m-%d') = ?
       ORDER BY c.id ASC`;
-      const [checks, ] = await conn.query(query, today);
+      const [checks] = await conn.query(query, today);
       let i = 1;
-      checks.forEach(check => {
-        check.datetime = datetime(check.createdAt, 'time');
+      checks.forEach((check) => {
+        check.datetime = datetime(check.createdAt, "time");
         check.number = i;
-        i ++;
+        i++;
       });
       checks.reverse();
-      const [checkContinues, ] = await conn.query(`SELECT * FROM checkContinue ORDER BY date ASC`);
+      const [checkContinues] = await conn.query(
+        `SELECT * FROM checkContinue ORDER BY date ASC`
+      );
       let status = false;
       if (user) {
         const statusQuery = `SELECT c.*
@@ -814,7 +831,10 @@ exports.check = doAsync(async (req, res, next) => {
         WHERE date_format(CONVERT_TZ(c.createdAt, @@session.time_zone, '+09:00'), '%Y-%m-%d') = ?
         AND c.check_user_ID = ?
         ORDER BY c.id DESC`;
-        const [checkStatusResult, ] = await conn.query(statusQuery, [today, user.id]);
+        const [checkStatusResult] = await conn.query(statusQuery, [
+          today,
+          user.id,
+        ]);
         if (checkStatusResult.length) {
           status = true;
         }
@@ -823,12 +843,17 @@ exports.check = doAsync(async (req, res, next) => {
       let checkComment = null;
       if (setting.useCheckComments) {
         const checkComments = setting.checkComments;
-        const checkCommentsArray = checkComments ? checkComments.split(',').map(comment => comment.trim()).filter(comment => comment.length) : [];
+        const checkCommentsArray = checkComments
+          ? checkComments
+              .split(",")
+              .map((comment) => comment.trim())
+              .filter((comment) => comment.length)
+          : [];
         if (checkCommentsArray.length) {
           checkComment = shuffle(checkCommentsArray)[0];
         }
       }
-      res.render('check', {
+      res.render("check", {
         pageTitle: `출석체크 - ${res.locals.setting.siteName}`,
         today,
         yesterday,
@@ -839,14 +864,12 @@ exports.check = doAsync(async (req, res, next) => {
         checkComment,
         status,
       });
-    } else if (method === 'POST') {
-      const {
-        comment,
-      } = req.body;
+    } else if (method === "POST") {
+      const { comment } = req.body;
       const checkPoint = res.locals.setting.checkPoint;
       const user = res.locals.user;
       if (user) {
-        const today = datetime(Date.now(), 'date');
+        const today = datetime(Date.now(), "date");
         const query = `SELECT c.*
         FROM \`check\` AS c
         LEFT JOIN user AS u
@@ -854,10 +877,12 @@ exports.check = doAsync(async (req, res, next) => {
         WHERE date_format(CONVERT_TZ(c.createdAt, @@session.time_zone, '+09:00'), '%Y-%m-%d') = ?
         AND c.check_user_ID = ?
         ORDER BY c.id DESC`;
-        const [checks, ] = await conn.query(query, [today, user?.id]);
+        const [checks] = await conn.query(query, [today, user?.id]);
         if (!checks.length) {
           let point = checkPoint;
-          const yesterday = moment(Date.now()).subtract('1', 'days').format('YYYY-MM-DD');
+          const yesterday = moment(Date.now())
+            .subtract("1", "days")
+            .format("YYYY-MM-DD");
           const yesterdayQuery = `SELECT c.*
           FROM \`check\` AS c
           LEFT JOIN user AS u
@@ -865,19 +890,31 @@ exports.check = doAsync(async (req, res, next) => {
           WHERE date_format(CONVERT_TZ(c.createdAt, @@session.time_zone, '+09:00'), '%Y-%m-%d') = ?
           AND c.check_user_ID = ?
           ORDER BY c.id DESC`;
-          const [yesterdayResult, ] = await conn.query(yesterdayQuery, [yesterday, user.id]);
+          const [yesterdayResult] = await conn.query(yesterdayQuery, [
+            yesterday,
+            user.id,
+          ]);
           // 개근일 경우
           if (yesterdayResult.length) {
             const userContinue = user.checkContinue + 1;
-            await conn.query(`UPDATE user SET checkContinue=checkContinue+1 WHERE id = ?`, [user.id]);
-            const [checkContinues, ] = await conn.query(`SELECT * FROM checkContinue ORDER BY date ASC`);
-            let thisContinues = checkContinues.filter(checkContinue => checkContinue.date === userContinue);
+            await conn.query(
+              `UPDATE user SET checkContinue=checkContinue+1 WHERE id = ?`,
+              [user.id]
+            );
+            const [checkContinues] = await conn.query(
+              `SELECT * FROM checkContinue ORDER BY date ASC`
+            );
+            let thisContinues = checkContinues.filter(
+              (checkContinue) => checkContinue.date === userContinue
+            );
             // 연속 지급 방식
             if (thisContinues.length) {
               const thisContainue = thisContinues[0];
               point = thisContainue.point;
             } else {
-              thisContinues = checkContinues.filter(checkContinue => checkContinue.date < userContinue);
+              thisContinues = checkContinues.filter(
+                (checkContinue) => checkContinue.date < userContinue
+              );
               const thisContainue = thisContinues[thisContinues.length - 1];
               if (thisContainue) {
                 point = thisContainue.point;
@@ -885,14 +922,16 @@ exports.check = doAsync(async (req, res, next) => {
             }
           } else {
             // 개근이 아닐 경우
-            await conn.query(`UPDATE user SET checkContinue = ? WHERE id = ?`, [1, user.id]);
+            await conn.query(`UPDATE user SET checkContinue = ? WHERE id = ?`, [
+              1,
+              user.id,
+            ]);
           }
           // 출석 등록
-          await conn.query(`INSERT INTO \`check\` (check_user_ID, comment, point) VALUES (?, ?, ?)`, [
-            user.id,
-            comment,
-            point,
-          ]);
+          await conn.query(
+            `INSERT INTO \`check\` (check_user_ID, comment, point) VALUES (?, ?, ?)`,
+            [user.id, comment, point]
+          );
           // 포인트 지급 & 총 출석일 + 1
           const userClass = new User(req, res, conn);
           const pointClass = new Point(req, res, conn);
@@ -901,24 +940,24 @@ exports.check = doAsync(async (req, res, next) => {
           });
           await pointClass.create({
             user,
-            type: 'check',
+            type: "check",
             point: point,
           });
           // 개근
           flash.create({
             status: true,
-            message: '출석체크 완료',
+            message: "출석체크 완료",
           });
         } else {
           flash.create({
             status: false,
-            message: '오늘은 이미 출석체크 하였습니다',
+            message: "오늘은 이미 출석체크 하였습니다",
           });
         }
       } else {
         flash.create({
           status: false,
-          message: '로그인이 필요합니다',
+          message: "로그인이 필요합니다",
         });
       }
       res.redirect(req.headers.referer);
@@ -931,19 +970,16 @@ exports.check = doAsync(async (req, res, next) => {
 });
 
 exports.findInfo = doAsync(async (req, res, next) => {
-  const {
-    method,
-  } = req;
+  const { method } = req;
   const thisSite = res.locals;
-  if (method === 'GET') {
-    res.render('findInfo', {
+  if (method === "GET") {
+    res.render("findInfo", {
       pageTitle: `비밀번호 찾기 - ${thisSite.setting.siteName}`,
     });
-  } else if (method === 'POST') {
-    const {
-      email,
-    } = req.body;
-    const emailSetting = thisSite.setting.gmailUser && thisSite.setting.gmailPassword;
+  } else if (method === "POST") {
+    const { email } = req.body;
+    const emailSetting =
+      thisSite.setting.gmailUser && thisSite.setting.gmailPassword;
     if (emailSetting) {
       if (email) {
         const conn = await pool.getConnection();
@@ -967,10 +1003,10 @@ exports.findInfo = doAsync(async (req, res, next) => {
               });
               flash.create({
                 status: true,
-                message: '인증번호가 발송되었습니다',
+                message: "인증번호가 발송되었습니다",
               });
               req.session.email = email;
-              res.redirect('/findInfo/checkout');
+              res.redirect("/findInfo/checkout");
             } catch (e) {
               flash.create({
                 status: false,
@@ -981,7 +1017,7 @@ exports.findInfo = doAsync(async (req, res, next) => {
           } else {
             flash.create({
               status: false,
-              message: '가입된 이메일이 없습니다',
+              message: "가입된 이메일이 없습니다",
             });
             res.redirect(req.headers.referer);
           }
@@ -994,7 +1030,7 @@ exports.findInfo = doAsync(async (req, res, next) => {
     } else {
       flash.create({
         status: false,
-        message: '관리자 - 설정에서 이메일 설정을 완료해주세요',
+        message: "관리자 - 설정에서 이메일 설정을 완료해주세요",
       });
       res.redirect(req.headers.referer);
     }
@@ -1002,28 +1038,21 @@ exports.findInfo = doAsync(async (req, res, next) => {
 });
 
 exports.findInfoCheckout = doAsync(async (req, res, next) => {
-  const {
-    method,
-  } = req;
+  const { method } = req;
   const thisSite = res.locals;
-  if (method === 'GET') {
-    res.render('newPassword', {
+  if (method === "GET") {
+    res.render("newPassword", {
       pageTitle: `새 비밀번호 등록 - ${thisSite.setting.siteName}`,
     });
-  } else if (method === 'POST') {
-    const {
-      submit,
-    } = req.body;
+  } else if (method === "POST") {
+    const { submit } = req.body;
     const email = req.session.email;
-    const emailSetting = thisSite.setting.gmailUser && thisSite.setting.gmailPassword;
+    const emailSetting =
+      thisSite.setting.gmailUser && thisSite.setting.gmailPassword;
     if (emailSetting) {
       if (email) {
-        if (submit === 'checkout') {
-          const {
-            authCode,
-            password,
-            passwordCheck,
-          } = req.body;
+        if (submit === "checkout") {
+          const { authCode, password, passwordCheck } = req.body;
           if (password === passwordCheck) {
             const conn = await pool.getConnection();
             try {
@@ -1038,16 +1067,16 @@ exports.findInfoCheckout = doAsync(async (req, res, next) => {
                 });
                 flash.create({
                   status: true,
-                  message: '로그인 성공',
+                  message: "로그인 성공",
                 });
                 req.session.user = user;
                 req.session.save(() => {
-                  res.redirect('/');
+                  res.redirect("/");
                 });
               } else {
                 flash.create({
                   status: false,
-                  message: '인증번호가 맞지 않습니다',
+                  message: "인증번호가 맞지 않습니다",
                 });
                 res.redirect(req.headers.referer);
               }
@@ -1057,11 +1086,11 @@ exports.findInfoCheckout = doAsync(async (req, res, next) => {
           } else {
             flash.create({
               status: false,
-              message: '비밀번호가 서로 일치하지 않습니다',
+              message: "비밀번호가 서로 일치하지 않습니다",
             });
             res.redirect(req.headers.referer);
           }
-        } else if (submit === 'newAuthCode') {
+        } else if (submit === "newAuthCode") {
           const conn = await pool.getConnection();
           try {
             const userClass = new User(req, res, conn);
@@ -1082,7 +1111,7 @@ exports.findInfoCheckout = doAsync(async (req, res, next) => {
               });
               flash.create({
                 status: true,
-                message: '인증코드를 새로 발송하였습니다',
+                message: "인증코드를 새로 발송하였습니다",
               });
             } catch (e) {
               flash.create({
@@ -1098,14 +1127,14 @@ exports.findInfoCheckout = doAsync(async (req, res, next) => {
       } else {
         flash.create({
           status: false,
-          message: '이메일 정보가 없습니다',
+          message: "이메일 정보가 없습니다",
         });
-        res.redirect('/findInfo');
+        res.redirect("/findInfo");
       }
     } else {
       flash.create({
         status: false,
-        message: '관리자 - 설정에서 이메일 설정을 완료해주세요',
+        message: "관리자 - 설정에서 이메일 설정을 완료해주세요",
       });
       res.redirect(req.headers.referer);
     }
@@ -1117,12 +1146,10 @@ exports.findInfoCheckout = doAsync(async (req, res, next) => {
 exports.rank = doAsync(async (req, res, next) => {
   const conn = await pool.getConnection();
   try {
-    const {
-      date,
-    } = req.query;
+    const { date } = req.query;
     const userClass = new User(req, res, conn);
     const pointRanks = await userClass.getPointRanks({ date });
-    res.render('rank', {
+    res.render("rank", {
       pageTitle: `포인트 랭킹 - ${res.locals.setting.siteName}`,
       pointRanks,
       date,
@@ -1142,7 +1169,7 @@ exports.freePoint = doAsync(async (req, res, next) => {
         await pointClass.freePoint();
         flash.create({
           status: true,
-          message: '무료 포인트 지급완료',
+          message: "무료 포인트 지급완료",
         });
       } catch (e) {
         flash.create({
@@ -1156,14 +1183,14 @@ exports.freePoint = doAsync(async (req, res, next) => {
   } else {
     flash.create({
       status: false,
-      message: '로그인이 필요합니다',
+      message: "로그인이 필요합니다",
     });
   }
   res.redirect(req.headers.referer);
 });
 
 exports.robots = doAsync(async (req, res, next) => {
-  res.set('Content-Type', 'text/plain').render('robots');
+  res.set("Content-Type", "text/plain").render("robots");
 });
 
 exports.feed = doAsync(async (req, res, next) => {
@@ -1181,16 +1208,23 @@ exports.feed = doAsync(async (req, res, next) => {
     ON u.permission = p.permission
     WHERE a.status = 2
     ORDER BY a.createdAt DESC`;
-    const [articles, ] = await conn.query(query);
+    const [articles] = await conn.query(query);
     const articleClass = new Article(req, res, conn);
-    articles.forEach(article => {
+    articles.forEach((article) => {
       if (!article.nickName) article.nickName = article.nonMember;
       article = articleClass.setInfo(article);
-      article.datetime = moment(article.updatedAt).format('ddd, DD MMM YYYY HH:mm:ss ZZ', 'ddd, DD MMM YY HH:mm:ss ZZ');
+      article.datetime = moment(article.updatedAt).format(
+        "ddd, DD MMM YYYY HH:mm:ss ZZ",
+        "ddd, DD MMM YY HH:mm:ss ZZ"
+      );
     });
     let lastDatetime = null;
-    if (articles.length) lastDatetime = moment(articles[0].updatedAt).format('ddd, DD MMM YYYY HH:mm:ss ZZ', 'ddd, DD MMM YY HH:mm:ss ZZ');
-    res.set('Content-Type', 'text/xml').render('feed', {
+    if (articles.length)
+      lastDatetime = moment(articles[0].updatedAt).format(
+        "ddd, DD MMM YYYY HH:mm:ss ZZ",
+        "ddd, DD MMM YY HH:mm:ss ZZ"
+      );
+    res.set("Content-Type", "text/xml").render("feed", {
       articles,
       lastDatetime,
     });
@@ -1200,11 +1234,11 @@ exports.feed = doAsync(async (req, res, next) => {
 });
 
 exports.sitemap = doAsync(async (req, res, next) => {
-  res.set('Content-Type', 'text/xml').render('sitemap');
+  res.set("Content-Type", "text/xml").render("sitemap");
 });
 
 exports.sitemapCommons = doAsync(async (req, res, next) => {
-  res.set('Content-Type', 'text/xml').render('sitemap/commons');
+  res.set("Content-Type", "text/xml").render("sitemap/commons");
 });
 
 exports.sitemapBoard = doAsync(async (req, res, next) => {
@@ -1214,11 +1248,11 @@ exports.sitemapBoard = doAsync(async (req, res, next) => {
     FROM board AS b
     WHERE b.status = 1
     ORDER BY id DESC`;
-    const [boards, ] = await conn.query(query);
-    boards.forEach(board => {
+    const [boards] = await conn.query(query);
+    boards.forEach((board) => {
       board.slugRaw = encodeURI(board.slug);
     });
-    res.set('Content-Type', 'text/xml').render('sitemap/board', {
+    res.set("Content-Type", "text/xml").render("sitemap/board", {
       boards,
     });
   } finally {
@@ -1235,11 +1269,11 @@ exports.sitemapArticle = doAsync(async (req, res, next) => {
     ON a.article_board_ID = b.id
     WHERE a.status = 2
     ORDER BY id DESC`;
-    const [articles, ] = await conn.query(query);
-    articles.forEach(article => {
+    const [articles] = await conn.query(query);
+    articles.forEach((article) => {
       article.boardSlugRaw = encodeURI(article.boardSlug);
     });
-    res.set('Content-Type', 'text/xml').render('sitemap/article', {
+    res.set("Content-Type", "text/xml").render("sitemap/article", {
       articles,
     });
   } finally {
@@ -1254,11 +1288,11 @@ exports.sitemapPage = doAsync(async (req, res, next) => {
     FROM page AS p
     WHERE p.status = 1
     ORDER BY id DESC`;
-    const [pages, ] = await conn.query(query);
-    pages.forEach(page => {
+    const [pages] = await conn.query(query);
+    pages.forEach((page) => {
       page.slugRaw = encodeURI(page.slug);
     });
-    res.set('Content-Type', 'text/xml').render('sitemap/page', {
+    res.set("Content-Type", "text/xml").render("sitemap/page", {
       pages,
     });
   } finally {
@@ -1268,15 +1302,15 @@ exports.sitemapPage = doAsync(async (req, res, next) => {
 
 exports.sitemapStore = doAsync(async (req, res, next) => {
   const index = res.locals.setting.index;
-  if (index === 'offline') {
+  if (index === "offline") {
     const conn = await pool.getConnection();
     try {
       const query = `SELECT s.*, date_format(s.updatedAt,'%Y-%m-%dT%H:%i:%s+09:00') AS datetime
       FROM offlineStore AS s
       WHERE s.status = 1
       ORDER BY s.id DESC`;
-      const [stores, ] = await conn.query(query);
-      res.set('Content-Type', 'text/xml').render('sitemap/store', {
+      const [stores] = await conn.query(query);
+      res.set("Content-Type", "text/xml").render("sitemap/store", {
         stores,
       });
     } finally {
